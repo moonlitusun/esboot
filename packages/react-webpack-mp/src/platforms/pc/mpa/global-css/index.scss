@@ -1,0 +1,13 @@
+@import './theme';
+
+html,
+body {
+  color: var(--font-color);
+  background-color: var(--background-main);
+}
+
+:global {
+  .submenu {
+    padding-left: 11px;
+  }
+}

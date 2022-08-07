@@ -1,0 +1,13 @@
+[development]
+Chrome >= 40
+
+[pc-mpa-production]
+Chrome >= 40
+
+[pc-spa-production]
+last 1 chrome version
+last 1 firefox version
+
+[mobile-mpa-production]
+ChromeAndroid >= 75
+ios_saf >= 10

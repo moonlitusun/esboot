@@ -1,0 +1,12 @@
+/* stylelint-disable-next-line selector-max-id */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+li,
+ol {
+  list-style: none;
+}

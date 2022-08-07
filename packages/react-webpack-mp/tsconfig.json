@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": false,
+    "baseUrl": ".",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "noResolve": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@mobile/*": ["src/platforms/mobile/*"],
+      "@mobile-mpa/*": ["src/platforms/mobile/mpa/*"],
+      "@mobile-spa/*": ["src/platforms/mobile/spa/*"],
+      "@pc/*": ["src/platforms/pc/*"],
+      "@pc-mpa/*": ["src/platforms/pc/mpa/*"],
+      "@pc-spa/*": ["src/platforms/pc/spa/*"],
+    },
+    "removeComments": false,
+    "allowJs": false,
+    "lib": [
+      "ES5",
+      "ES2015",
+      "ES2018",
+      "DOM"
+    ],
+    "target": "ES5",
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "src/**/*",
+    "globals.d.ts",
+  ]
+}
