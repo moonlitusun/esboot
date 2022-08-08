@@ -132,7 +132,7 @@ const getPlugins = () => [
   ),
   new InjectBodyPlugin({
     content: `
-    <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${pkg.version}"></script>
+    <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${process.env.BUILD_VERSION || pkg.version}"></script>
     ${
       (!ESBOOT_IS_SPA && isDevMode) ?
       `<script>
