@@ -19,5 +19,5 @@ ReactDOM.render(
 );
 
 export default {
-  title: '中信建投证券',
+  title: 'React-webpack-mp',
 };

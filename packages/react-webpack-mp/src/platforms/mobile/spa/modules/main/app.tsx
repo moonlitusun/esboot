@@ -18,7 +18,7 @@ const App: React.FC = () => (
     <div styleName="header">
       <div styleName="header-left">
         <Avatar shape="square" size="large" />
-        <h1>中信建投证券</h1>
+        <h1>React-webpack-mp</h1>
         <Link to="quote">首页</Link>
         <Dropdown overlay={menu} placement="bottomLeft" arrow>
           <Link to="quote">去行情</Link>

@@ -11,7 +11,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+// const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
 const {
   getLocalIdent,
@@ -118,7 +118,7 @@ const createEntry = () =>
 
 const getPlugins = () => [
   // !isDevMode && new BundleAnalyzerPlugin(),
-  new AntdDayjsWebpackPlugin(),
+  // new AntdDayjsWebpackPlugin(),
   ...entryList.map(
     (i) =>
       new HtmlWebpackPlugin({

@@ -3,35 +3,43 @@ import * as ReactDOM from 'react-dom';
 import '@/global-css/main.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { QuoteClientProvider } from 'quote-client-react';
 import { IntlProvider } from 'react-intl';
-import { store } from '@/model/store';
+import { store, useAppSelector } from '@pc/model/store';
+import { LAN_ENUM, DEFAULT_LAN } from '@/constants/config';
 
-import zhHans from '../../lang/zh-hans';
-// import zhHant from '../../lang/zh-hant';
+import zhTW from '@pc-spa/lang/zh-tw';
+import zhCN from '@pc-spa/lang/zh-cn';
 
 import '@pc/styles/global.scss';
 
 import RouterApp from './router';
 
+const messagesDict = {
+  [LAN_ENUM.ZH_TW]: zhTW,
+  [LAN_ENUM.ZH_CN]: zhCN,
+};
+
+const App = () => {
+  const lang = useAppSelector((state) => state.app.userConfig.language);
+
+  return (
+    <IntlProvider locale={DEFAULT_LAN} messages={messagesDict[lang]}>
+      <Router>
+        <RouterApp />
+      </Router>
+    </IntlProvider>
+  );
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <StrictMode>
-      <IntlProvider locale="zhHans" messages={zhHans}>
-        <QuoteClientProvider
-          wsServerAddress="ws://47.112.167.178:10001/socket"
-          token="692005c1-d54f-4590-b5d5-7fbca7c025c2"
-        >
-          <Router>
-            <RouterApp />
-          </Router>
-        </QuoteClientProvider>
-      </IntlProvider>
+      <App />
     </StrictMode>
   </Provider>,
   document.getElementById('root'),
 );
 
 export default {
-  title: '中信建投证券',
+  title: 'React-webpack-mp',
 };
