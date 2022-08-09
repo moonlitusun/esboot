@@ -1,4 +1,4 @@
-import { initBridge } from '@/helpers/sdk-bridge';
+import { initBridge } from '@/helpers/bridge';
 
 // export default initBridge('mock');
 // export default initBridge('app');

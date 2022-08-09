@@ -5,7 +5,7 @@ import { useSafeState } from 'ahooks';
 import { RequestProxyScope } from '@/constants/request';
 import requestProxyManager from '@/helpers/request-proxy/request-proxy-manager';
 
-import codeStorage from '@/helpers/code-storage';
+import codeStorage from '@mobile/helpers/code-storage';
 
 import {
   DEFAULT_THEME, THEME_MAP,
