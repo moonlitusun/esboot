@@ -281,7 +281,7 @@ const baseCfg = {
 
 const devCfg = {
   devServer: getDevServer(),
-  devtool: 'cheap-source-map',
+  devtool: 'cheap-module-source-map',
 };
 
 const prodCfg = {

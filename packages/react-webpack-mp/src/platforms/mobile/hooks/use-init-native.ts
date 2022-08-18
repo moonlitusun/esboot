@@ -58,7 +58,7 @@ export default function useInitNative(): IUseInitNative {
     };
 
     setUserConfig(config);
-    classList.remove(prevTheme || '');
+    classList.remove(prevTheme || 'null');
     classList.add(nextTheme);
   }
 
