@@ -19,7 +19,7 @@ const {
   // eslint-disable-next-line import/no-unresolved
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 const getEntryList = require('../../scripts/entry');
-const createMultiPlatform = require('../../scripts/create-multi-platform');
+// const createMultiPlatform = require('../../scripts/create-multi-platform');
 const postcssNormalize = require('postcss-normalize');
 const { MFSU } = require('@umijs/mfsu');
 
@@ -236,7 +236,7 @@ const getDevServer = () => ({
 
     return middlewares;
   },
-  port: 3000,
+  port: 8100,
   host: '0.0.0.0',
 });
 
@@ -327,25 +327,25 @@ const getConfig = async () => {
       });
     }
 
-    try {
-      let port = userConfig.serverPort;
+  //   try {
+  //     let port = userConfig.serverPort || 3600;
 
-      // if (!port) {
-      //   port = await portfinder.getPortPromise();
-      // }
+  //     // if (!port) {
+  //     //   port = await portfinder.getPortPromise();
+  //     // }
 
-      cfg.devServer.port = 3600;
+  //     cfg.devServer.port = 3600;
 
-      console.log(
-        entryList.map((item) => ({
-          ...item,
-          url: `http://${ip}:${port}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
-        })),
-      );
-    } catch(err) {}
+  //     console.log(
+  //       entryList.map((item) => ({
+  //         ...item,
+  //         url: `http://${ip}:${port}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
+  //       })),
+  //     );
+  //   } catch(err) {}
   }
 
   return cfg;
 };
 
-module.exports = getConfig();
+module.exports = cfg;

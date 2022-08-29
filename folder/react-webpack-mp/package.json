@@ -59,7 +59,6 @@
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.0",
-    "@dz-web-esboot-react/config": "*",
     "@dz-web/bridge-mock": "^1.2.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@types/react": "17.0.3",

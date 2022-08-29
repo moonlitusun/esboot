@@ -205,13 +205,13 @@ const baseCfg = {
   resolve: {
     extensions: ['.ts', '.tsx', '.jsx', '.js'],
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@mobile': path.resolve(__dirname, './src/platforms/mobile'),
-      '@mobile-native': path.resolve(__dirname, './src/platforms/mobile/native'),
-      '@mobile-browser': path.resolve(__dirname, './src/platforms/mobile/browser'),
-      '@pc': path.resolve(__dirname, './src/platforms/pc'),
-      '@pc-native': path.resolve(__dirname, './src/platforms/pc/native'),
-      '@pc-browser': path.resolve(__dirname, './src/platforms/pc/browser'),
+      '@': path.resolve(__dirname, contentRelativePath, './src'),
+      '@mobile': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile'),
+      '@mobile-native': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/native'),
+      '@mobile-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/browser'),
+      '@pc': path.resolve(__dirname, contentRelativePath, './src/platforms/pc'),
+      '@pc-native': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/native'),
+      '@pc-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/browser'),
     },
   },
   output: {
