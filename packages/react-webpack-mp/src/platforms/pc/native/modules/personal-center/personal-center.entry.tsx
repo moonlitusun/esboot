@@ -1,6 +1,6 @@
 import { HashRouter as Router } from 'react-router-dom';
 import React from 'react';
-import generatePage from '@pc-mpa/helpers/generate-page';
+import generatePage from '@pc-native/helpers/generate-page';
 import { store } from '@/model/store';
 import { LAN_ENUM } from '@pc/constants/config';
 import App from './personal-center';

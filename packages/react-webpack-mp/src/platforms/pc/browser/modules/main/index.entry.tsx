@@ -7,8 +7,8 @@ import { IntlProvider } from 'react-intl';
 import { store, useAppSelector } from '@pc/model/store';
 import { LAN_ENUM, DEFAULT_LAN } from '@/constants/config';
 
-import zhTW from '@pc-spa/lang/zh-tw';
-import zhCN from '@pc-spa/lang/zh-cn';
+import zhTW from '@pc-browser/lang/zh-tw';
+import zhCN from '@pc-browser/lang/zh-cn';
 
 import '@pc/styles/global.scss';
 

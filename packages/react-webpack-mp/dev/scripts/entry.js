@@ -14,7 +14,6 @@ const contentRootPath = `./platforms/${ESBOOT_PLATFORM}/${ESBOOT_PAGE_TYPE}`;
 function getEntryList() {
   const { html } = userConfig;
   if (html) return html;
-console.log(contentRootPath, '-----> contentRootPath');
   const content_path = join(contentRootPath, ESBOOT_CONTENT_PATH);
   const list = [];
   const files = glob.sync(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {

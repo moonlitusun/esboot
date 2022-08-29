@@ -2,7 +2,7 @@ import React from 'react';
 import { parseUrl } from '@dz-web/o-orange';
 import { useSafeState, useGetState } from 'ahooks';
 
-import codeStorage from '@pc-mpa/helpers/code-storage';
+import codeStorage from '@pc-native/helpers/code-storage';
 
 import {
   DEFAULT_THEME,
@@ -14,7 +14,7 @@ import {
   RISE_FALL_CLASS_DICT,
 } from '@/constants/config';
 
-import { FONT_ADD_SIZE, FONT_WEIGHT, FONT_CFG_SIZE_DICT, FONT_SIZE } from '@pc-mpa/constants/config';
+import { FONT_ADD_SIZE, FONT_WEIGHT, FONT_CFG_SIZE_DICT, FONT_SIZE } from '@pc-native/constants/config';
 import { queryUserConfig, queryUserInfo } from '../helpers/native/msg';
 import { updateUserConfig, IUserConfigRaw, updateUserInfo } from '../helpers/native/register';
 
@@ -98,7 +98,7 @@ export default function useInitNative(): IUseInitNative {
     document.documentElement.style.fontWeight = weight;
   }
 
-  function updateUserInfoProxy(res, isInit = false): void {
+  function updateUserInfoProxy(res): void {
     Object.assign(res, { token: res.sessionCode });
 
     setUserInfo({ ...res });
@@ -126,7 +126,7 @@ export default function useInitNative(): IUseInitNative {
     updateUserConfig((res) => updateUserConfigProxy(res));
 
     queryUserInfo()
-      .then((res) => updateUserInfoProxy(res, true))
+      .then((res) => updateUserInfoProxy(res))
       .catch((err) => console.log('err:', err));
 
     updateUserInfo((res) => updateUserInfoProxy(res));

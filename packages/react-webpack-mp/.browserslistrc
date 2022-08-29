@@ -1,13 +1,16 @@
 [development]
-Chrome >= 40
-
-[pc-mpa-production]
-Chrome >= 40
-
-[pc-spa-production]
 last 1 chrome version
 last 1 firefox version
 
-[mobile-mpa-production]
+[pc-native-production]
+Chrome >= 67
+
+[pc-browser-production]
+Chrome >= 67
+
+[mobile-native-production]
 ChromeAndroid >= 75
 ios_saf >= 10
+
+[mobile-browser-production]
+Chrome >= 75

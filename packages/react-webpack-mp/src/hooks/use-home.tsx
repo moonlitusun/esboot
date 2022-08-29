@@ -7,7 +7,7 @@ export interface IUseHome {
 }
 
 export interface IUseHomeProps {
-  platform?: 'app-mpa' | 'app-spa' | 'pc-mpa' | 'pc-spa';
+  platform?: 'mobile-native' | 'mobile-browser' | 'pc-native' | 'pc-browser';
 }
 
 export default function useHome(props: IUseHomeProps = {}): IUseHome {

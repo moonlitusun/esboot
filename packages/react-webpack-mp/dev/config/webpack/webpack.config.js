@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InjectBodyPlugin = require('inject-body-webpack-plugin').default;
+const portfinder = require('portfinder');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -36,16 +37,6 @@ const mfsu = new MFSU({
 const useMFSU = Number(process.env.useMFSU) !== 0;
 const smp = new SpeedMeasurePlugin();
 const isDevMode = process.env.NODE_ENV === 'development';
-
-if (isDevMode) {
-  console.log(
-    entryList.map((item) => ({
-      ...item,
-      url: `http://${ip}:${userConfig.serverPort}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
-    })),
-    '<-- entryList',
-  );
-}
 
 const parseScssModule = (options = {}) => {
   const { modules } = options;
@@ -152,7 +143,7 @@ const getPlugins = () => [
     patterns: userConfig.copyFile,
   }),
   isDevMode && new ReactRefreshPlugin(),
-  // isDevMode && new ForkTsCheckerWebpackPlugin({}),
+  isDevMode && new ForkTsCheckerWebpackPlugin({}),
 ];
 
 const getModulesRules = () => [
@@ -201,7 +192,7 @@ const getModulesRules = () => [
         options: {
           workers: 4,
           workerParallelJobs: 50,
-          workerNodeArgs: ['--max-old-space-size=1024'],
+          workerNodeArgs: ['--max-old-bce-size=1024'],
           poolTimeout: 2000,
           poolParallelJobs: 50,
           name: 'my-pool',
@@ -245,7 +236,7 @@ const getDevServer = () => ({
 
     return middlewares;
   },
-  port: userConfig.serverPort,
+  port: 3000,
   host: '0.0.0.0',
 });
 
@@ -260,12 +251,11 @@ const baseCfg = {
     alias: {
       '@': path.resolve(__dirname, contentRelativePath, './src'),
       '@mobile': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile'),
-      '@mobile-mpa': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/mpa'),
-      '@mobile-spa': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/spa'),
+      '@mobile-native': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/native'),
+      '@mobile-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/browser'),
       '@pc': path.resolve(__dirname, contentRelativePath, './src/platforms/pc'),
-      '@pc-mpa': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/mpa'),
-      '@pc-mpa-trade': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/mpa/modules/trade'),
-      '@pc-spa': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/spa'),
+      '@pc-native': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/native'),
+      '@pc-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/browser'),
     },
   },
   output: {
@@ -330,13 +320,32 @@ if (!isDevMode) {
 }
 
 const getConfig = async () => {
-  if (useMFSU) {
-    await mfsu.setWebpackConfig({
-      config: cfg,
-    });
+  if (isDevMode) {
+    if (useMFSU) {
+      await mfsu.setWebpackConfig({
+        config: cfg,
+      });
+    }
+
+    try {
+      let port = userConfig.serverPort;
+
+      // if (!port) {
+      //   port = await portfinder.getPortPromise();
+      // }
+
+      cfg.devServer.port = 3600;
+
+      console.log(
+        entryList.map((item) => ({
+          ...item,
+          url: `http://${ip}:${port}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
+        })),
+      );
+    } catch(err) {}
   }
 
   return cfg;
 };
 
-module.exports = isDevMode ? getConfig() : cfg;
+module.exports = getConfig();

@@ -1,5 +1,42 @@
 {
-  "extends": "@dz-web-esboot-react/config/tsconfig/mp.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": false,
+    "baseUrl": ".",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "noResolve": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@mobile/*": ["src/platforms/mobile/*"],
+      "@mobile-native/*": ["src/platforms/mobile/native/*"],
+      "@mobile-browser/*": ["src/platforms/mobile/browser/*"],
+      "@pc/*": ["src/platforms/pc/*"],
+      "@pc-native/*": ["src/platforms/pc/native/*"],
+      "@pc-browser/*": ["src/platforms/pc/browser/*"]
+    },
+    "removeComments": false,
+    "allowJs": false,
+    "lib": [
+      "ES5",
+      "ES2015",
+      "ES2018",
+      "DOM"
+    ],
+    "target": "ES5"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "src/**/*",
+    "globals.d.ts"
+  ]
 }
