@@ -251,11 +251,11 @@ const baseCfg = {
     alias: {
       '@': path.resolve(__dirname, contentRelativePath, './src'),
       '@mobile': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile'),
-      '@mobile-native': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/native'),
-      '@mobile-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/browser'),
+      '@mobile-native': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/_native'),
+      '@mobile-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/_browser'),
       '@pc': path.resolve(__dirname, contentRelativePath, './src/platforms/pc'),
-      '@pc-native': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/native'),
-      '@pc-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/browser'),
+      '@pc-native': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/_native'),
+      '@pc-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/_browser'),
     },
   },
   output: {
@@ -327,25 +327,32 @@ const getConfig = async () => {
       });
     }
 
-  //   try {
-  //     let port = userConfig.serverPort || 3600;
+    try {
+      // let port = userConfig.serverPort;
 
-  //     // if (!port) {
-  //     //   port = await portfinder.getPortPromise();
-  //     // }
+      // if (!port) {
+      //   port = await portfinder.getPortPromise();
+      // }
 
-  //     cfg.devServer.port = 3600;
+      // cfg.devServer.port = port;
 
-  //     console.log(
-  //       entryList.map((item) => ({
-  //         ...item,
-  //         url: `http://${ip}:${port}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
-  //       })),
-  //     );
-  //   } catch(err) {}
+      // console.log(
+      //   entryList.map((item) => ({
+      //     ...item,
+      //     url: `http://${ip}:${9003}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
+      //   })),
+      // );
+    } catch(err) {}
   }
+
+  console.log(
+    entryList.map((item) => ({
+      ...item,
+      url: `http://${ip}:${9003}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
+    })),
+  );
 
   return cfg;
 };
 
-module.exports = cfg;
+module.exports = getConfig();

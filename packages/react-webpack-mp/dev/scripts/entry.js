@@ -9,7 +9,7 @@ const {
 
 const userConfig = require(ESBOOT_CONFIG_PATH);
 const rootPath = resolve(__dirname, '../../src');
-const contentRootPath = `./platforms/${ESBOOT_PLATFORM}/${ESBOOT_PAGE_TYPE}`;
+const contentRootPath = `./platforms/${ESBOOT_PLATFORM}/_${ESBOOT_PAGE_TYPE}`;
 
 function getEntryList() {
   const { html } = userConfig;

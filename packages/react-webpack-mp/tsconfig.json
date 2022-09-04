@@ -15,11 +15,11 @@
     "paths": {
       "@/*": ["src/*"],
       "@mobile/*": ["src/platforms/mobile/*"],
-      "@mobile-native/*": ["src/platforms/mobile/native/*"],
-      "@mobile-browser/*": ["src/platforms/mobile/browser/*"],
+      "@mobile-native/*": ["src/platforms/mobile/_native/*"],
+      "@mobile-browser/*": ["src/platforms/mobile/_browser/*"],
       "@pc/*": ["src/platforms/pc/*"],
-      "@pc-native/*": ["src/platforms/pc/native/*"],
-      "@pc-browser/*": ["src/platforms/pc/browser/*"]
+      "@pc-native/*": ["src/platforms/pc/_native/*"],
+      "@pc-browser/*": ["src/platforms/pc/_browser/*"]
     },
     "removeComments": false,
     "allowJs": false,
