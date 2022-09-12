@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const outputPath = path.resolve(__dirname, '../package.json');
+const outputPath = path.resolve('./package.json');
 
 function editData() {
   const f = fs.readFileSync(outputPath, 'utf8');

@@ -3,8 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InjectBodyPlugin = require('inject-body-webpack-plugin').default;
-const portfinder = require('portfinder');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -12,38 +10,42 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
+const esbuild = require('esbuild')
 const {
   getLocalIdent,
   // eslint-disable-next-line import/no-unresolved
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
-const getEntryList = require('../../scripts/entry');
-// const createMultiPlatform = require('../../scripts/create-multi-platform');
+
+const libPath = path.resolve(__dirname, '../../');
+const helpersPath = path.join(libPath, './helpers/config');
+
+const getEntryList = require(path.resolve(__dirname, './helpers/entry'));
 const postcssNormalize = require('postcss-normalize');
-const { MFSU } = require('@umijs/mfsu');
+const { MFSU, esbuildLoader } = require('@umijs/mfsu');
 
-const srcPath = path.resolve(__dirname, '../../../src');
-
-const { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE, ESBOOT_IS_SPA } = require('../../scripts/config');
-const pkg = require('../../../package.json');
+const { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE } = require(path.join(helpersPath, './config'));
+const pkg = require('./package.json');
 const userConfig = require(ESBOOT_CONFIG_PATH);
-const ip = require('../../scripts/ip');
+const ip = require(path.join(helpersPath, './helpers/ip'));
 const entryList = getEntryList();
 const mfsu = new MFSU({
   implementor: webpack,
   buildDepWithESBuild: true,
 });
 
-const useMFSU = Number(process.env.useMFSU) !== 0;
 const smp = new SpeedMeasurePlugin();
 const isDevMode = process.env.NODE_ENV === 'development';
 
-const globalScssPathList = [
-  path.join(srcPath, './styles/'),
-  path.join(srcPath, './platforms/mobile/styles/'),
-  path.join(srcPath, './platforms/pc/styles/'),
-];
+if (isDevMode) {
+  console.log(
+    entryList.map((item) => ({
+      ...item,
+      url: `http://${ip}:${userConfig.serverPort}/${item.name}.html`,
+    })),
+    '<-- entryList',
+  );
+}
 
 const parseScssModule = (options = {}) => {
   const { modules } = options;
@@ -57,7 +59,7 @@ const parseScssModule = (options = {}) => {
       importLoaders: 2,
       modules: {
         namedExport: true,
-        localIdentContext: srcPath,
+        localIdentContext: path.resolve(__dirname, 'src'),
         getLocalIdent,
         localIdentName: '[name]__[local]__[contenthash:base64:5]',
       },
@@ -76,19 +78,18 @@ const parseScssModule = (options = {}) => {
         sourceMap: isDevMode,
         postcssOptions: {
           plugins: [
-            ESBOOT_IS_MOBILE &&
-              pxtorem({
-                rootValue: 100,
-                unitPrecision: 5,
-                propWhiteList: [],
-                propBlackList: [],
-                exclude: false,
-                selectorBlackList: [],
-                ignoreIdentifier: false,
-                replace: true,
-                mediaQuery: false,
-                minPixelValue: 0,
-              }),
+            ESBOOT_IS_MOBILE && pxtorem({
+              rootValue: 100,
+              unitPrecision: 5,
+              propWhiteList: [],
+              propBlackList: [],
+              exclude: false,
+              selectorBlackList: [],
+              ignoreIdentifier: false,
+              replace: true,
+              mediaQuery: false,
+              minPixelValue: 0
+            }),
             require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
               autoprefixer: {
@@ -116,47 +117,20 @@ const createEntry = () =>
 
 const getPlugins = () => [
   // !isDevMode && new BundleAnalyzerPlugin(),
-  new AntdDayjsWebpackPlugin(),
   ...entryList.map(
     (i) =>
       new HtmlWebpackPlugin({
-        inject: true,
+        inject: 'auto',
         chunks: [i.name],
         filename: `${i.name}.html`,
         title: i.title || 'ESboot App',
         template: i.template || 'template/index.html',
+        templateParameters: {
+          configPath: `${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${pkg.version}`,
+        },
         hash: true,
       }),
   ),
-  new InjectBodyPlugin({
-    content: `
-    <script>
-      // default theme
-      function getUrlParam(name) {
-        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return decodeURI(r[2]);
-        return null;
-      }
-
-      var theme = getUrlParam('theme');
-
-      if (theme) {
-        document.documentElement.className = theme;
-      }
-    </script>
-
-    <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${process.env.BUILD_VERSION || pkg.version}"></script>
-    ${
-      (!ESBOOT_IS_SPA && isDevMode) ?
-      `<script>
-      window.brigeMockHost = "http://${ip}";
-      window.brigeMockPort = ${process.env.BRIDGE_MOCK_PORT || 3000};
-      </script>`
-      : ''
-    }
-    `,
-  }),
   new webpack.DefinePlugin({
     VERSION: JSON.stringify(pkg.version),
     ENV: JSON.stringify(process.env.NODE_ENV),
@@ -171,7 +145,7 @@ const getPlugins = () => [
 
 const getModulesRules = () => [
   {
-    test: /\.(jpg|gif|png|ico|svg)$/,
+    test: /\.(jpg|gif|png|svg|ico)$/,
     type: 'asset',
     parser: {
       dataUrlCondition: {
@@ -183,52 +157,18 @@ const getModulesRules = () => [
     },
   },
   {
-    test: /_svg\.svg$/,
-    type: 'asset/source',
-    parser: {
-      dataUrlCondition: {
-        maxSize: 8 * 1024,
-      },
-    },
-    generator: {
-      encoding: false,
-      filename: 'images/[name].[hash:8][ext]',
-    },
-  },
-  {
-    test: /\.(t|j)sx?$/,
-    include: srcPath,
-    exclude: /(node_modules|bower_components)/,
-    use: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: !isDevMode,
-          plugins: [
-            ...(isDevMode && useMFSU ? mfsu.getBabelPlugins() : []),
-            isDevMode && require.resolve('react-refresh/babel'),
-          ].filter(Boolean),
-        },
-      },
-      {
-        loader: 'thread-loader',
-        options: {
-          workers: 4,
-          workerParallelJobs: 50,
-          workerNodeArgs: ['--max-old-space-size=1024'],
-          poolTimeout: 2000,
-          poolParallelJobs: 50,
-          name: 'my-pool',
-        },
-      },
-      {
-        loader: 'ts-loader',
-        options: {
-          happyPackMode: true,
-          transpileOnly: true,
-        },
-      },
-    ],
+    test: /\.[jt]sx?$/,
+    exclude: /node_modules/,
+    use: {
+      loader: esbuildLoader,
+      options: {
+        handler: [
+          ...mfsu.getEsbuildLoaderHandler()
+        ],
+        target: 'esnext',
+        implementation: esbuild
+      }
+    }
   },
   {
     test: /\.css$/,
@@ -236,12 +176,12 @@ const getModulesRules = () => [
   },
   {
     test: /\.scss$/,
-    exclude: globalScssPathList,
+    exclude: path.resolve(__dirname, 'src/global-css/'),
     use: parseScssModule({ modules: true }),
   },
   {
     test: /\.scss$/,
-    include: globalScssPathList,
+    include: path.resolve(__dirname, 'src/global-css/'),
     use: parseScssModule(),
   },
 ];
@@ -253,13 +193,10 @@ const getDevServer = () => ({
     disableDotRule: true,
   },
   setupMiddlewares(middlewares) {
-    if (useMFSU) {
-      middlewares.unshift(...mfsu.getMiddlewares());
-    }
-
+    middlewares.unshift(...mfsu.getMiddlewares());
     return middlewares;
   },
-  port: 8100,
+  port: userConfig.serverPort,
   host: '0.0.0.0',
 });
 
@@ -272,13 +209,13 @@ const baseCfg = {
   resolve: {
     extensions: ['.ts', '.tsx', '.jsx', '.js'],
     alias: {
-      '@': srcPath,
-      '@mobile': path.join(srcPath, './src/platforms/mobile'),
-      '@mobile-native': path.join(srcPath, './src/platforms/mobile/_native'),
-      '@mobile-browser': path.join(srcPath, './src/platforms/mobile/_browser'),
-      '@pc': path.join(srcPath, './src/platforms/pc'),
-      '@pc-native': path.join(srcPath, './src/platforms/pc/_native'),
-      '@pc-browser': path.join(srcPath, './src/platforms/pc/_browser'),
+      '@': path.resolve(__dirname, contentRelativePath, './src'),
+      '@mobile': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile'),
+      '@mobile-native': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/native'),
+      '@mobile-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/mobile/browser'),
+      '@pc': path.resolve(__dirname, contentRelativePath, './src/platforms/pc'),
+      '@pc-native': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/native'),
+      '@pc-browser': path.resolve(__dirname, contentRelativePath, './src/platforms/pc/browser'),
     },
   },
   output: {
@@ -294,7 +231,7 @@ const baseCfg = {
 
 const devCfg = {
   devServer: getDevServer(),
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-source-map',
 };
 
 const prodCfg = {
@@ -323,9 +260,17 @@ const prodCfg = {
       new CssMinimizerPlugin(),
     ],
   },
+  // externalsType: 'script',
   // externals: {
-  //   'react': 'React',
-  //   'react-dom': 'ReactDOM'
+  //   'react': ['https://unpkg.com/react@17.0.2/umd/react.production.min.js', 'React', 'head'],
+  //   'react-dom': ['https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js', 'ReactDOM', 'head'],
+  //   'react-router-dom': [
+  //     'https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.production.min.js',
+  //     'ReactRouterDOM',
+  //     'head'
+  //   ],
+  //   // 'react': 'React',
+  //   // 'react-dom': 'ReactDOM'
   // },
 };
 
@@ -334,41 +279,18 @@ const cfg = Object.assign(baseCfg, isDevMode && devCfg, !isDevMode && prodCfg);
 
 // See https://github.com/stephencookdev/speed-measure-webpack-plugin/issues/167
 if (!isDevMode) {
-  cfg.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:5].css',
-      chunkFilename: 'css/[id].[contenthash:5].css',
-    }),
-  );
+  cfg.plugins.push(new MiniCssExtractPlugin({
+    filename: 'css/[name].[contenthash:5].css',
+    chunkFilename: 'css/[id].[contenthash:5].css',
+  }));
 }
 
 const getConfig = async () => {
-  if (isDevMode) {
-    if (useMFSU) {
-      await mfsu.setWebpackConfig({
-        config: cfg,
-      });
-    }
-
-    try {
-      let port = userConfig.serverPort;
-
-      if (!port) {
-        port = await portfinder.getPortPromise();
-      }
-
-      cfg.devServer.port = port;
-
-      console.log(
-        entryList.map((item) => ({
-          ...item,
-          url: `http://${ip}:${port}${!ESBOOT_IS_SPA ? `/${item.name}.html` : ''}`,
-        })),
-      );
-    } catch(err) {}
-  }
+  await mfsu.setWebpackConfig({
+    config: cfg,
+  });
 
   return cfg;
 };
 
-module.exports = getConfig();
+module.exports = isDevMode ? getConfig() : cfg;

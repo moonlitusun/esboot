@@ -37,6 +37,7 @@ stats.json
 
 # umi
 .umi
+.umi-*
 .mfsu-*
 .mfsu
 

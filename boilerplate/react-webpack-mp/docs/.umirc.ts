@@ -7,7 +7,7 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
-  publicPath: '/pd/zx/',
+  publicPath: '/',
   mode: 'site',
   mfsu: {
     development : {
@@ -17,17 +17,6 @@ export default defineConfig({
     //   output : "./.mfsu-prod",
     // }
   },
-  navs: [
-    null,
-    {
-      title: '项目资源',
-      children: [
-        { title: '代码地址', path: 'http://git.web.dz/WebTeam/zhongxin-web' },
-        { title: '任务管理', path: 'http://git.web.dz/WebTeam/zhongxin-web/issues' },
-        { title: '项目文档', path: 'https://doc.dztec.net/pages/viewpage.action?pageId=5276618' },
-      ],
-    },
-  ],
   themeConfig: {
     repository: {
        url: '',

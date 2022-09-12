@@ -5,10 +5,10 @@ const glob = require('glob');
 const {
   ESBOOT_PLATFORM, ESBOOT_PAGE_TYPE, ESBOOT_TEMPLATE, ESBOOT_CONFIG_PATH,
   ESBOOT_CONTENT_PATH = './', ESBOOT_CONTENT_PATTERN,
-} = require('./config');
+} = require(resolve(__dirname, '../../../helpers/config'));
 
 const userConfig = require(ESBOOT_CONFIG_PATH);
-const rootPath = resolve(__dirname, '../../src');
+const rootPath = resolve(process.cwd(), './src');
 const contentRootPath = `./platforms/${ESBOOT_PLATFORM}/_${ESBOOT_PAGE_TYPE}`;
 
 function getEntryList() {

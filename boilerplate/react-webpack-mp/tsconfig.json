@@ -21,7 +21,7 @@
       "@pc-native/*": ["src/platforms/pc/_native/*"],
       "@pc-browser/*": ["src/platforms/pc/_browser/*"]
     },
-    "removeComments": false,
+    "removeComments": true,
     "allowJs": false,
     "lib": [
       "ES5",

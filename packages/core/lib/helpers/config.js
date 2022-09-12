@@ -35,8 +35,8 @@ module.exports = {
   ESBOOT_TEMPLATE: TPL_DICT[ESBOOT_PLATFORM],
   ESBOOT_CONTENT_PATH,
   ESBOOT_IS_MOBILE: ESBOOT_PLATFORM === PLATFORMS.MOBILE,
-  ESBOOT_IS_browser: ESBOOT_PAGE_TYPE === PAGE_TYPE.browser,
+  ESBOOT_IS_BROWSER: ESBOOT_PAGE_TYPE === PAGE_TYPE.browser,
   ESBOOT_RELATIVE_STATIC_CONFIG_PATH: `/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`,
-  ESBOOT_CONFIG_PATH: path.resolve(__dirname, `../config/esboot/esboot-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`),
-  ESBOOT_STATIC_CONFIG_PATH: path.resolve(__dirname, `../config/static-config/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`)
+  ESBOOT_CONFIG_PATH: path.resolve(process.cwd(), `./dev/config/esboot/esboot-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`),
+  ESBOOT_STATIC_CONFIG_PATH: path.resolve(process.cwd(), `./dev/config/static-config/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`)
 };

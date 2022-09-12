@@ -1,13 +1,22 @@
+import { Button } from 'antd';
 import Home from '@mobile/components/home/home';
+import { useBearStore } from '@/model';
 
-const AppHome: React.FC = () => (
-  <div>
-    <Home platform="mobile-native" />
+useBearStore.getState().increase();
+console.log(useBearStore.getState());
 
-    <p>
-      <a href="/app-func.html">跳转到App Func页面</a>
-    </p>
-  </div>
-);
+const AppHome: React.FC = () => {
+  const bears = useBearStore((state) => state.bears);
+  const increase = useBearStore((state) => state.increase);
+
+  return (
+    <div>
+      <Home platform="mobile-native" />
+
+      <p>Bears: {bears}</p>
+      <Button onClick={increase}>Add Bears</Button>
+    </div>
+  );
+};
 
 export default AppHome;
