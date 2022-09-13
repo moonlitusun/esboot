@@ -4,6 +4,7 @@
     "stylelint-scss",
     "stylelint-declaration-use-variable"
   ],
+  "customSyntax": "postcss-scss",
   "rules": {
     "at-rule-no-unknown": [
       true,

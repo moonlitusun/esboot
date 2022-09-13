@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 
 import
 useInitNative, { IUserConfig, IUserInfo, defaultUserConfig, defaultUserInfo } from '@pc-native/hooks-pure/use-init-native';
@@ -6,8 +6,8 @@ useInitNative, { IUserConfig, IUserInfo, defaultUserConfig, defaultUserInfo } fr
 export const userConfigContext = createContext<IUserConfig>(defaultUserConfig);
 export const userInfoContext = createContext<IUserInfo>(defaultUserInfo);
 
-export function getDisplayName(WrappedComponent: React.ReactNode): string {
-  return (WrappedComponent as React.FC).displayName || 'Component';
+export function getDisplayName(WrappedComponent: ReactNode): string {
+  return (WrappedComponent as any).displayName || 'Component';
 }
 
 export default function wrapNative(App): React.ReactNode {

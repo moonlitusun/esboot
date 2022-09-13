@@ -7,8 +7,8 @@ useInitNative,
 export const userConfigContext = createContext<IUserConfig>(defaultUserConfig);
 export const userInfoContext = createContext<IUserInfo>(defaultUserInfo);
 
-export function getDisplayName(WrappedComponent: React.ReactNode): string {
-  return (WrappedComponent as React.FC).displayName || 'Component';
+export function getDisplayName(WrappedComponent: React.FC): string {
+  return WrappedComponent.displayName || 'Component';
 }
 
 export default function wrapNative(App): React.ReactNode {

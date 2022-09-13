@@ -1,6 +1,6 @@
 {
   "name": "@dz-web-esboot/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "bin/index.js",
   "bin": {
@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@alitajs/postcss-plugin-px2rem": "^0.0.1",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
