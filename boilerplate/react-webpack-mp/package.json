@@ -18,7 +18,7 @@
     "prepare": "husky install",
     "docs:start": "esboot docs dev",
     "docs:build": "esboot docs build",
-    "postinstall": "esboot generate env"
+    "postinstall": "esboot setup"
   },
   "author": "",
   "license": "ISC",
