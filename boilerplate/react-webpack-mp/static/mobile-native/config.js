@@ -1,0 +1,3 @@
+var APP_CONFIG = {
+
+};

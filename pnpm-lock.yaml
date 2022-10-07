@@ -4,11 +4,13 @@ importers:
 
   .:
     specifiers:
+      '@types/node': ^17.0.12
       eslint-config-custom: workspace:*
       father: ^4.0.5
       prettier: latest
       turbo: latest
     devDependencies:
+      '@types/node': 17.0.45
       eslint-config-custom: link:packages/eslint-config-custom
       father: 4.0.5
       prettier: 2.7.1
@@ -80,6 +82,9 @@ importers:
       '@alitajs/postcss-plugin-px2rem': ^0.0.1
       '@dr.pogodin/babel-plugin-react-css-modules': ^6.8.2
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.7
+      '@types/cross-spawn': ^6.0.2
+      '@types/fs-extra': ^9.0.13
+      '@types/webpack': ^5.28.0
       '@types/webpack-env': ^1.18.0
       '@umijs/ast': ^4.0.19
       '@umijs/mfsu': ^4.0.19
@@ -133,7 +138,7 @@ importers:
     dependencies:
       '@alitajs/postcss-plugin-px2rem': 0.0.1
       '@dr.pogodin/babel-plugin-react-css-modules': 6.8.2_grylgppdul3acdjxua2mgahpji
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_6mooiwnzb26vti6xfwwzkqin6i
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_k5dim3av2b73h2lcsckzgl7rmy
       '@types/webpack-env': 1.18.0
       '@umijs/ast': 4.0.19
       '@umijs/mfsu': 4.0.19
@@ -184,7 +189,10 @@ importers:
       webpack-cli: 4.10.0_irwyrf74sagbvbsw3orpfloabm
       webpack-dev-server: 4.11.0_5v66e2inugklgvlh4huuavolfq
     devDependencies:
-      father: 4.0.5_mldmorf72vas4wjtkspcp7zl7m
+      '@types/cross-spawn': 6.0.2
+      '@types/fs-extra': 9.0.13
+      '@types/webpack': 5.28.0_7tkwga3o7uz2s4amplmncacgza
+      father: 4.0.5_sx43p7j7jvmxbtf4ccfu7sslqi
 
   packages/eslint-config-custom:
     specifiers:
@@ -1036,7 +1044,7 @@ packages:
       '@parcel/css-win32-x64-msvc': 1.9.0
     dev: true
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.7_6mooiwnzb26vti6xfwwzkqin6i:
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.7_k5dim3av2b73h2lcsckzgl7rmy:
     resolution: {integrity: sha512-bcKCAzF0DV2IIROp9ZHkRJa6O4jy7NlnHdWL3GmcUxYWNjLXkK5kfELELwEfSP5hXPfVL/qOGMAROuMQb9GG8Q==}
     engines: {node: '>= 10.13'}
     peerDependencies:
@@ -1062,6 +1070,7 @@ packages:
       webpack-plugin-serve:
         optional: true
     dependencies:
+      '@types/webpack': 5.28.0_7tkwga3o7uz2s4amplmncacgza
       ansi-html-community: 0.0.8
       common-path-prefix: 3.0.0
       core-js-pure: 3.25.0
@@ -1325,6 +1334,12 @@ packages:
     dependencies:
       '@types/node': 18.7.14
 
+  /@types/cross-spawn/6.0.2:
+    resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
+    dependencies:
+      '@types/node': 18.7.14
+    dev: true
+
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -1354,6 +1369,12 @@ packages:
       '@types/express-serve-static-core': 4.17.30
       '@types/qs': 6.9.7
       '@types/serve-static': 1.15.0
+
+  /@types/fs-extra/9.0.13:
+    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
+    dependencies:
+      '@types/node': 18.7.14
+    dev: true
 
   /@types/hapi__joi/17.1.8:
     resolution: {integrity: sha512-omVytnOAiAfzGUOQArujJr3heWxPrDHW7MF1ieqix1ngoGdhtJmSSDFVM+ZAOa7UmhlGJtltdgUAT03mfDu6kg==}
@@ -1564,6 +1585,18 @@ packages:
   /@types/webpack-env/1.18.0:
     resolution: {integrity: sha512-56/MAlX5WMsPVbOg7tAxnYvNYMMWr/QJiIp6BxVSW3JJXUVzzOn64qW8TzQyMSqSUFM2+PVI4aUHcHOzIz/1tg==}
     dev: false
+
+  /@types/webpack/5.28.0_7tkwga3o7uz2s4amplmncacgza:
+    resolution: {integrity: sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==}
+    dependencies:
+      '@types/node': 18.7.14
+      tapable: 2.2.1
+      webpack: 5.74.0_7tkwga3o7uz2s4amplmncacgza
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
 
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
@@ -1820,12 +1853,12 @@ packages:
       - react-router
     dev: false
 
-  /@umijs/bundler-webpack/4.0.20_hs2bkcxaeao4yfvccp26zamhmy:
+  /@umijs/bundler-webpack/4.0.20_chsumpqshhlmnif6xt5jhoh2je:
     resolution: {integrity: sha512-lOuIRdCrKpu/2M4n5RUfTbv4nazAcVo7lzuE7H747mvPM3GhLJCJ37GS3EXdm0qIj6w2B8r7euAIJUoqGstLvA==}
     hasBin: true
     dependencies:
       '@parcel/css': 1.9.0
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_6mooiwnzb26vti6xfwwzkqin6i
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_k5dim3av2b73h2lcsckzgl7rmy
       '@svgr/core': 6.2.1
       '@svgr/plugin-jsx': 6.3.1_@svgr+core@6.2.1
       '@svgr/plugin-svgo': 6.3.1_@svgr+core@6.2.1
@@ -5318,14 +5351,14 @@ packages:
       - webpack-plugin-serve
     dev: true
 
-  /father/4.0.5_mldmorf72vas4wjtkspcp7zl7m:
+  /father/4.0.5_sx43p7j7jvmxbtf4ccfu7sslqi:
     resolution: {integrity: sha512-2IHPHjvg+6MoRVsDPWhB7GmRvysrORsdNe+JzIAf3V7PYZ/cFhjiUVNyZwkvSmnlo/m4B+0EQvlvFMNzKNcKpw==}
     hasBin: true
     dependencies:
       '@microsoft/api-extractor': 7.29.5
       '@umijs/babel-preset-umi': 4.0.20
       '@umijs/bundler-utils': 4.0.19
-      '@umijs/bundler-webpack': 4.0.20_hs2bkcxaeao4yfvccp26zamhmy
+      '@umijs/bundler-webpack': 4.0.20_chsumpqshhlmnif6xt5jhoh2je
       '@umijs/core': 4.0.20
       '@umijs/utils': 4.0.19
       '@vercel/ncc': 0.33.3

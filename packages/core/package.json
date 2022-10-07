@@ -1,8 +1,9 @@
 {
-  "name": "@dz-web-esboot/core",
-  "version": "1.0.1",
+  "name": "@dz-web/esboot",
+  "version": "2.0.1",
   "description": "",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "bin": {
     "esboot": "bin/index.js"
   },
@@ -10,7 +11,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "father build"
+    "dev": "father dev",
+    "build": "father build",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -70,6 +74,9 @@
     "webpack-dev-server": "^4.11.0"
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/fs-extra": "^9.0.13",
+    "@types/webpack": "^5.28.0",
     "father": "^4.0.5"
   }
 }

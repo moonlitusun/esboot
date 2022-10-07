@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "bridge-mock": "node dev/bridge-mock",
-    "start": "npm run dev",
+    "start": "esboot run dev",
     "dev": "esboot dev",
     "build": "esboot build",
     "preview": "esboot preview",
@@ -56,7 +56,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.2",
-    "@dz-web-esboot/core": "^1.0.1",
+    "@dz-web/esboot": "^1.0.1",
     "@dz-web/bridge-mock": "^1.2.5",
     "@types/react": "18.0.18",
     "@types/react-css-modules": "^4.6.4",

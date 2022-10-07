@@ -166,7 +166,7 @@ const getPlugins = () => [
   }),
   new FriendlyErrorsWebpackPlugin(),
   new CopyPlugin({
-    patterns: userConfig.copyFile,
+    patterns: userConfig.copy,
   }),
   isDevMode && new ReactRefreshPlugin(),
   isDevMode && new ForkTsCheckerWebpackPlugin({}),

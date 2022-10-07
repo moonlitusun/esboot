@@ -30,14 +30,14 @@ program
   .command('dev')
   .description('Start Projects')
   .action(() => {
-    require('../lib/compiler/webpack').execDev();
+    require('../dist').execDev();
   });
 
 program
   .command('build')
   .description('Build Projects')
   .action(() => {
-    require('../lib/compiler/webpack').execBuild();
+    require('../dist').execBuild();
   });
 
 program
