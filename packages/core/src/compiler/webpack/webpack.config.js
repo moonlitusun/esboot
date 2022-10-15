@@ -1,60 +1,50 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InjectBodyPlugin = require('inject-body-webpack-plugin').default;
-const portfinder = require('portfinder');
-const webpack = require('webpack');
-const CopyPlugin = require('copy-webpack-plugin');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-// const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
-const pxtorem = require('@alitajs/postcss-plugin-px2rem');
-const {
-  getLocalIdent,
-  // eslint-disable-next-line import/no-unresolved
-} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
-const createMultiPlatform = require('../../scripts/create-multi-platform');
-const postcssNormalize = require('postcss-normalize');
-const { MFSU } = require('@umijs/mfsu');
-
-const srcPath = path.resolve('./src');
-const libPath = path.resolve(__dirname, '../../');
-const helpersPath = path.join(libPath, './helpers');
-
-const getEntryList = require(path.resolve(__dirname, './helpers/entry'));
-const ip = require(path.join(helpersPath, './ip'));
-const pkg = require(path.resolve(process.cwd(), './package.json'));
-
-const { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE, ESBOOT_IS_BROWSER } = require(path.join(helpersPath, './config'));
-const userConfig = require(ESBOOT_CONFIG_PATH);
-const entryList = getEntryList();
-const mfsu = new MFSU({
+var path = require("path");
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var TerserPlugin = require("terser-webpack-plugin");
+var CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var InjectBodyPlugin = require("inject-body-webpack-plugin").default;
+var portfinder = require("portfinder");
+var webpack = require("webpack");
+var CopyPlugin = require("copy-webpack-plugin");
+var SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+var FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+var { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+var ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+var ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+var pxtorem = require("@alitajs/postcss-plugin-px2rem");
+var {
+  getLocalIdent
+} = require("@dr.pogodin/babel-plugin-react-css-modules/utils");
+var createMultiPlatform = require("../../scripts/create-multi-platform");
+var postcssNormalize = require("postcss-normalize");
+var { MFSU } = require("@umijs/mfsu");
+var srcPath = path.resolve("./src");
+var libPath = path.resolve(__dirname, "../../");
+var helpersPath = path.join(libPath, "./helpers");
+var getEntryList = require(path.resolve(__dirname, "./helpers/entry"));
+var ip = require(path.join(helpersPath, "./ip"));
+var pkg = require(path.resolve(process.cwd(), "./package.json"));
+var { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE, ESBOOT_IS_BROWSER } = require(path.join(helpersPath, "./config"));
+var userConfig = require(ESBOOT_CONFIG_PATH);
+var entryList = getEntryList();
+var mfsu = new MFSU({
   implementor: webpack,
-  buildDepWithESBuild: true,
+  buildDepWithESBuild: true
 });
-
-const useMFSU = Number(process.env.useMFSU) !== 0;
-const smp = new SpeedMeasurePlugin();
-const isDevMode = process.env.NODE_ENV === 'development';
-
-const globalScssPathList = [
-  path.join(srcPath, './styles/'),
-  path.join(srcPath, './platforms/mobile/styles/'),
-  path.join(srcPath, './platforms/pc/styles/'),
+var useMFSU = Number(process.env.useMFSU) !== 0;
+var smp = new SpeedMeasurePlugin();
+var isDevMode = process.env.NODE_ENV === "development";
+var globalScssPathList = [
+  path.join(srcPath, "./styles/"),
+  path.join(srcPath, "./platforms/mobile/styles/"),
+  path.join(srcPath, "./platforms/pc/styles/")
 ];
-
-const parseScssModule = (options = {}) => {
+var parseScssModule = (options = {}) => {
   const { modules } = options;
-
   const cssLoaderOptions = {
-    sourceMap: isDevMode,
+    sourceMap: isDevMode
   };
-
   if (modules) {
     Object.assign(cssLoaderOptions, {
       importLoaders: 2,
@@ -62,78 +52,68 @@ const parseScssModule = (options = {}) => {
         namedExport: true,
         localIdentContext: srcPath,
         getLocalIdent,
-        localIdentName: '[name]__[local]__[contenthash:base64:5]',
-      },
+        localIdentName: "[name]__[local]__[contenthash:base64:5]"
+      }
     });
   }
-
   return [
-    isDevMode ? 'style-loader' : {
+    isDevMode ? "style-loader" : {
       loader: MiniCssExtractPlugin.loader,
-      options: { publicPath: '../' }
+      options: { publicPath: "../" }
     },
     {
-      loader: 'css-loader',
-      options: cssLoaderOptions,
+      loader: "css-loader",
+      options: cssLoaderOptions
     },
     {
-      loader: 'postcss-loader',
+      loader: "postcss-loader",
       options: {
         sourceMap: isDevMode,
         postcssOptions: {
           plugins: [
-            ESBOOT_IS_MOBILE &&
-              pxtorem({
-                rootValue: 100,
-                unitPrecision: 5,
-                propWhiteList: [],
-                propBlackList: [],
-                exclude: false,
-                selectorBlackList: [],
-                ignoreIdentifier: false,
-                replace: true,
-                mediaQuery: false,
-                minPixelValue: 0,
-              }),
-            require('postcss-flexbugs-fixes'),
-            require('postcss-preset-env')({
-              autoprefixer: {
-                flexbox: 'no-2009',
-              },
-              stage: 3,
+            ESBOOT_IS_MOBILE && pxtorem({
+              rootValue: 100,
+              unitPrecision: 5,
+              propWhiteList: [],
+              propBlackList: [],
+              exclude: false,
+              selectorBlackList: [],
+              ignoreIdentifier: false,
+              replace: true,
+              mediaQuery: false,
+              minPixelValue: 0
             }),
-            postcssNormalize(),
-          ].filter(Boolean),
-        },
-      },
+            require("postcss-flexbugs-fixes"),
+            require("postcss-preset-env")({
+              autoprefixer: {
+                flexbox: "no-2009"
+              },
+              stage: 3
+            }),
+            postcssNormalize()
+          ].filter(Boolean)
+        }
+      }
     },
     {
-      loader: 'sass-loader',
-      options: { sourceMap: isDevMode },
-    },
+      loader: "sass-loader",
+      options: { sourceMap: isDevMode }
+    }
   ];
 };
-
-const createEntry = () =>
-  entryList.reduce((prev, curr) => {
-    prev[curr.name] = curr.entry;
-    return prev;
-  }, {});
-
-const getPlugins = () => [
-  // !isDevMode && new BundleAnalyzerPlugin(),
-  // new AntdDayjsWebpackPlugin(),
-  ...entryList.map(
-    (i) =>
-      new HtmlWebpackPlugin({
-        inject: true,
-        chunks: [i.name],
-        filename: `${i.name}.html`,
-        title: i.title || 'ESboot App',
-        template: i.template || 'template/index.html',
-        hash: true,
-      }),
-  ),
+var createEntry = () => entryList.reduce((prev, curr) => {
+  prev[curr.name] = curr.entry;
+  return prev;
+}, {});
+var getPlugins = () => [
+  ...entryList.map((i) => new HtmlWebpackPlugin({
+    inject: true,
+    chunks: [i.name],
+    filename: `${i.name}.html`,
+    title: i.title || "ESboot App",
+    template: i.template || "template/index.html",
+    hash: true
+  })),
   new InjectBodyPlugin({
     content: `
     <script>
@@ -150,56 +130,51 @@ const getPlugins = () => [
       if (theme) {
         document.documentElement.className = theme;
       }
-    </script>
+    <\/script>
 
-    <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${process.env.BUILD_VERSION || pkg.version}"></script>
-    ${
-      (!ESBOOT_IS_BROWSER && isDevMode) ?
-      `<script>
+    <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${process.env.BUILD_VERSION || pkg.version}"><\/script>
+    ${!ESBOOT_IS_BROWSER && isDevMode ? `<script>
       window.brigeMockHost = "http://${ip}";
-      window.brigeMockPort = ${process.env.BRIDGE_MOCK_PORT || 3000};
-      </script>`
-      : ''
-    }
-    `,
+      window.brigeMockPort = ${process.env.BRIDGE_MOCK_PORT || 3e3};
+      <\/script>` : ""}
+    `
   }),
   new webpack.DefinePlugin({
     VERSION: JSON.stringify(pkg.version),
-    ENV: JSON.stringify(process.env.NODE_ENV),
+    ENV: JSON.stringify(process.env.NODE_ENV)
   }),
   new FriendlyErrorsWebpackPlugin(),
   new CopyPlugin({
-    patterns: userConfig.copy,
+    patterns: userConfig.copy
   }),
   isDevMode && new ReactRefreshPlugin(),
-  isDevMode && new ForkTsCheckerWebpackPlugin({}),
+  isDevMode && new ForkTsCheckerWebpackPlugin({})
 ];
-
-const getModulesRules = () => [
+var getModulesRules = () => [
   {
     test: /\.(jpg|gif|png|ico|svg)$/,
-    type: 'asset',
+    type: "asset",
     parser: {
       dataUrlCondition: {
-        maxSize: 8 * 1024,
-      },
+        maxSize: 8 * 1024
+      }
     },
     generator: {
-      filename: 'images/[name].[hash:8][ext]',
-    },
+      filename: "images/[name].[hash:8][ext]"
+    }
   },
   {
     test: /_svg\.svg$/,
-    type: 'asset/source',
+    type: "asset/source",
     parser: {
       dataUrlCondition: {
-        maxSize: 8 * 1024,
-      },
+        maxSize: 8 * 1024
+      }
     },
     generator: {
       encoding: false,
-      filename: 'images/[name].[hash:8][ext]',
-    },
+      filename: "images/[name].[hash:8][ext]"
+    }
   },
   {
     test: /\.(t|j)sx?$/,
@@ -207,112 +182,107 @@ const getModulesRules = () => [
     exclude: /(node_modules|bower_components)/,
     use: [
       {
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
           cacheDirectory: !isDevMode,
           plugins: [
-            ...(isDevMode && useMFSU ? mfsu.getBabelPlugins() : []),
-            isDevMode && require.resolve('react-refresh/babel'),
-          ].filter(Boolean),
-        },
+            ...isDevMode && useMFSU ? mfsu.getBabelPlugins() : [],
+            isDevMode && require.resolve("react-refresh/babel")
+          ].filter(Boolean)
+        }
       },
       {
-        loader: 'thread-loader',
+        loader: "thread-loader",
         options: {
           workers: 4,
           workerParallelJobs: 50,
-          workerNodeArgs: ['--max-old-space-size=1024'],
-          poolTimeout: 2000,
+          workerNodeArgs: ["--max-old-space-size=1024"],
+          poolTimeout: 2e3,
           poolParallelJobs: 50,
-          name: 'my-pool',
-        },
+          name: "my-pool"
+        }
       },
       {
-        loader: 'ts-loader',
+        loader: "ts-loader",
         options: {
           happyPackMode: true,
-          transpileOnly: true,
-        },
-      },
-    ],
+          transpileOnly: true
+        }
+      }
+    ]
   },
   {
     test: /\.css$/,
-    use: ['style-loader', 'css-loader'],
+    use: ["style-loader", "css-loader"]
   },
   {
     test: /\.scss$/,
     exclude: globalScssPathList,
-    use: parseScssModule({ modules: true }),
+    use: parseScssModule({ modules: true })
   },
   {
     test: /\.scss$/,
     include: globalScssPathList,
-    use: parseScssModule(),
-  },
+    use: parseScssModule()
+  }
 ];
-
-const getDevServer = () => ({
+var getDevServer = () => ({
   compress: true,
   hot: true,
   historyApiFallback: {
-    disableDotRule: true,
+    disableDotRule: true
   },
   setupMiddlewares(middlewares) {
     if (useMFSU) {
       middlewares.unshift(...mfsu.getMiddlewares());
     }
-
     return middlewares;
   },
   port: 8100,
-  host: '0.0.0.0',
+  host: "0.0.0.0"
 });
-
-const baseCfg = {
-  mode: isDevMode ? 'development' : 'production',
+var baseCfg = {
+  mode: isDevMode ? "development" : "production",
   performance: {
-    hints: false,
+    hints: false
   },
   entry: createEntry(),
   resolve: {
-    extensions: ['.ts', '.tsx', '.jsx', '.js'],
+    extensions: [".ts", ".tsx", ".jsx", ".js"],
     alias: {
-      '@': srcPath,
-      '@mobile': path.join(srcPath, './src/platforms/mobile'),
-      '@mobile-native': path.join(srcPath, './src/platforms/mobile/_native'),
-      '@mobile-browser': path.join(srcPath, './src/platforms/mobile/_browser'),
-      '@pc': path.join(srcPath, './src/platforms/pc'),
-      '@pc-native': path.join(srcPath, './src/platforms/pc/_native'),
-      '@pc-browser': path.join(srcPath, './src/platforms/pc/_browser'),
-    },
+      "@": srcPath,
+      "@mobile": path.join(srcPath, "./src/platforms/mobile"),
+      "@mobile-native": path.join(srcPath, "./src/platforms/mobile/_native"),
+      "@mobile-browser": path.join(srcPath, "./src/platforms/mobile/_browser"),
+      "@pc": path.join(srcPath, "./src/platforms/pc"),
+      "@pc-native": path.join(srcPath, "./src/platforms/pc/_native"),
+      "@pc-browser": path.join(srcPath, "./src/platforms/pc/_browser")
+    }
   },
   output: {
-    publicPath: isDevMode ? '/' : './',
+    publicPath: isDevMode ? "/" : "./",
     clean: !isDevMode,
-    filename: isDevMode ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
+    filename: isDevMode ? "js/[name].js" : "js/[name].[chunkhash:5].js"
   },
   plugins: getPlugins().filter(Boolean),
   module: {
-    rules: getModulesRules(),
-  },
+    rules: getModulesRules()
+  }
 };
-
-const devCfg = {
+var devCfg = {
   devServer: getDevServer(),
-  devtool: 'cheap-module-source-map',
+  devtool: "cheap-module-source-map"
 };
-
-const prodCfg = {
+var prodCfg = {
   optimization: {
     splitChunks: {
-      chunks: 'all',
-      name: 'vendor',
+      chunks: "all",
+      name: "vendor",
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
-        },
-      },
+          test: /[\\/]node_modules[\\/]/
+        }
+      }
     },
     emitOnErrors: true,
     usedExports: true,
@@ -322,59 +292,41 @@ const prodCfg = {
         parallel: true,
         terserOptions: {
           format: {
-            comments: false,
-          },
-        },
+            comments: false
+          }
+        }
       }),
-      new CssMinimizerPlugin(),
-    ],
-  },
-  // externals: {
-  //   'react': 'React',
-  //   'react-dom': 'ReactDOM'
-  // },
+      new CssMinimizerPlugin()
+    ]
+  }
 };
-
-// const cfg = Object.assign(baseCfg, isDevMode && devCfg, !isDevMode && smp.wrap(prodCfg));
-const cfg = Object.assign(baseCfg, isDevMode && devCfg, !isDevMode && prodCfg);
-
-// See https://github.com/stephencookdev/speed-measure-webpack-plugin/issues/167
+var cfg = Object.assign(baseCfg, isDevMode && devCfg, !isDevMode && prodCfg);
 if (!isDevMode) {
-  cfg.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:5].css',
-      chunkFilename: 'css/[id].[contenthash:5].css',
-    }),
-  );
+  cfg.plugins.push(new MiniCssExtractPlugin({
+    filename: "css/[name].[contenthash:5].css",
+    chunkFilename: "css/[id].[contenthash:5].css"
+  }));
 }
-
-const getConfig = async () => {
+var getConfig = async () => {
   if (isDevMode) {
     if (useMFSU) {
       await mfsu.setWebpackConfig({
-        config: cfg,
+        config: cfg
       });
     }
-
     try {
       let port = userConfig.serverPort;
-
       if (!port) {
         port = await portfinder.getPortPromise();
       }
-
       cfg.devServer.port = port;
-
-      console.log(
-        entryList.map((item) => ({
-          ...item,
-          url: `http://${ip}:${port}${!ESBOOT_IS_BROWSER ? `/${item.name}.html` : ''}`,
-        })),
-      );
-    } catch(err) {}
+      console.log(entryList.map((item) => ({
+        ...item,
+        url: `http://${ip}:${port}${!ESBOOT_IS_BROWSER ? `/${item.name}.html` : ""}`
+      })));
+    } catch (err) {
+    }
   }
-
   return cfg;
 };
-
 module.exports = getConfig();
