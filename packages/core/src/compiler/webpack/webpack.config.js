@@ -68,7 +68,10 @@ const parseScssModule = (options = {}) => {
   }
 
   return [
-    isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+    isDevMode ? 'style-loader' : {
+      loader: MiniCssExtractPlugin.loader,
+      options: { publicPath: '../' }
+    },
     {
       loader: 'css-loader',
       options: cssLoaderOptions,
@@ -285,7 +288,7 @@ const baseCfg = {
     },
   },
   output: {
-    publicPath: '/',
+    publicPath: isDevMode ? '/' : './',
     clean: !isDevMode,
     filename: isDevMode ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
   },
