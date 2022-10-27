@@ -9,7 +9,7 @@ program
   .command('setup')
   .description('Init project')
   .action(() => {
-    require('../lib/scripts/create-env');
+    require('../src/scripts/create-env');
   });
 
 program
@@ -19,7 +19,7 @@ program
   .action((type) => {
     switch (type) {
       case 'env':
-        require('../lib/scripts/create-env');
+        require('../src/scripts/create-env');
         break;
       default:
         break;
@@ -30,21 +30,21 @@ program
   .command('dev')
   .description('Start Projects')
   .action(() => {
-    require('../lib/compiler/webpack').execDev();
+    require('../src/compiler/webpack').execDev();
   });
 
 program
   .command('build')
   .description('Build Projects')
   .action(() => {
-    require('../lib/compiler/webpack').execBuild();
+    require('../src/compiler/webpack').execBuild();
   });
 
 program
   .command('analyzer')
   .description('Analyzer')
   .action(() => {
-    require('../lib/compiler/webpack').execAnalyzer();
+    require('../src/compiler/webpack').execAnalyzer();
   });
 
 program
@@ -52,7 +52,7 @@ program
   .description('Start Projects')
   .option('-p, --port <char>')
   .action((options) => {
-    require('../lib/compiler/webpack').execPreview(options.port || 8900);
+    require('../src/compiler/webpack').execPreview(options.port || 8900);
   });
 
 program
@@ -60,7 +60,7 @@ program
   .description('DOCs')
   .argument('<action>', 'docs action')
   .action((action) => {
-    require('../lib/docs').execDocs(action);
+    require('../src/docs').execDocs(action);
   });
 
 program.parse();

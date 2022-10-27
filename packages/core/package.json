@@ -1,13 +1,14 @@
 {
   "name": "@dz-web-esboot/core",
-  "version": "1.0.1",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/index.js",
   "bin": {
     "esboot": "bin/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "father build"

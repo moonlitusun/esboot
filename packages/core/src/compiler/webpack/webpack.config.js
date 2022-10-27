@@ -30,7 +30,7 @@ const getEntryList = require(path.resolve(__dirname, './helpers/entry'));
 const ip = require(path.join(helpersPath, './ip'));
 const pkg = require(path.resolve(process.cwd(), './package.json'));
 
-const { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE, ESBOOT_IS_BROWSER } = require(path.join(helpersPath, './config'));
+const { ESBOOT_CONFIG_PATH, ESBOOT_RELATIVE_STATIC_CONFIG_PATH, ESBOOT_IS_MOBILE, ESBOOT_IS_BROWSER, isDevMode, publicPath } = require(path.join(helpersPath, './config'));
 const userConfig = require(ESBOOT_CONFIG_PATH);
 const entryList = getEntryList();
 const mfsu = new MFSU({
@@ -40,7 +40,6 @@ const mfsu = new MFSU({
 
 const useMFSU = Number(process.env.useMFSU) !== 0;
 const smp = new SpeedMeasurePlugin();
-const isDevMode = process.env.NODE_ENV === 'development';
 
 const globalScssPathList = [
   path.join(srcPath, './styles/'),
@@ -68,7 +67,10 @@ const parseScssModule = (options = {}) => {
   }
 
   return [
-    isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+    isDevMode ? 'style-loader' : {
+      loader: MiniCssExtractPlugin.loader,
+      options: { publicPath: '../' }
+    },
     {
       loader: 'css-loader',
       options: cssLoaderOptions,
@@ -285,7 +287,7 @@ const baseCfg = {
     },
   },
   output: {
-    publicPath: '/',
+    publicPath,
     clean: !isDevMode,
     filename: isDevMode ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
   },
