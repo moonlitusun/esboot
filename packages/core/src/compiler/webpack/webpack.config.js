@@ -40,6 +40,7 @@ var globalScssPathList = [
   path.join(srcPath, "./platforms/mobile/styles/"),
   path.join(srcPath, "./platforms/pc/styles/")
 ];
+
 var parseScssModule = (options = {}) => {
   const { modules } = options;
   const cssLoaderOptions = {

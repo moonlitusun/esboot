@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,17 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/webpack.config.ts
-var webpack_config_exports = {};
-__export(webpack_config_exports, {
-  default: () => webpack_config_default
-});
-module.exports = __toCommonJS(webpack_config_exports);
-var import_webpack_chain = __toESM(require("webpack-chain"));
-var config = new import_webpack_chain.default();
-config.entry("index").add("src/index.js").end().output.path("dist").filename("[name].bundle.js");
-var webpack_config_default = config.toConfig();
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+// src/compiler/webpack/config/entry/index.ts
+var import_path = __toESM(require("path"));
+var getEntryList = require(import_path.default.resolve(__dirname, "@/compiler/webpack/helpers/entry"));

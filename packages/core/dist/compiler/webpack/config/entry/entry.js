@@ -1,4 +1,4 @@
-// src/compiler/webpack/helpers/entry.js
+// src/compiler/webpack/config/entry/entry.ts
 var { getExportProps } = require("@umijs/ast");
 var { readFileSync } = require("fs");
 var { resolve, basename, join } = require("path");

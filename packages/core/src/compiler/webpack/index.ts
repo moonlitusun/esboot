@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import spawn from 'cross-spawn';
 import { searchCommand } from '../../helpers/path';
 import { run } from './index2';
+import config from './webpack.config';
 
 const webpackCfgOption = `--config ${resolve(
   __dirname,
@@ -15,6 +16,7 @@ export function execDev() {
   //   )} ${webpackCfgOption}`,
   //   { stdio: 'inherit', shell: true }
   // );
+  console.log(config, '<-- config');
   run();
 }
 

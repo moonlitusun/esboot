@@ -29,8 +29,10 @@ var import_path = require("path");
 var import_cross_spawn = __toESM(require("cross-spawn"));
 var import_path2 = require("../../helpers/path");
 var import_index2 = require("./index2");
+var import_webpack = __toESM(require("./webpack.config"));
 var webpackCfgOption = `--config ${(0, import_path.resolve)(__dirname, "./webpack.config.js")}`;
 function execDev() {
+  console.log(import_webpack.default, "<-- config");
   (0, import_index2.run)();
 }
 // Annotate the CommonJS export names for ESM import in node:

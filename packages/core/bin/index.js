@@ -6,6 +6,13 @@ const pkg = require('../package.json');
 program.description('esboot').version(pkg.version);
 
 program
+  .command('dev')
+  .description('Start Projects')
+  .action(() => {
+    require('../dist').execDev();
+  });
+  
+program
   .command('setup')
   .description('Init project')
   .action(() => {
@@ -24,13 +31,6 @@ program
       default:
         break;
     }
-  });
-
-program
-  .command('dev')
-  .description('Start Projects')
-  .action(() => {
-    require('../dist').execDev();
   });
 
 program
