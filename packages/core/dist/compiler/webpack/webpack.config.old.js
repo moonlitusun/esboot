@@ -259,10 +259,6 @@ var getDevServer = () => ({
   host: "0.0.0.0"
 });
 var baseCfg = {
-  mode: isDevMode ? "development" : "production",
-  performance: {
-    hints: false
-  },
   entry: createEntry(),
   resolve: {
     extensions: [".ts", ".tsx", ".jsx", ".js"],

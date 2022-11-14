@@ -2,7 +2,6 @@ import { getExportProps } from '@umijs/ast';
 import { readFileSync } from 'fs';
 import { resolve, basename, join } from 'path';
 import glob from 'glob';
-import dotenv from 'dotenv';
 require("dotenv").config();
 
 dotenv.config();
