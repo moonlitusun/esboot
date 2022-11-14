@@ -1,8 +1,9 @@
 import { resolve } from 'path';
 import spawn from 'cross-spawn';
 import { searchCommand } from '../../helpers/path';
-import { run } from './index2';
-import config from './webpack.config';
+import getConfig from './webpack.config';
+import { Environment } from '@@webpack/helpers/environment';
+import dotenv from 'dotenv';
 
 const webpackCfgOption = `--config ${resolve(
   __dirname,
@@ -10,14 +11,18 @@ const webpackCfgOption = `--config ${resolve(
 )}`;
 
 export function execDev() {
+  dotenv.config();
   // spawn.sync(
   //   `${searchCommand('cross-env')} NODE_ENV=development ${searchCommand(
   //     'webpack-dev-server'
   //   )} ${webpackCfgOption}`,
   //   { stdio: 'inherit', shell: true }
   // );
-  console.log(config, '<-- config');
-  run();
+  const opts = {
+    env: Environment.dev,
+  };
+
+  console.log(getConfig(opts), '<-- config');
 }
 
 function execBuild() {

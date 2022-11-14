@@ -5,7 +5,12 @@
     "declaration": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": ["src/*"],
+      "@@webpack/*": ["src/compiler/webpack/*"],
+    },
   },
   "include": ["src", "globals.d.ts"],
 }

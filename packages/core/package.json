@@ -76,6 +76,7 @@
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^8.0.0",
     "@types/webpack": "^5.28.0",
     "father": "^4.0.5",
     "webpack-chain": "^6.5.1"

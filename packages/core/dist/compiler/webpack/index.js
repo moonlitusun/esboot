@@ -28,12 +28,16 @@ module.exports = __toCommonJS(webpack_exports);
 var import_path = require("path");
 var import_cross_spawn = __toESM(require("cross-spawn"));
 var import_path2 = require("../../helpers/path");
-var import_index2 = require("./index2");
 var import_webpack = __toESM(require("./webpack.config"));
+var import_environment = require("./helpers/environment");
+var import_dotenv = __toESM(require("dotenv"));
 var webpackCfgOption = `--config ${(0, import_path.resolve)(__dirname, "./webpack.config.js")}`;
 function execDev() {
-  console.log(import_webpack.default, "<-- config");
-  (0, import_index2.run)();
+  import_dotenv.default.config();
+  const opts = {
+    env: import_environment.Environment.dev
+  };
+  console.log((0, import_webpack.default)(opts), "<-- config");
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

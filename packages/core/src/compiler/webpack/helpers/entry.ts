@@ -1,17 +1,26 @@
-const { getExportProps } = require('@umijs/ast');
-const { readFileSync } = require('fs');
-const { resolve, basename, join } = require('path');
-const glob = require('glob');
+import { getExportProps } from '@umijs/ast';
+import { readFileSync } from 'fs';
+import { resolve, basename, join } from 'path';
+import glob from 'glob';
+import dotenv from 'dotenv';
+require("dotenv").config();
+
+dotenv.config();
+
 const {
-  ESBOOT_PLATFORM, ESBOOT_PAGE_TYPE, ESBOOT_TEMPLATE, ESBOOT_CONFIG_PATH,
-  ESBOOT_CONTENT_PATH = './', ESBOOT_CONTENT_PATTERN,
+  ESBOOT_PLATFORM,
+  ESBOOT_PAGE_TYPE,
+  ESBOOT_TEMPLATE,
+  ESBOOT_CONFIG_PATH,
+  ESBOOT_CONTENT_PATH = './',
+  ESBOOT_CONTENT_PATTERN,
 } = require(resolve(__dirname, '../../../helpers/config'));
 
 const userConfig = require(ESBOOT_CONFIG_PATH);
 const rootPath = resolve(process.cwd(), './src');
 const contentRootPath = `./platforms/${ESBOOT_PLATFORM}/_${ESBOOT_PAGE_TYPE}`;
 
-function getEntryList() {
+const getEntryList = () => {
   const { html } = userConfig;
   if (html) return html;
   const content_path = join(contentRootPath, ESBOOT_CONTENT_PATH);
@@ -21,7 +30,8 @@ function getEntryList() {
   });
 
   files.forEach((file, index) => {
-    const { title, template, name } = getExportProps(readFileSync(file, 'utf-8')) || {};
+    const { title, template, name } =
+      getExportProps(readFileSync(file, 'utf-8')) || {};
     const filename = basename(file, '.entry.tsx');
 
     const entryInfo = {
@@ -35,6 +45,15 @@ function getEntryList() {
   });
 
   return list;
-}
+};
 
-module.exports = getEntryList;
+const getEntryList = require(path.resolve(
+  __dirname,
+  '@/compiler/webpack/helpers/entry'
+));
+
+const createEntry = () =>
+  entryList.reduce((prev, curr) => {
+    prev[curr.name] = curr.entry;
+    return prev;
+  }, {});

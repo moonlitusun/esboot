@@ -26,8 +26,18 @@ __export(webpack_config_exports, {
 });
 module.exports = __toCommonJS(webpack_config_exports);
 var import_webpack_chain = __toESM(require("webpack-chain"));
-var config = new import_webpack_chain.default();
-config.entry("index").add("src/index.js").end().output.path("dist").filename("[name].bundle.js");
-var webpack_config_default = config.toConfig();
+var import_environment = require("./helpers/environment");
+var getConfig = (opts) => {
+  const config = new import_webpack_chain.default();
+  const applyOpts = {
+    config
+  };
+  const isDev = opts.env === import_environment.Environment.dev;
+  config.mode(isDev ? import_environment.Environment.dev : import_environment.Environment.prod);
+  config.entry("index").add("src/index.js").end().output.path("dist").filename("[name].bundle.js");
+  config.performance.hints(false);
+  return config.toConfig();
+};
+var webpack_config_default = getConfig;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});

@@ -16,16 +16,21 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/index2.ts
-var index2_exports = {};
-__export(index2_exports, {
-  run: () => run
+// src/compiler/webpack/helpers/environment.ts
+var environment_exports = {};
+__export(environment_exports, {
+  Environment: () => Environment,
+  isDevMode: () => isDevMode
 });
-module.exports = __toCommonJS(index2_exports);
-function run() {
-  console.log(42, "<-- 42");
-}
+module.exports = __toCommonJS(environment_exports);
+var Environment = /* @__PURE__ */ ((Environment2) => {
+  Environment2["dev"] = "development";
+  Environment2["prod"] = "production";
+  return Environment2;
+})(Environment || {});
+var isDevMode = process.env.NODE_ENV === "development" /* dev */;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  run
+  Environment,
+  isDevMode
 });
