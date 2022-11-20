@@ -1,8 +1,35 @@
-// src/helpers/ip.js
-var interfaces = require("os").networkInterfaces();
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/helpers/ip.ts
+var ip_exports = {};
+__export(ip_exports, {
+  default: () => ip_default
+});
+module.exports = __toCommonJS(ip_exports);
+var import_os = __toESM(require("os"));
+var interfaces = import_os.default.networkInterfaces();
 var ipAddress = "";
 for (devName in interfaces) {
-  iface = interfaces[devName];
+  const iface = interfaces[devName];
   for (i = 0; i < iface.length; i++) {
     alias = iface[i];
     if (alias.family === "IPv4" && alias.address !== "127.0.0.1" && !alias.internal) {
@@ -10,8 +37,9 @@ for (devName in interfaces) {
     }
   }
 }
-var iface;
 var alias;
 var i;
 var devName;
-module.exports = ipAddress;
+var ip_default = ipAddress;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

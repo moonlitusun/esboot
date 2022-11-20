@@ -1,8 +1,8 @@
 import { resolve } from 'path';
 import spawn from 'cross-spawn';
-import { searchCommand } from '../../helpers/path';
-import getConfig from './webpack.config';
-import { Environment } from '@@webpack/helpers/environment';
+import { searchCommand } from '@@/helpers/path';
+import getConfig from '@@webpack/config/config';
+import { Environment } from '@@webpack/config/environment';
 import dotenv from 'dotenv';
 
 const webpackCfgOption = `--config ${resolve(
@@ -10,7 +10,7 @@ const webpackCfgOption = `--config ${resolve(
   './webpack.config.js'
 )}`;
 
-export function execDev() {
+export async function execDev() {
   dotenv.config();
   // spawn.sync(
   //   `${searchCommand('cross-env')} NODE_ENV=development ${searchCommand(
@@ -22,7 +22,9 @@ export function execDev() {
     env: Environment.dev,
   };
 
-  console.log(getConfig(opts), '<-- config');
+  const cfg = await getConfig(opts);
+
+  console.log(JSON.stringify(cfg, '', 2), '<-- config');
 }
 
 function execBuild() {

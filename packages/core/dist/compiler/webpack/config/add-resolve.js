@@ -19,28 +19,41 @@ var __copyProps = (to, from, except, desc) => {
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/index.ts
-var webpack_exports = {};
-__export(webpack_exports, {
-  execDev: () => execDev
+// src/compiler/webpack/config/add-resolve.ts
+var add_resolve_exports = {};
+__export(add_resolve_exports, {
+  addResolve: () => addResolve
 });
-module.exports = __toCommonJS(webpack_exports);
+module.exports = __toCommonJS(add_resolve_exports);
 var import_path = require("path");
-var import_cross_spawn = __toESM(require("cross-spawn"));
-var import_path2 = require("../../helpers/path");
-var import_config = __toESM(require("./config/config"));
-var import_environment = require("./config/environment");
-var import_dotenv = __toESM(require("dotenv"));
-var webpackCfgOption = `--config ${(0, import_path.resolve)(__dirname, "./webpack.config.js")}`;
-async function execDev() {
-  import_dotenv.default.config();
-  const opts = {
-    env: import_environment.Environment.dev
+var import_config = __toESM(require("../../../helpers/config"));
+var { rootPath } = import_config.default;
+var aliasDict = {
+  "@": rootPath,
+  "@mobile": (0, import_path.join)(rootPath, "./src/platforms/mobile"),
+  "@mobile-native": (0, import_path.join)(rootPath, "./src/platforms/mobile/_native"),
+  "@mobile-browser": (0, import_path.join)(rootPath, "./src/platforms/mobile/_browser"),
+  "@pc": (0, import_path.join)(rootPath, "./src/platforms/pc"),
+  "@pc-native": (0, import_path.join)(rootPath, "./src/platforms/pc/_native"),
+  "@pc-browser": (0, import_path.join)(rootPath, "./src/platforms/pc/_browser")
+};
+var addResolve = async (applyOpts) => {
+  const { config: config2 } = applyOpts;
+  config2.resolve = {
+    alias: aliasDict,
+    extensions: [
+      ".wasm",
+      ".mjs",
+      ".cjs",
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx",
+      ".json"
+    ]
   };
-  const cfg = await (0, import_config.default)(opts);
-  console.log(JSON.stringify(cfg, "", 2), "<-- config");
-}
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  execDev
+  addResolve
 });

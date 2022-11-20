@@ -133,8 +133,8 @@ importers:
       typescript: ^4.8.3
       url-loader: ^4.1.1
       webpack: ^5.74.0
+      webpack-5-chain: ^8.0.1
       webpack-bundle-analyzer: ^4.6.1
-      webpack-chain: ^6.5.1
       webpack-cli: ^4.10.0
       webpack-dev-server: ^4.11.0
     dependencies:
@@ -196,7 +196,7 @@ importers:
       '@types/glob': 8.0.0
       '@types/webpack': 5.28.0_na2qyddqajkdtu6l4otwoergp4
       father: 4.1.0_mj4lbfe5rhkiziqfblt5k3bl2m
-      webpack-chain: 6.5.1
+      webpack-5-chain: 8.0.1
 
   packages/eslint-config-custom:
     specifiers:
@@ -11950,6 +11950,14 @@ packages:
     engines: {node: '>=10.4'}
     dev: false
 
+  /webpack-5-chain/8.0.1:
+    resolution: {integrity: sha512-Tu1w80WA2Z+X6e7KzGy+cc0A0z+npVJA/fh55q2azMJ030gqz343Kx+yNAstDCeugsepmtDWY2J2IBRW/O+DEA==}
+    engines: {node: '>=10'}
+    dependencies:
+      deepmerge: 1.5.2
+      javascript-stringify: 2.1.0
+    dev: true
+
   /webpack-bundle-analyzer/4.7.0:
     resolution: {integrity: sha512-j9b8ynpJS4K+zfO5GGwsAcQX4ZHpWV+yRiHDiL+bE0XHJ8NiPYLTNVQdlFYWxtpg9lfAQNlwJg16J9AJtFSXRg==}
     engines: {node: '>= 10.13.0'}
@@ -11974,6 +11982,7 @@ packages:
     dependencies:
       deepmerge: 1.5.2
       javascript-stringify: 2.1.0
+    dev: false
 
   /webpack-cli/4.10.0_2pgkpa4gmr6rnlmjzfbhv7tkoa:
     resolution: {integrity: sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==}

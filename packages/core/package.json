@@ -79,6 +79,6 @@
     "@types/glob": "^8.0.0",
     "@types/webpack": "^5.28.0",
     "father": "^4.0.5",
-    "webpack-chain": "^6.5.1"
+    "webpack-5-chain": "^8.0.1"
   }
 }
