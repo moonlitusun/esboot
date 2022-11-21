@@ -1,5 +1,5 @@
 {
-  "name": "@dz-web-esboot/react",
+  "name": "@dz-web/esboot-react",
   "version": "1.0.0",
   "testVersion": 1,
   "description": "",
@@ -57,7 +57,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.2",
     "@dz-web/bridge-mock": "^1.2.5",
-    "@dz-web/esboot": "^1.0.1",
+    "@dz-web/esboot": "workspace:*",
     "@types/react": "18.0.18",
     "@types/react-css-modules": "^4.6.4",
     "@types/react-dom": "^18.0.6",

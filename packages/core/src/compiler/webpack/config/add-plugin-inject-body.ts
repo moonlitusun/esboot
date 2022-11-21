@@ -7,7 +7,7 @@ import { ApplyOpts } from './types';
 
 const { relativeStaticConfigPath, isBrowser, pkg } = config;
 
-export const addPluginInjectBody = async (applyOpts: ApplyOpts) => {
+export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
   const { config, isDev } = applyOpts;
 
   config.plugins.push(

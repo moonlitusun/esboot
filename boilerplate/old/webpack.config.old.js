@@ -35,73 +35,73 @@ var mfsu = new MFSU({
 var useMFSU = Number(process.env.useMFSU) !== 0;
 var smp = new SpeedMeasurePlugin();
 var isDevMode = process.env.NODE_ENV === "development";
-var globalScssPathList = [
-  path.join(srcPath, "./styles/"),
-  path.join(srcPath, "./platforms/mobile/styles/"),
-  path.join(srcPath, "./platforms/pc/styles/")
-];
+// var globalScssPathList = [
+//   path.join(srcPath, "./styles/"),
+//   path.join(srcPath, "./platforms/mobile/styles/"),
+//   path.join(srcPath, "./platforms/pc/styles/")
+// ];
 
-var parseScssModule = (options = {}) => {
-  const { modules } = options;
-  const cssLoaderOptions = {
-    sourceMap: isDevMode
-  };
-  if (modules) {
-    Object.assign(cssLoaderOptions, {
-      importLoaders: 2,
-      modules: {
-        namedExport: true,
-        localIdentContext: srcPath,
-        getLocalIdent,
-        localIdentName: "[name]__[local]__[contenthash:base64:5]"
-      }
-    });
-  }
-  return [
-    isDevMode ? "style-loader" : {
-      loader: MiniCssExtractPlugin.loader,
-      options: { publicPath: "../" }
-    },
-    {
-      loader: "css-loader",
-      options: cssLoaderOptions
-    },
-    {
-      loader: "postcss-loader",
-      options: {
-        sourceMap: isDevMode,
-        postcssOptions: {
-          plugins: [
-            ESBOOT_IS_MOBILE && pxtorem({
-              rootValue: 100,
-              unitPrecision: 5,
-              propWhiteList: [],
-              propBlackList: [],
-              exclude: false,
-              selectorBlackList: [],
-              ignoreIdentifier: false,
-              replace: true,
-              mediaQuery: false,
-              minPixelValue: 0
-            }),
-            require("postcss-flexbugs-fixes"),
-            require("postcss-preset-env")({
-              autoprefixer: {
-                flexbox: "no-2009"
-              },
-              stage: 3
-            }),
-            postcssNormalize()
-          ].filter(Boolean)
-        }
-      }
-    },
-    {
-      loader: "sass-loader",
-      options: { sourceMap: isDevMode }
-    }
-  ];
-};
+// var parseScssModule = (options = {}) => {
+//   const { modules } = options;
+//   const cssLoaderOptions = {
+//     sourceMap: isDevMode
+//   };
+//   if (modules) {
+//     Object.assign(cssLoaderOptions, {
+//       importLoaders: 2,
+//       modules: {
+//         namedExport: true,
+//         localIdentContext: srcPath,
+//         getLocalIdent,
+//         localIdentName: "[name]__[local]__[contenthash:base64:5]"
+//       }
+//     });
+//   }
+//   return [
+//     isDevMode ? "style-loader" : {
+//       loader: MiniCssExtractPlugin.loader,
+//       options: { publicPath: "../" }
+//     },
+//     {
+//       loader: "css-loader",
+//       options: cssLoaderOptions
+//     },
+//     {
+//       loader: "postcss-loader",
+//       options: {
+//         sourceMap: isDevMode,
+//         postcssOptions: {
+//           plugins: [
+//             ESBOOT_IS_MOBILE && pxtorem({
+//               rootValue: 100,
+//               unitPrecision: 5,
+//               propWhiteList: [],
+//               propBlackList: [],
+//               exclude: false,
+//               selectorBlackList: [],
+//               ignoreIdentifier: false,
+//               replace: true,
+//               mediaQuery: false,
+//               minPixelValue: 0
+//             }),
+//             require("postcss-flexbugs-fixes"),
+//             require("postcss-preset-env")({
+//               autoprefixer: {
+//                 flexbox: "no-2009"
+//               },
+//               stage: 3
+//             }),
+//             postcssNormalize()
+//           ].filter(Boolean)
+//         }
+//       }
+//     },
+//     {
+//       loader: "sass-loader",
+//       options: { sourceMap: isDevMode }
+//     }
+//   ];
+// };
 // var createEntry = () => entryList.reduce((prev, curr) => {
 //   prev[curr.name] = curr.entry;
 //   return prev;
@@ -140,43 +140,43 @@ var getPlugins = () => [
   //     <\/script>` : ""}
   //   `
   // }),
-  new webpack.DefinePlugin({
-    VERSION: JSON.stringify(pkg.version),
-    ENV: JSON.stringify(process.env.NODE_ENV)
-  }),
-  new FriendlyErrorsWebpackPlugin(),
-  new CopyPlugin({
-    patterns: userConfig.copy
-  }),
-  isDevMode && new ReactRefreshPlugin(),
-  isDevMode && new ForkTsCheckerWebpackPlugin({})
+  // new webpack.DefinePlugin({
+  //   VERSION: JSON.stringify(pkg.version),
+  //   ENV: JSON.stringify(process.env.NODE_ENV)
+  // }),
+  // new FriendlyErrorsWebpackPlugin(),
+  // new CopyPlugin({
+  //   patterns: userConfig.copy
+  // }),
+  // isDevMode && new ReactRefreshPlugin(),
+  // isDevMode && new ForkTsCheckerWebpackPlugin({})
 ];
 var getModulesRules = () => [
-  {
-    test: /\.(jpg|gif|png|ico|svg)$/,
-    type: "asset",
-    parser: {
-      dataUrlCondition: {
-        maxSize: 8 * 1024
-      }
-    },
-    generator: {
-      filename: "images/[name].[hash:8][ext]"
-    }
-  },
-  {
-    test: /_svg\.svg$/,
-    type: "asset/source",
-    parser: {
-      dataUrlCondition: {
-        maxSize: 8 * 1024
-      }
-    },
-    generator: {
-      encoding: false,
-      filename: "images/[name].[hash:8][ext]"
-    }
-  },
+  // {
+  //   test: /\.(jpg|gif|png|ico|svg)$/,
+  //   type: "asset",
+  //   parser: {
+  //     dataUrlCondition: {
+  //       maxSize: 8 * 1024
+  //     }
+  //   },
+  //   generator: {
+  //     filename: "images/[name].[hash:8][ext]"
+  //   }
+  // },
+  // {
+  //   test: /_svg\.svg$/,
+  //   type: "asset/source",
+  //   parser: {
+  //     dataUrlCondition: {
+  //       maxSize: 8 * 1024
+  //     }
+  //   },
+  //   generator: {
+  //     encoding: false,
+  //     filename: "images/[name].[hash:8][ext]"
+  //   }
+  // },
   // {
   //   test: /\.(t|j)sx?$/,
   //   include: srcPath,
@@ -212,20 +212,20 @@ var getModulesRules = () => [
   //     }
   //   ]
   // },
-  {
-    test: /\.css$/,
-    use: ["style-loader", "css-loader"]
-  },
-  {
-    test: /\.scss$/,
-    exclude: globalScssPathList,
-    use: parseScssModule({ modules: true })
-  },
-  {
-    test: /\.scss$/,
-    include: globalScssPathList,
-    use: parseScssModule()
-  }
+  // {
+  //   test: /\.css$/,
+  //   use: ["style-loader", "css-loader"]
+  // },
+  // {
+  //   test: /\.scss$/,
+  //   exclude: globalScssPathList,
+  //   use: parseScssModule({ modules: true })
+  // },
+  // {
+  //   test: /\.scss$/,
+  //   include: globalScssPathList,
+  //   use: parseScssModule()
+  // }
 ];
 var getDevServer = () => ({
   compress: true,
@@ -266,9 +266,9 @@ var baseCfg = {
   //   filename: isDevMode ? "js/[name].js" : "js/[name].[chunkhash:5].js"
   // },
   // plugins: getPlugins().filter(Boolean),
-  module: {
-    rules: getModulesRules()
-  }
+  // module: {
+  //   rules: getModulesRules()
+  // }
 };
 var devCfg = {
   devServer: getDevServer(),

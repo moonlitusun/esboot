@@ -19,12 +19,12 @@ var __copyProps = (to, from, except, desc) => {
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/config/add-javascript-rules.ts
-var add_javascript_rules_exports = {};
-__export(add_javascript_rules_exports, {
+// src/compiler/webpack/config/add-rules-javascript.ts
+var add_rules_javascript_exports = {};
+__export(add_rules_javascript_exports, {
   addJavaScriptRules: () => addJavaScriptRules
 });
-module.exports = __toCommonJS(add_javascript_rules_exports);
+module.exports = __toCommonJS(add_rules_javascript_exports);
 var import_config = __toESM(require("../../../helpers/config"));
 var { rootPath } = import_config.default;
 async function addJavaScriptRules(applyOpts) {

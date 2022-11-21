@@ -19,16 +19,20 @@ var __copyProps = (to, from, except, desc) => {
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/config/add-css-rules.ts
-var add_css_rules_exports = {};
-__export(add_css_rules_exports, {
+// src/compiler/webpack/config/add-rules-style.ts
+var add_rules_style_exports = {};
+__export(add_rules_style_exports, {
   addCSSRules: () => addCSSRules
 });
-module.exports = __toCommonJS(add_css_rules_exports);
+module.exports = __toCommonJS(add_rules_style_exports);
 var import_path = __toESM(require("path"));
 var import_mini_css_extract_plugin = __toESM(require("mini-css-extract-plugin"));
-var import_postcss_plugin_px2rem = __toESM(require("@alitajs/postcss-plugin-px2rem"));
+var import_postcss_normalize = __toESM(require("postcss-normalize"));
 var import_config = __toESM(require("../../../helpers/config"));
+var pxtorem = require("@alitajs/postcss-plugin-px2rem");
+var {
+  getLocalIdent
+} = require("@dr.pogodin/babel-plugin-react-css-modules/utils");
 var { rootPath, isMobile } = import_config.default;
 var globalScssPathList = [
   import_path.default.join(rootPath, "./styles/"),
@@ -42,8 +46,8 @@ async function addCSSRules(applyOpts) {
     mfsuInstance,
     userOpts: { mfsu }
   } = applyOpts;
-  const parseScssModule = (options = {}) => {
-    const { modules } = options;
+  const parseScssModule = (options) => {
+    const { modules = false } = options;
     const cssLoaderOptions = {
       sourceMap: isDev
     };
@@ -73,7 +77,7 @@ async function addCSSRules(applyOpts) {
           sourceMap: isDev,
           postcssOptions: {
             plugins: [
-              isMobile && (0, import_postcss_plugin_px2rem.default)({
+              isMobile && pxtorem({
                 rootValue: 100,
                 unitPrecision: 5,
                 propWhiteList: [],
@@ -92,7 +96,7 @@ async function addCSSRules(applyOpts) {
                 },
                 stage: 3
               }),
-              postcssNormalize()
+              (0, import_postcss_normalize.default)()
             ].filter(Boolean)
           }
         }
@@ -113,7 +117,7 @@ async function addCSSRules(applyOpts) {
   }, {
     test: /\.scss$/,
     include: globalScssPathList,
-    use: parseScssModule()
+    use: parseScssModule({})
   });
 }
 // Annotate the CommonJS export names for ESM import in node:

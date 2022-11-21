@@ -19,27 +19,18 @@ var __copyProps = (to, from, except, desc) => {
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/index.ts
-var webpack_exports = {};
-__export(webpack_exports, {
-  execDev: () => execDev
+// src/compiler/webpack/config/add-plugin-copy.ts
+var add_plugin_copy_exports = {};
+__export(add_plugin_copy_exports, {
+  addCopyPlugin: () => addCopyPlugin
 });
-module.exports = __toCommonJS(webpack_exports);
-var import_path = require("path");
-var import_cross_spawn = __toESM(require("cross-spawn"));
-var import_path2 = require("../../helpers/path");
-var import_config = __toESM(require("./config/config"));
-var import_environment = require("./config/environment");
-var import_dotenv = __toESM(require("dotenv"));
-var webpackCfgOption = `--config ${(0, import_path.resolve)(__dirname, "./webpack.config.js")}`;
-async function execDev() {
-  import_dotenv.default.config();
-  const opts = {
-    env: import_environment.Environment.dev
-  };
-  const cfg = await (0, import_config.default)(opts);
-}
+module.exports = __toCommonJS(add_plugin_copy_exports);
+var import_config = __toESM(require("../../../helpers/config"));
+var { pkg } = import_config.default;
+var addCopyPlugin = async (applyOpts) => {
+  const { config: config2 } = applyOpts;
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  execDev
+  addCopyPlugin
 });

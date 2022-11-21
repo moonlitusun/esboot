@@ -22,14 +22,14 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/compiler/webpack/config/add-plugin-inject-body.ts
 var add_plugin_inject_body_exports = {};
 __export(add_plugin_inject_body_exports, {
-  addPluginInjectBody: () => addPluginInjectBody
+  addInjectBodyPlugin: () => addInjectBodyPlugin
 });
 module.exports = __toCommonJS(add_plugin_inject_body_exports);
 var import_inject_body_webpack_plugin = __toESM(require("inject-body-webpack-plugin"));
 var import_ip = __toESM(require("../../../helpers/ip"));
 var import_config = __toESM(require("../../../helpers/config"));
 var { relativeStaticConfigPath, isBrowser, pkg } = import_config.default;
-var addPluginInjectBody = async (applyOpts) => {
+var addInjectBodyPlugin = async (applyOpts) => {
   const { config: config2, isDev } = applyOpts;
   config2.plugins.push(new import_inject_body_webpack_plugin.default({
     position: "start",
@@ -60,5 +60,5 @@ var addPluginInjectBody = async (applyOpts) => {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  addPluginInjectBody
+  addInjectBodyPlugin
 });

@@ -1,8 +1,8 @@
-import { defineConfig } from '@ez-web/esboot';
+import { defineConfig } from '@dz-web/esboot';
 
 // const { ESBOOT_STATIC_CONFIG_PATH } = require('@dz-web/esboot');
 // const { defineConfig } = require('@dz-web/esboot');
 
-module.exports = defineConfig({
+export default defineConfig({
   test: 1,
 });
