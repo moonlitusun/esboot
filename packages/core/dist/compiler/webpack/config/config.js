@@ -27,6 +27,7 @@ __export(config_exports, {
 module.exports = __toCommonJS(config_exports);
 var import_webpack = __toESM(require("webpack"));
 var import_path = require("path");
+var import_lodash = require("lodash");
 var import_esbuild = __toESM(require("esbuild"));
 var import_mfsu = require("@umijs/mfsu");
 var import_react_refresh_webpack_plugin = __toESM(require("@pmmmwh/react-refresh-webpack-plugin"));
@@ -41,10 +42,8 @@ var import_add_plugin_inject_body = require("./add-plugin-inject-body");
 var import_add_plugin_define = require("./add-plugin-define");
 var import_add_plugin_copy = require("./add-plugin-copy");
 var register = __toESM(require("../../../helpers/register"));
+var import_user_opts = require("../constants/user-opts");
 var FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
-var userOpts = {
-  mfsu: true
-};
 var mfsuInstance = new import_mfsu.MFSU({
   implementor: import_webpack.default,
   buildDepWithESBuild: true
@@ -61,8 +60,9 @@ var getConfig = async (opts) => {
     implementor: import_esbuild.default
   });
   register.clearFiles();
-  const userCfg = require((0, import_path.resolve)(process.cwd(), "./.esbootrc.ts")).default;
-  console.log(userCfg, "<-- userCfg");
+  const customOpts = require((0, import_path.resolve)(process.cwd(), "./.esbootrc.ts")).default;
+  const userOpts = (0, import_lodash.merge)(import_user_opts.defaultUserOpts, customOpts);
+  console.log(userOpts, "<-- userOpts");
   const isDev = opts.env === import_environment.Environment.dev;
   const applyOpts = {
     config,

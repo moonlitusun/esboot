@@ -1,5 +1,6 @@
 import webpack, { Configuration } from 'webpack';
 import { resolve } from 'path';
+import { merge } from 'lodash';
 import esbuild from 'esbuild';
 import { MFSU } from '@umijs/mfsu';
 
@@ -21,6 +22,8 @@ import { addCopyPlugin } from '@@webpack/config/add-plugin-copy';
 
 import * as register from '@@/helpers/register';
 
+import { defaultUserOpts } from '@@webpack/constants/user-opts';
+
 import { ApplyOpts, CustomConfiguration, UserOpts } from './types';
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -28,10 +31,6 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 export interface IOpts {
   env: Environment;
 }
-
-const userOpts: UserOpts = {
-  mfsu: true,
-};
 
 // @ts-ignore
 const mfsuInstance = new MFSU({
@@ -52,8 +51,10 @@ const getConfig = async (opts: IOpts) => {
     implementor: esbuild,
   });
   register.clearFiles();
-  const userCfg = require(resolve(process.cwd(), './.esbootrc.ts')).default;
-  console.log(userCfg, '<-- userCfg');
+  const customOpts = require(resolve(process.cwd(), './.esbootrc.ts')).default;
+  const userOpts = merge(defaultUserOpts, customOpts);
+
+  console.log(userOpts, '<-- userOpts');
 
   const isDev = opts.env === Environment.dev;
 

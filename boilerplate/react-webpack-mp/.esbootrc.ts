@@ -4,5 +4,5 @@ import { defineConfig } from '@dz-web/esboot';
 // const { defineConfig } = require('@dz-web/esboot');
 
 export default defineConfig({
-  test: 1,
+  copy: [],
 });
