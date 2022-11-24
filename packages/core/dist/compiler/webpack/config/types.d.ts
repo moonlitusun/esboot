@@ -8,6 +8,7 @@ export interface CustomConfiguration extends Configuration {
 }
 export interface UserOpts {
     mfsu?: boolean;
+    copy?: any;
 }
 export interface ApplyOpts {
     config: CustomConfiguration;

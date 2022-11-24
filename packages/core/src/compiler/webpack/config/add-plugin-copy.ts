@@ -6,11 +6,12 @@ import { ApplyOpts } from './types';
 const { pkg } = config;
 
 export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
-  const { config } = applyOpts;
+  const { config, userOpts: { copy } } = applyOpts;
 
-  // config.plugins.push(
-  //   new CopyPlugin({
-  //     // patterns: userConfig.copy,
-  //   })
-  // );
+  // { from: './static/mobile-mpa', to: './static' },
+  config.plugins.push(
+    new CopyPlugin({
+      patterns: copy,
+    })
+  );
 };

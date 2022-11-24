@@ -38,6 +38,7 @@ async function execDev() {
     env: import_environment.Environment.dev
   };
   const cfg = await (0, import_config.default)(opts);
+  console.log(cfg, "<-- cfg");
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

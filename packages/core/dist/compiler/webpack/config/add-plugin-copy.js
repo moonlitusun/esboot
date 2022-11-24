@@ -25,10 +25,14 @@ __export(add_plugin_copy_exports, {
   addCopyPlugin: () => addCopyPlugin
 });
 module.exports = __toCommonJS(add_plugin_copy_exports);
+var import_copy_webpack_plugin = __toESM(require("copy-webpack-plugin"));
 var import_config = __toESM(require("../../../helpers/config"));
 var { pkg } = import_config.default;
 var addCopyPlugin = async (applyOpts) => {
-  const { config: config2 } = applyOpts;
+  const { config: config2, userOpts: { copy } } = applyOpts;
+  config2.plugins.push(new import_copy_webpack_plugin.default({
+    patterns: copy
+  }));
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

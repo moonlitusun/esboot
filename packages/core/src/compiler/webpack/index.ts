@@ -24,6 +24,7 @@ export async function execDev() {
 
   const cfg = await getConfig(opts);
 
+  console.log(cfg, '<-- cfg');
   // console.log(JSON.stringify(cfg, '', 2), '<-- config');
 }
 

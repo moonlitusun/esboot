@@ -1,1 +1,1 @@
-{"version":3,"file":"add-plugin-copy.d.ts","sourceRoot":"","sources":["../../../../src/compiler/webpack/config/add-plugin-copy.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,SAAS,EAAE,MAAM,SAAS,CAAC;AAIpC,eAAO,MAAM,aAAa,cAAqB,SAAS,kBAQvD,CAAC"}
+{"version":3,"file":"add-plugin-copy.d.ts","sourceRoot":"","sources":["../../../../src/compiler/webpack/config/add-plugin-copy.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,SAAS,EAAE,MAAM,SAAS,CAAC;AAIpC,eAAO,MAAM,aAAa,cAAqB,SAAS,kBASvD,CAAC"}
