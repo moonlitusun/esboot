@@ -39,6 +39,7 @@ const mfsu = new MFSU({
 });
 
 const useMFSU = Number(process.env.useMFSU) !== 0;
+const tsChecker = Number(process.env.tsChecker) !== 0;
 const smp = new SpeedMeasurePlugin();
 
 const globalScssPathList = [
@@ -171,7 +172,7 @@ const getPlugins = () => [
     patterns: userConfig.copyFile,
   }),
   isDevMode && new ReactRefreshPlugin(),
-  isDevMode && new ForkTsCheckerWebpackPlugin({}),
+  (isDevMode && tsChecker) && new ForkTsCheckerWebpackPlugin({}),
 ];
 
 const getModulesRules = () => [
