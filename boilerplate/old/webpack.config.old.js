@@ -228,19 +228,19 @@ var getModulesRules = () => [
   // }
 ];
 var getDevServer = () => ({
-  compress: true,
-  hot: true,
-  historyApiFallback: {
-    disableDotRule: true
-  },
-  setupMiddlewares(middlewares) {
-    if (useMFSU) {
-      middlewares.unshift(...mfsu.getMiddlewares());
-    }
-    return middlewares;
-  },
-  port: 8100,
-  host: "0.0.0.0"
+  // compress: true,
+  // hot: true,
+  // historyApiFallback: {
+  //   disableDotRule: true
+  // },
+  // setupMiddlewares(middlewares) {
+  //   if (useMFSU) {
+  //     middlewares.unshift(...mfsu.getMiddlewares());
+  //   }
+  //   return middlewares;
+  // },
+  // port: 8100,
+  // host: "0.0.0.0"
 });
 var baseCfg = {
   // mode: isDevMode ? "development" : "production",
@@ -271,43 +271,43 @@ var baseCfg = {
   // }
 };
 var devCfg = {
-  devServer: getDevServer(),
-  devtool: "cheap-module-source-map"
+  // devServer: getDevServer(),
+  // devtool: "cheap-module-source-map"
 };
 var prodCfg = {
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-      name: "vendor",
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/
-        }
-      }
-    },
-    emitOnErrors: true,
-    usedExports: true,
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        terserOptions: {
-          format: {
-            comments: false
-          }
-        }
-      }),
-      new CssMinimizerPlugin()
-    ]
-  }
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: "all",
+  //     name: "vendor",
+  //     cacheGroups: {
+  //       vendors: {
+  //         test: /[\\/]node_modules[\\/]/
+  //       }
+  //     }
+  //   },
+  //   emitOnErrors: true,
+  //   usedExports: true,
+  //   minimize: true,
+  //   minimizer: [
+  //     new TerserPlugin({
+  //       parallel: true,
+  //       terserOptions: {
+  //         format: {
+  //           comments: false
+  //         }
+  //       }
+  //     }),
+  //     new CssMinimizerPlugin()
+  //   ]
+  // }
 };
 var cfg = Object.assign(baseCfg, isDevMode && devCfg, !isDevMode && prodCfg);
-if (!isDevMode) {
-  cfg.plugins.push(new MiniCssExtractPlugin({
-    filename: "css/[name].[contenthash:5].css",
-    chunkFilename: "css/[id].[contenthash:5].css"
-  }));
-}
+// if (!isDevMode) {
+//   cfg.plugins.push(new MiniCssExtractPlugin({
+//     filename: "css/[name].[contenthash:5].css",
+//     chunkFilename: "css/[id].[contenthash:5].css"
+//   }));
+// }
 var getConfig = async () => {
   if (isDevMode) {
     if (useMFSU) {

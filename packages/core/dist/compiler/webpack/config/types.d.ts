@@ -5,6 +5,9 @@ export interface CustomConfiguration extends Configuration {
     module: {
         rules: RuleSetRule[];
     };
+    devServer: {
+        [index: string]: any;
+    };
 }
 export interface UserOpts {
     mfsu?: boolean;

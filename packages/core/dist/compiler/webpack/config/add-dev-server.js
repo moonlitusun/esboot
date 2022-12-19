@@ -23,6 +23,29 @@ __export(add_dev_server_exports, {
 });
 module.exports = __toCommonJS(add_dev_server_exports);
 var addDevServer = async (applyOpts) => {
+  const {
+    config,
+    isDev,
+    mfsuInstance,
+    userOpts: { mfsu }
+  } = applyOpts;
+  if (isDev)
+    return;
+  config.devServer = {
+    compress: true,
+    hot: true,
+    historyApiFallback: {
+      disableDotRule: true
+    },
+    setupMiddlewares(middlewares) {
+      if (mfsu) {
+        middlewares.unshift(...mfsuInstance.getMiddlewares());
+      }
+      return middlewares;
+    },
+    port: 8100,
+    host: "0.0.0.0"
+  };
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

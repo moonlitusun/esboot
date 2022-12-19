@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 
 const pkg = require('../../package.json');
 
@@ -21,38 +21,43 @@ const {
   NODE_ENV,
   ESBOOT_PLATFORM = PLATFORMS.PC,
   ESBOOT_PAGE_TYPE = PAGE_TYPE.browser,
-  ESBOOT_CONTENT_PATTERN = '*',
 } = process.env;
+
+const configRootPath = resolve(process.cwd(), `./config`);
+const configRootPathOfPlatfrom = join(configRootPath, ESBOOT_PLATFORM);
+const configRootPathOfPageType = join(
+  configRootPathOfPlatfrom,
+  ESBOOT_PAGE_TYPE
+);
 
 if (NODE_ENV === 'production') {
   process.env.BROWSERSLIST_ENV = `${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}-production`;
 }
 
-const configPath = resolve(
-  process.cwd(),
-  `./dev/config/esboot/esboot-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`
-);
+// const configPath = resolve(
+//   process.cwd(),
+//   `./config/esboot-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`
+// );
 // const userConfig = require(configPath);
 // console.log(userConfig, '<-- userConfig');
 
-const config = {
-  contentPattern: ESBOOT_CONTENT_PATTERN,
+const appConfig = {
   pageType: ESBOOT_PAGE_TYPE,
-  contentPath: process.env.ESBOOT_CONTENT_PATH || '',
   platform: ESBOOT_PLATFORM,
-  template: TPL_DICT[ESBOOT_PLATFORM as PLATFORMS],
   isMobile: ESBOOT_PLATFORM === PLATFORMS.MOBILE,
   isBrowser: ESBOOT_PAGE_TYPE === PAGE_TYPE.browser,
   rootPath: resolve(process.cwd(), './src'),
-  // TODO: 区分public path
-  relativeStaticConfigPath: `/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`,
+  configRootPath,
+  configRootPathOfPlatfrom,
+  configRootPathOfPageType,
   pkg,
-  configPath,
-  staticConfigPath: resolve(
-    process.cwd(),
-    `./dev/config/static-config/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`
-  ),
+  // TODO: 区分public path
+  // relativeStaticConfigPath: `/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`,
+  // staticConfigPath: resolve(
+  //   process.cwd(),
+  //   `./dev/config/static-config/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`
+  // ),
   // ...userConfig,
 };
 
-export default config;
+export default appConfig;

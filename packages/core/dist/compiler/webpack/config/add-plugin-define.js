@@ -26,8 +26,8 @@ __export(add_plugin_define_exports, {
 });
 module.exports = __toCommonJS(add_plugin_define_exports);
 var import_webpack = __toESM(require("webpack"));
-var import_config = __toESM(require("../../../helpers/config"));
-var { pkg } = import_config.default;
+var import_app_config = __toESM(require("../../../helpers/app-config"));
+var { pkg } = import_app_config.default;
 var addDefinePlugin = async (applyOpts) => {
   const { config: config2 } = applyOpts;
   config2.plugins.push(new import_webpack.default.DefinePlugin({

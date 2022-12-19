@@ -4,12 +4,16 @@ import { merge } from 'lodash';
 import esbuild from 'esbuild';
 import { MFSU } from '@umijs/mfsu';
 
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { Environment } from '@@webpack/config/environment';
 
 import { addEntry } from '@@webpack/config/add-entry';
+import { addDevServer } from '@@webpack/config/add-dev-server';
+import { addOptimization } from '@@webpack/config/add-optimization';
 import { addResolve } from '@@webpack/config/add-resolve';
 
 import { addJavaScriptRules } from '@@webpack/config/add-rules-javascript';
@@ -42,6 +46,7 @@ const getConfig = async (opts: IOpts) => {
   const config: CustomConfiguration = {
     entry: {},
     plugins: [],
+    devServer: {},
     module: {
       rules: [],
     },
@@ -80,6 +85,9 @@ const getConfig = async (opts: IOpts) => {
   await addDefinePlugin(applyOpts);
   await addCopyPlugin(applyOpts);
 
+  await addOptimization(applyOpts);
+  await addDevServer(applyOpts);
+
   const restPlugins = [
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshPlugin(),
@@ -97,6 +105,17 @@ const getConfig = async (opts: IOpts) => {
   config.performance = {
     hints: 'warning',
   };
+
+  if (isDev) {
+    config.devtool = 'cheap-module-source-map';
+  }
+
+  if (!isDev) {
+    config.plugins.push(new MiniCssExtractPlugin({
+      filename: "css/[name].[contenthash:5].css",
+      chunkFilename: "css/[id].[contenthash:5].css"
+    }));
+  }
 
   return config;
 };

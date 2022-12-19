@@ -25,8 +25,8 @@ __export(add_rules_javascript_exports, {
   addJavaScriptRules: () => addJavaScriptRules
 });
 module.exports = __toCommonJS(add_rules_javascript_exports);
-var import_config = __toESM(require("../../../helpers/config"));
-var { rootPath } = import_config.default;
+var import_app_config = __toESM(require("../../../helpers/app-config"));
+var { rootPath } = import_app_config.default;
 async function addJavaScriptRules(applyOpts) {
   const {
     config: config2,

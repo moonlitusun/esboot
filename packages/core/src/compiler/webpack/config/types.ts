@@ -1,11 +1,14 @@
-import type { Configuration, WebpackPluginInstance, EntryObject, RuleSetRule } from 'webpack';
+import type { Configuration, WebpackPluginInstance, EntryObject, RuleSetRule, WebpackOptionsNormalized } from 'webpack';
 
 export interface CustomConfiguration extends Configuration {
   plugins: WebpackPluginInstance[];
   entry: EntryObject;
   module: {
     rules: RuleSetRule[]
-  }
+  },
+  devServer: {
+    [index: string]: any;
+  },
 }
 
 export interface UserOpts {

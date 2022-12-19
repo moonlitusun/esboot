@@ -28,12 +28,12 @@ module.exports = __toCommonJS(add_rules_style_exports);
 var import_path = __toESM(require("path"));
 var import_mini_css_extract_plugin = __toESM(require("mini-css-extract-plugin"));
 var import_postcss_normalize = __toESM(require("postcss-normalize"));
-var import_config = __toESM(require("../../../helpers/config"));
+var import_app_config = __toESM(require("../../../helpers/app-config"));
 var pxtorem = require("@alitajs/postcss-plugin-px2rem");
 var {
   getLocalIdent
 } = require("@dr.pogodin/babel-plugin-react-css-modules/utils");
-var { rootPath, isMobile } = import_config.default;
+var { rootPath, isMobile } = import_app_config.default;
 var globalScssPathList = [
   import_path.default.join(rootPath, "./styles/"),
   import_path.default.join(rootPath, "./platforms/mobile/styles/"),

@@ -26,8 +26,8 @@ __export(add_resolve_exports, {
 });
 module.exports = __toCommonJS(add_resolve_exports);
 var import_path = require("path");
-var import_config = __toESM(require("../../../helpers/config"));
-var { rootPath } = import_config.default;
+var import_app_config = __toESM(require("../../../helpers/app-config"));
+var { rootPath } = import_app_config.default;
 var aliasDict = {
   "@": rootPath,
   "@mobile": (0, import_path.join)(rootPath, "./src/platforms/mobile"),

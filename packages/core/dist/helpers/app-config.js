@@ -16,42 +16,36 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/helpers/config.ts
-var config_exports = {};
-__export(config_exports, {
-  default: () => config_default
+// src/helpers/app-config.ts
+var app_config_exports = {};
+__export(app_config_exports, {
+  default: () => app_config_default
 });
-module.exports = __toCommonJS(config_exports);
+module.exports = __toCommonJS(app_config_exports);
 var import_path = require("path");
 var pkg = require("../../package.json");
-var TPL_DICT = {
-  ["mobile" /* MOBILE */]: "template/mobile.html",
-  ["pc" /* PC */]: "template/pc.html"
-};
 var {
   NODE_ENV,
   ESBOOT_PLATFORM = "pc" /* PC */,
-  ESBOOT_PAGE_TYPE = "browser" /* browser */,
-  ESBOOT_CONTENT_PATTERN = "*"
+  ESBOOT_PAGE_TYPE = "browser" /* browser */
 } = process.env;
+var configRootPath = (0, import_path.resolve)(process.cwd(), `./config`);
+var configRootPathOfPlatfrom = (0, import_path.join)(configRootPath, ESBOOT_PLATFORM);
+var configRootPathOfPageType = (0, import_path.join)(configRootPathOfPlatfrom, ESBOOT_PAGE_TYPE);
 if (NODE_ENV === "production") {
   process.env.BROWSERSLIST_ENV = `${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}-production`;
 }
-var configPath = (0, import_path.resolve)(process.cwd(), `./dev/config/esboot/esboot-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`);
-var config = {
-  contentPattern: ESBOOT_CONTENT_PATTERN,
+var appConfig = {
   pageType: ESBOOT_PAGE_TYPE,
-  contentPath: process.env.ESBOOT_CONTENT_PATH || "",
   platform: ESBOOT_PLATFORM,
-  template: TPL_DICT[ESBOOT_PLATFORM],
   isMobile: ESBOOT_PLATFORM === "mobile" /* MOBILE */,
   isBrowser: ESBOOT_PAGE_TYPE === "browser" /* browser */,
   rootPath: (0, import_path.resolve)(process.cwd(), "./src"),
-  relativeStaticConfigPath: `/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`,
-  pkg,
-  configPath,
-  staticConfigPath: (0, import_path.resolve)(process.cwd(), `./dev/config/static-config/static-${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}.config.js`)
+  configRootPath,
+  configRootPathOfPlatfrom,
+  configRootPathOfPageType,
+  pkg
 };
-var config_default = config;
+var app_config_default = appConfig;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});

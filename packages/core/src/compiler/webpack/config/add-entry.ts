@@ -3,18 +3,21 @@ import { readFileSync } from 'fs';
 import { basename, join } from 'path';
 import glob from 'glob';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import config from '@@/helpers/config';
+import appConfig from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 
 const {
   rootPath,
-  contentPath,
-  contentPattern,
   platform,
   pageType,
-  template: defaultTpl,
-} = config;
+  configRootPathOfPlatfrom,
+} = appConfig;
+
+const {
+  ESBOOT_CONTENT_PATH = '',
+  ESBOOT_CONTENT_PATTERN = '*',
+} = process.env;
 
 const contentRootPath = `./platforms/${platform}/_${pageType}`;
 
@@ -26,8 +29,8 @@ interface EntryFileExportProps {
 
 export const addEntry = async (applyOpts: ApplyOpts) => {
   const { config } = applyOpts;
-  const content_path = join(contentRootPath, contentPath);
-  const files = glob.sync(`/**/${contentPattern}.entry.tsx`, {
+  const content_path = join(contentRootPath, ESBOOT_CONTENT_PATH);
+  const files = glob.sync(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {
     root: join(rootPath, content_path),
   });
 
@@ -38,7 +41,7 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     const filename = basename(file, '.entry.tsx');
     const chunkName = name || filename;
     const ensureTitle = title || filename || 'ESboot APP';
-    const ensureTpl = template || defaultTpl || 'template/index.html';
+    const ensureTpl = join(configRootPathOfPlatfrom, `${template || 'index'}.html`);
 
     config.entry[chunkName] = file;
 

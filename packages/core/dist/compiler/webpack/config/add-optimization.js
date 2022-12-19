@@ -19,32 +19,43 @@ var __copyProps = (to, from, except, desc) => {
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/compiler/webpack/config/add-plugin-copy.ts
-var add_plugin_copy_exports = {};
-__export(add_plugin_copy_exports, {
-  addCopyPlugin: () => addCopyPlugin
+// src/compiler/webpack/config/add-optimization.ts
+var add_optimization_exports = {};
+__export(add_optimization_exports, {
+  addOptimization: () => addOptimization
 });
-module.exports = __toCommonJS(add_plugin_copy_exports);
-var import_copy_webpack_plugin = __toESM(require("copy-webpack-plugin"));
-var import_app_config = __toESM(require("../../../helpers/app-config"));
-var {
-  rootPath,
-  platform,
-  pageType,
-  configRootPathOfPlatfrom
-} = import_app_config.default;
-var addCopyPlugin = async (applyOpts) => {
-  const { config, userOpts: { copy } } = applyOpts;
-  config.plugins.push(new import_copy_webpack_plugin.default({
-    patterns: [
-      {
-        from: `${configRootPathOfPlatfrom}/static`,
-        to: "./static"
+module.exports = __toCommonJS(add_optimization_exports);
+var import_terser_webpack_plugin = __toESM(require("terser-webpack-plugin"));
+var import_css_minimizer_webpack_plugin = __toESM(require("css-minimizer-webpack-plugin"));
+var addOptimization = async (applyOpts) => {
+  const { config } = applyOpts;
+  config.optimization = {
+    splitChunks: {
+      chunks: "all",
+      name: "vendor",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/
+        }
       }
+    },
+    emitOnErrors: true,
+    usedExports: true,
+    minimize: true,
+    minimizer: [
+      new import_terser_webpack_plugin.default({
+        parallel: true,
+        terserOptions: {
+          format: {
+            comments: false
+          }
+        }
+      }),
+      new import_css_minimizer_webpack_plugin.default()
     ]
-  }));
+  };
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  addCopyPlugin
+  addOptimization
 });

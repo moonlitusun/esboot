@@ -30,20 +30,22 @@ var import_fs = require("fs");
 var import_path = require("path");
 var import_glob = __toESM(require("glob"));
 var import_html_webpack_plugin = __toESM(require("html-webpack-plugin"));
-var import_config = __toESM(require("../../../helpers/config"));
+var import_app_config = __toESM(require("../../../helpers/app-config"));
 var {
   rootPath,
-  contentPath,
-  contentPattern,
   platform,
   pageType,
-  template: defaultTpl
-} = import_config.default;
+  configRootPathOfPlatfrom
+} = import_app_config.default;
+var {
+  ESBOOT_CONTENT_PATH = "",
+  ESBOOT_CONTENT_PATTERN = "*"
+} = process.env;
 var contentRootPath = `./platforms/${platform}/_${pageType}`;
 var addEntry = async (applyOpts) => {
-  const { config: config2 } = applyOpts;
-  const content_path = (0, import_path.join)(contentRootPath, contentPath);
-  const files = import_glob.default.sync(`/**/${contentPattern}.entry.tsx`, {
+  const { config } = applyOpts;
+  const content_path = (0, import_path.join)(contentRootPath, ESBOOT_CONTENT_PATH);
+  const files = import_glob.default.sync(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {
     root: (0, import_path.join)(rootPath, content_path)
   });
   files.forEach((file) => {
@@ -51,9 +53,9 @@ var addEntry = async (applyOpts) => {
     const filename = (0, import_path.basename)(file, ".entry.tsx");
     const chunkName = name || filename;
     const ensureTitle = title || filename || "ESboot APP";
-    const ensureTpl = template || defaultTpl || "template/index.html";
-    config2.entry[chunkName] = file;
-    config2.plugins.push(new import_html_webpack_plugin.default({
+    const ensureTpl = (0, import_path.join)(configRootPathOfPlatfrom, `${template || "index"}.html`);
+    config.entry[chunkName] = file;
+    config.plugins.push(new import_html_webpack_plugin.default({
       inject: true,
       chunks: [chunkName],
       filename: `${chunkName}.html`,

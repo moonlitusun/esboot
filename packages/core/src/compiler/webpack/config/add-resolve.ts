@@ -1,5 +1,5 @@
 import { join } from 'path';
-import config from '@@/helpers/config';
+import config from '@@/helpers/app-config';
 
 const { rootPath } = config;
 

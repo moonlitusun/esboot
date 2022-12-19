@@ -7,7 +7,7 @@ const {
   getLocalIdent
 } = require("@dr.pogodin/babel-plugin-react-css-modules/utils");
 
-import config from '@@/helpers/config';
+import config from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 

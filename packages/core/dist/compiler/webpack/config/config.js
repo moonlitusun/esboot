@@ -30,10 +30,13 @@ var import_path = require("path");
 var import_lodash = require("lodash");
 var import_esbuild = __toESM(require("esbuild"));
 var import_mfsu = require("@umijs/mfsu");
+var import_mini_css_extract_plugin = __toESM(require("mini-css-extract-plugin"));
 var import_react_refresh_webpack_plugin = __toESM(require("@pmmmwh/react-refresh-webpack-plugin"));
 var import_fork_ts_checker_webpack_plugin = __toESM(require("fork-ts-checker-webpack-plugin"));
 var import_environment = require("./environment");
 var import_add_entry = require("./add-entry");
+var import_add_dev_server = require("./add-dev-server");
+var import_add_optimization = require("./add-optimization");
 var import_add_resolve = require("./add-resolve");
 var import_add_rules_javascript = require("./add-rules-javascript");
 var import_add_rules_style = require("./add-rules-style");
@@ -52,6 +55,7 @@ var getConfig = async (opts) => {
   const config = {
     entry: {},
     plugins: [],
+    devServer: {},
     module: {
       rules: []
     }
@@ -79,6 +83,8 @@ var getConfig = async (opts) => {
   await (0, import_add_plugin_inject_body.addInjectBodyPlugin)(applyOpts);
   await (0, import_add_plugin_define.addDefinePlugin)(applyOpts);
   await (0, import_add_plugin_copy.addCopyPlugin)(applyOpts);
+  await (0, import_add_optimization.addOptimization)(applyOpts);
+  await (0, import_add_dev_server.addDevServer)(applyOpts);
   const restPlugins = [
     new FriendlyErrorsWebpackPlugin(),
     isDev && new import_react_refresh_webpack_plugin.default(),
@@ -93,6 +99,15 @@ var getConfig = async (opts) => {
   config.performance = {
     hints: "warning"
   };
+  if (isDev) {
+    config.devtool = "cheap-module-source-map";
+  }
+  if (!isDev) {
+    config.plugins.push(new import_mini_css_extract_plugin.default({
+      filename: "css/[name].[contenthash:5].css",
+      chunkFilename: "css/[id].[contenthash:5].css"
+    }));
+  }
   return config;
 };
 var config_default = getConfig;

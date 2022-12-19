@@ -1,4 +1,4 @@
-import config from '@@/helpers/config';
+import config from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 

@@ -1,7 +1,7 @@
 import InjectBodyPlugin from 'inject-body-webpack-plugin';
 
 import ip from '@@/helpers/ip';
-import config from '@@/helpers/config';
+import config from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 
@@ -30,11 +30,6 @@ export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
         }
       <\/script>
 
-      <script src="${relativeStaticConfigPath}?v=${
-        // jenkins build verison
-        process.env.BUILD_VERSION || pkg.version
-      }"><\/script>
-
       ${
         !isBrowser && isDev
           ? `<script>
@@ -47,3 +42,8 @@ export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
     })
   );
 };
+
+// <script src="${relativeStaticConfigPath}?v=${
+//   // jenkins build verison
+//   process.env.BUILD_VERSION || pkg.version
+// }"><\/script>

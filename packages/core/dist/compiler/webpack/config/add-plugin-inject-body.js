@@ -27,8 +27,8 @@ __export(add_plugin_inject_body_exports, {
 module.exports = __toCommonJS(add_plugin_inject_body_exports);
 var import_inject_body_webpack_plugin = __toESM(require("inject-body-webpack-plugin"));
 var import_ip = __toESM(require("../../../helpers/ip"));
-var import_config = __toESM(require("../../../helpers/config"));
-var { relativeStaticConfigPath, isBrowser, pkg } = import_config.default;
+var import_app_config = __toESM(require("../../../helpers/app-config"));
+var { relativeStaticConfigPath, isBrowser, pkg } = import_app_config.default;
 var addInjectBodyPlugin = async (applyOpts) => {
   const { config: config2, isDev } = applyOpts;
   config2.plugins.push(new import_inject_body_webpack_plugin.default({
@@ -48,8 +48,6 @@ var addInjectBodyPlugin = async (applyOpts) => {
           document.documentElement.className = theme;
         }
       <\/script>
-
-      <script src="${relativeStaticConfigPath}?v=${process.env.BUILD_VERSION || pkg.version}"><\/script>
 
       ${!isBrowser && isDev ? `<script>
         window.brigeMockHost = "http://${import_ip.default}";
