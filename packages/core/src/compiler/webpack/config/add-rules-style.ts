@@ -2,22 +2,14 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import postcssNormalize from 'postcss-normalize';
 
-const pxtorem = require("@alitajs/postcss-plugin-px2rem");
+const pxtorem = require('@alitajs/postcss-plugin-px2rem');
 const {
-  getLocalIdent
-} = require("@dr.pogodin/babel-plugin-react-css-modules/utils");
+  getLocalIdent,
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
-import config from '@@/helpers/app-config';
+import appConfig from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
-
-const { rootPath, isMobile } = config;
-
-const globalScssPathList = [
-  path.join(rootPath, './styles/'),
-  path.join(rootPath, './platforms/mobile/styles/'),
-  path.join(rootPath, './platforms/pc/styles/'),
-];
 
 interface ParseScssModuleOpts {
   modules?: boolean;
@@ -30,6 +22,13 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
     mfsuInstance,
     userOpts: { mfsu },
   } = applyOpts;
+  const { rootPath, isMobile } = appConfig;
+
+  const globalScssPathList = [
+    path.join(rootPath, './styles/'),
+    path.join(rootPath, './platforms/mobile/styles/'),
+    path.join(rootPath, './platforms/pc/styles/'),
+  ];
 
   const parseScssModule = (options: ParseScssModuleOpts) => {
     const { modules = false } = options;

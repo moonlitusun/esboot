@@ -1,11 +1,11 @@
 import webpack from 'webpack';
-import config from '@@/helpers/app-config';
+import appConfig from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 
-const { pkg } = config;
-
 export const addDefinePlugin = async (applyOpts: ApplyOpts) => {
+  const { pkg } = appConfig;
+
   const { config } = applyOpts;
 
   config.plugins.push(

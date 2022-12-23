@@ -1,10 +1,10 @@
-import config from '@@/helpers/app-config';
+import appConfig from '@@/helpers/app-config';
 
 import { ApplyOpts } from './types';
 
-const { rootPath } = config;
-
 export async function addJavaScriptRules(applyOpts: ApplyOpts) {
+  const { rootPath } = appConfig;
+
   const {
     config,
     isDev,

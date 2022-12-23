@@ -91,7 +91,7 @@ const getConfig = async (opts: IOpts) => {
   const restPlugins = [
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshPlugin(),
-    isDev && new ForkTsCheckerWebpackPlugin({}),
+    // isDev && new ForkTsCheckerWebpackPlugin({}),
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);

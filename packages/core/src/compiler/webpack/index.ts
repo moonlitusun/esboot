@@ -1,9 +1,11 @@
 import { resolve } from 'path';
+import Webpack from 'webpack';
 import spawn from 'cross-spawn';
+import WebpackDevServer from 'webpack-dev-server';
 import { searchCommand } from '@@/helpers/path';
 import getConfig from '@@webpack/config/config';
 import { Environment } from '@@webpack/config/environment';
-import dotenv from 'dotenv';
+import appConfig from '@@/helpers/app-config';
 
 const webpackCfgOption = `--config ${resolve(
   __dirname,
@@ -11,30 +13,61 @@ const webpackCfgOption = `--config ${resolve(
 )}`;
 
 export async function execDev() {
-  dotenv.config();
+  const opts = {
+    env: Environment.dev,
+  };
+  process.env.NODE_ENV = opts.env;
+
+  appConfig.init();
   // spawn.sync(
   //   `${searchCommand('cross-env')} NODE_ENV=development ${searchCommand(
   //     'webpack-dev-server'
   //   )} ${webpackCfgOption}`,
   //   { stdio: 'inherit', shell: true }
   // );
-  const opts = {
-    env: Environment.dev,
-  };
 
   const cfg = await getConfig(opts);
+  const compiler = Webpack(cfg);
+
+  const devServerOptions = { ...cfg.devServer, open: true };
+  const server = new WebpackDevServer(devServerOptions, compiler);
+
+  const runServer = async () => {
+    console.log('Starting server...');
+    await server.start();
+  };
+
+  runServer();
 
   console.log(cfg, '<-- cfg');
   // console.log(JSON.stringify(cfg, '', 2), '<-- config');
 }
 
-function execBuild() {
-  spawn.sync(
-    `${searchCommand('cross-env')} NODE_ENV=production ${searchCommand(
-      'webpack'
-    )} ${webpackCfgOption}`,
-    { stdio: 'inherit', shell: true }
-  );
+export async function execBuild() {
+  const opts = {
+    env: Environment.prod,
+  };
+  process.env.NODE_ENV = opts.env;
+
+  appConfig.init();
+
+  const cfg = await getConfig(opts);
+  const compiler = Webpack(cfg);
+
+  compiler.run((err, stats) => {
+    // ...
+
+    compiler.close((closeErr) => {
+      // ...
+    });
+  });
+
+  // spawn.sync(
+  //   `${searchCommand('cross-env')} NODE_ENV=production ${searchCommand(
+  //     'webpack'
+  //   )} ${webpackCfgOption}`,
+  //   { stdio: 'inherit', shell: true }
+  // );
 }
 
 function execAnalyzer() {
@@ -49,8 +82,12 @@ function execAnalyzer() {
 }
 
 function execPreview(port: number) {
-  spawn.sync(searchCommand('http-server'), ['dist', '-p', String(port), '-c', '1'], {
-    stdio: 'inherit',
-    shell: true,
-  });
+  spawn.sync(
+    searchCommand('http-server'),
+    ['dist', '-p', String(port), '-c', '1'],
+    {
+      stdio: 'inherit',
+      shell: true,
+    }
+  );
 }
