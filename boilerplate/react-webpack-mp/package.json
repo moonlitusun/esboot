@@ -17,16 +17,15 @@
     "commitlint": "npx commitlint --from HEAD~1 --to HEAD",
     "prepare": "husky install",
     "docs:start": "esboot docs dev",
-    "docs:build": "esboot docs build",
-    "postinstall": "esboot setup"
+    "docs:build": "esboot docs build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@dz-web/bridge": "^1.5.3",
-    "@dz-web/o-orange": "^3.6.7",
-    "@dz-web/request": "^0.0.6",
+    "@dz-web/o-orange": "^3.6.10",
+    "@dz-web/request": "^0.0.7",
     "@loadable/component": "^5.15.2",
     "@reduxjs/toolkit": "^1.8.5",
     "ahooks": "^3.7.1",
