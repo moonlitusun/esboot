@@ -1,4 +1,4 @@
-const { ESBOOT_STATIC_CONFIG_PATH } = require('@dz-web-esboot/core/lib/helpers/config');
+const { ESBOOT_STATIC_CONFIG_PATH } = require('@dz-web-esboot/core/src/helpers/config');
 
 module.exports = {
   copyFile: [

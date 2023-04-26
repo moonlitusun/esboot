@@ -1,6 +1,6 @@
 const { join } = require('path');
 const spawn = require('cross-spawn');
-const { ESBOOT_IS_MOBILE } = require('@dz-web-esboot/core/lib/helpers/config');
+const { ESBOOT_IS_MOBILE } = require('@dz-web-esboot/core/src/helpers/config');
 const platformsPath = join('./dev/bridge-mock', ESBOOT_IS_MOBILE ? './mobile' : './pc');
 const filePath = join(platformsPath, './bridge-mock.js');
 const samplePath = join(platformsPath, './bridge-mock-sample.js');
