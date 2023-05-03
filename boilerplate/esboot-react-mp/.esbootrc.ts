@@ -5,4 +5,5 @@ import { defineConfig } from '@dz-web/esboot';
 
 export default defineConfig({
   copy: [],
+  mfsu: false,
 });

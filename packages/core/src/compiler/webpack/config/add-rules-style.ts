@@ -48,17 +48,17 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
     }
     return [
       isDev
-        ? 'style-loader'
+        ? require.resolve('style-loader')
         : {
             loader: MiniCssExtractPlugin.loader,
             options: { publicPath: '../' },
           },
       {
-        loader: 'css-loader',
+        loader: require.resolve('css-loader'),
         options: cssLoaderOptions,
       },
       {
-        loader: 'postcss-loader',
+        loader: require.resolve('postcss-loader'),
         options: {
           sourceMap: isDev,
           postcssOptions: {
@@ -89,7 +89,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
         },
       },
       {
-        loader: 'sass-loader',
+        loader: require.resolve('sass-loader'),
         options: { sourceMap: isDev },
       },
     ];
@@ -98,7 +98,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
   config.module.rules.push(
     {
       test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
+      use: [require.resolve('style-loader'), require.resolve('css-loader')],
     },
     {
       test: /\.scss$/,

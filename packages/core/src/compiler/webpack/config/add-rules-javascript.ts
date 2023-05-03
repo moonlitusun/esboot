@@ -5,6 +5,7 @@ import { ApplyOpts } from './types';
 export async function addJavaScriptRules(applyOpts: ApplyOpts) {
   const { rootPath } = appConfig;
 
+  console.log(rootPath, '<-- rootPath');
   const {
     config,
     isDev,
@@ -18,7 +19,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
     exclude: /(node_modules|bower_components)/,
     use: [
       {
-        loader: 'babel-loader',
+        loader: require.resolve('babel-loader'),
         options: {
           cacheDirectory: !isDev,
           plugins: [
@@ -28,7 +29,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
         },
       },
       {
-        loader: 'thread-loader',
+        loader: require.resolve('thread-loader'),
         options: {
           workers: 4,
           workerParallelJobs: 50,
@@ -39,7 +40,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
         },
       },
       {
-        loader: 'ts-loader',
+        loader: require.resolve('ts-loader'),
         options: {
           happyPackMode: true,
           transpileOnly: true,

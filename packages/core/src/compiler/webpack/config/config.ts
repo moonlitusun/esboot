@@ -30,6 +30,8 @@ import { defaultUserOpts } from '@@webpack/constants/user-opts';
 
 import { ApplyOpts, CustomConfiguration, UserOpts } from './types';
 
+import appConfig from '@@/helpers/app-config';
+
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 export interface IOpts {
@@ -43,6 +45,7 @@ const mfsuInstance = new MFSU({
 });
 
 const getConfig = async (opts: IOpts) => {
+  const { rootPath } = appConfig;
   const config: CustomConfiguration = {
     entry: {},
     plugins: [],
@@ -95,16 +98,17 @@ const getConfig = async (opts: IOpts) => {
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);
-
-  config.output = {
-    publicPath: isDev ? '/' : './',
-    clean: !isDev,
-    filename: isDev ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
-  };
-
-  config.performance = {
-    hints: 'warning',
-  };
+  Object.assign(config, {
+    context: rootPath,
+    output: {
+      publicPath: isDev ? '/' : './',
+      clean: !isDev,
+      filename: isDev ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
+    },
+    performance: {
+      hints: isDev ? false : 'warning',
+    }
+  })
 
   if (isDev) {
     config.devtool = 'cheap-module-source-map';
