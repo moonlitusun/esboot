@@ -1,11 +1,11 @@
 import appConfig from '@@/helpers/app-config';
+import { plugins, env, presets } from './babel/babelrc.config';
 
-import { ApplyOpts } from './types';
+import { ApplyOpts } from '../types';
 
 export async function addJavaScriptRules(applyOpts: ApplyOpts) {
   const { rootPath } = appConfig;
 
-  console.log(rootPath, '<-- rootPath');
   const {
     config,
     isDev,
@@ -22,7 +22,10 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
         loader: require.resolve('babel-loader'),
         options: {
           cacheDirectory: !isDev,
+          presets,
+          env,
           plugins: [
+            ...plugins,
             ...(isDev && mfsu ? mfsuInstance.getBabelPlugins() : []),
             isDev && require.resolve('react-refresh/babel'),
           ].filter(Boolean),

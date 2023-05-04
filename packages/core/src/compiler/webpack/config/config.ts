@@ -16,7 +16,7 @@ import { addDevServer } from '@@webpack/config/add-dev-server';
 import { addOptimization } from '@@webpack/config/add-optimization';
 import { addResolve } from '@@webpack/config/add-resolve';
 
-import { addJavaScriptRules } from '@@webpack/config/add-rules-javascript';
+import { addJavaScriptRules } from '@@webpack/config/javascript/add-rules-javascript';
 import { addCSSRules } from '@@webpack/config/add-rules-style';
 import { addAssetRules } from '@@webpack/config/add-rules-asset';
 
