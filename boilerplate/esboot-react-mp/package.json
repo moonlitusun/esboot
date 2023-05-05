@@ -33,10 +33,7 @@
     "antd-mobile": "^5.22.0",
     "classnames": "^2.3.1",
     "core-js": "^3.25.1",
-    "dayjs": "^1.11.5",
-    "decimal.js": "^10.4.0",
     "lodash-es": "^4.17.21",
-    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.1.1",
@@ -55,27 +52,21 @@
     "@types/react-css-modules": "^4.6.4",
     "@types/react-dom": "^18.0.6",
     "@types/react-redux": "^7.1.24",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
-    "eslint": "^8.23.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-import-resolver-typescript": "^3.5.1",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.8",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "stylelint": "^14.11.0",
-    "stylelint-config-standard": "^28.0.0",
-    "stylelint-declaration-use-variable": "^1.7.3",
-    "stylelint-scss": "^4.3.0",
-    "typescript": "^4.8.3"
+    "lint-staged": "^13.0.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint",
     "*.{scss,css}": "stylelint"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@dz-web/esboot/config/eslint"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "@dz-web/esboot/config/stylelint"
+    ]
   }
 }

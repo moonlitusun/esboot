@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
-    "eslint-config-custom": "workspace:*",
     "father": "^4.0.5",
     "prettier": "latest",
     "turbo": "latest"

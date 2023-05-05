@@ -38,30 +38,22 @@ export const plugins = [
     },
   ],
   [
-    'import',
-    {
-      libraryName: 'antd',
-      libraryDirectory: 'es',
-      style: 'css',
-    },
-  ],
-  [
     require.resolve('babel-plugin-module-resolver'),
     {
       alias: {
-        '@': path.resolve(__dirname, './src/'),
-        '@mobile': path.resolve(__dirname, './src/platforms/mobile/'),
+        '@': path.resolve(process.cwd(), './src/'),
+        '@mobile': path.resolve(process.cwd(), './src/platforms/mobile/'),
         '@mobile-native': path.resolve(
-          __dirname,
+          process.cwd(),
           './src/platforms/mobile/_native/'
         ),
         '@mobile-browser': path.resolve(
-          __dirname,
+          process.cwd(),
           './src/platforms/mobile/_browser/'
         ),
-        '@pc': path.resolve(__dirname, './src/platforms/pc/'),
-        '@pc-native': path.resolve(__dirname, './src/platforms/pc/_native/'),
-        '@pc-browser': path.resolve(__dirname, './src/platforms/pc/_browser/'),
+        '@pc': path.resolve(process.cwd(), './src/platforms/pc/'),
+        '@pc-native': path.resolve(process.cwd(), './src/platforms/pc/_native/'),
+        '@pc-browser': path.resolve(process.cwd(), './src/platforms/pc/_browser/'),
       },
       extensions: ['.ts', '.tsx'],
     },

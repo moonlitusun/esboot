@@ -1,5 +1,0 @@
-{
-  "extends": "@dz-web-esboot/eslint/react-library.json",
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
-}
