@@ -1,6 +1,10 @@
-const path = require('path');
-
 module.exports = {
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   settings: {
     'import/resolver': {
       node: {
@@ -8,13 +12,25 @@ module.exports = {
       },
       alias: {
         map: [
-          ['@', path.resolve(__dirname, './src/')],
-          ['@mobile', path.resolve(__dirname, './src/platforms/mobile/')],
-          ['@mobile-native', path.resolve(__dirname, './src/platforms/mobile/_native/')],
-          ['@mobile-browser', path.resolve(__dirname, './src/platforms/mobile/_browser/')],
-          ['@pc', path.resolve(__dirname, './src/platforms/pc/')],
-          ['@pc-native', path.resolve(__dirname, './src/platforms/pc/_native/')],
-          ['@pc-browser', path.resolve(__dirname, './src/platforms/pc/_browser/')],
+          ['@', 'src/'],
+          ['@mobile', 'src/platforms/mobile/'],
+          [
+            '@mobile-native',
+            'src/platforms/mobile/_native/',
+          ],
+          [
+            '@mobile-browser',
+            'src/platforms/mobile/_browser/',
+          ],
+          ['@pc', 'src/platforms/pc/'],
+          [
+            '@pc-native',
+            'src/platforms/pc/_native/',
+          ],
+          [
+            '@pc-browser',
+            'src/platforms/pc/_browser/',
+          ],
         ],
         extensions: ['.ts', '.tsx', '.js', 'jsx'],
       },
@@ -39,7 +55,10 @@ module.exports = {
     'no-param-reassign': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'react/jsx-props-no-spreading': 0,
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     'react/function-component-definition': [
       1,
       {
@@ -73,18 +92,13 @@ module.exports = {
     'jsx-a11y/no-redundant-roles': 0,
     'react/react-in-jsx-scope': 0,
     'react/prop-types': 0,
+    "react/no-unknown-property": ['error', { ignore: ['styleName'] }],
     'prefer-destructuring': 'warn',
     'max-len': ['error', 120],
     'object-curly-newline': 0,
     'react-hooks/exhaustive-deps': 0,
     '@typescript-eslint/no-explicit-any': ['off'],
   },
-  extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
   env: {
     browser: true,
     node: true,

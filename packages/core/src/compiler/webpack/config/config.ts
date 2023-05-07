@@ -1,4 +1,5 @@
 import webpack, { Configuration } from 'webpack';
+import webpackbar from 'webpackbar';
 import { resolve } from 'path';
 import { merge } from 'lodash';
 import esbuild from 'esbuild';
@@ -92,6 +93,7 @@ const getConfig = async (opts: IOpts) => {
   await addDevServer(applyOpts);
 
   const restPlugins = [
+    new webpackbar(),
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshPlugin(),
     // isDev && new ForkTsCheckerWebpackPlugin({}),

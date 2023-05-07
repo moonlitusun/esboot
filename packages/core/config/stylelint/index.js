@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'stylelint-config-standard',
+  extends: ['stylelint-config-standard'],
   plugins: ['stylelint-scss', 'stylelint-declaration-use-variable'],
   customSyntax: 'postcss-scss',
   rules: {
@@ -35,7 +35,6 @@ module.exports = {
         ignore: ['after-comment'],
       },
     ],
-    'at-rule-name-case': 'lower',
     'at-rule-name-space-after': 'always-single-line',
     'at-rule-semicolon-newline-after': 'always',
     'block-closing-brace-empty-line-before': 'never',
