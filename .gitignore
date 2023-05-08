@@ -33,3 +33,9 @@ yarn-error.log*
 .turbo
 
 dist/
+
+# umi
+.umi
+.umi-*
+.mfsu-*
+.mfsu

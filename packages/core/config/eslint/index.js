@@ -12,24 +12,24 @@ module.exports = {
       },
       alias: {
         map: [
-          ['@', 'src/'],
-          ['@mobile', 'src/platforms/mobile/'],
+          ['@', './src/'],
+          ['@mobile', './src/platforms/mobile/'],
           [
             '@mobile-native',
-            'src/platforms/mobile/_native/',
+            './src/platforms/mobile/_native/',
           ],
           [
             '@mobile-browser',
-            'src/platforms/mobile/_browser/',
+            './src/platforms/mobile/_browser/',
           ],
-          ['@pc', 'src/platforms/pc/'],
+          ['@pc', './src/platforms/pc/'],
           [
             '@pc-native',
-            'src/platforms/pc/_native/',
+            './src/platforms/pc/_native/',
           ],
           [
             '@pc-browser',
-            'src/platforms/pc/_browser/',
+            './src/platforms/pc/_browser/',
           ],
         ],
         extensions: ['.ts', '.tsx', '.js', 'jsx'],

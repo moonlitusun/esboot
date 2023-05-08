@@ -1,3 +1,3 @@
 export default {
-  name: '简体名称'
+  name: '简体名称',
 };

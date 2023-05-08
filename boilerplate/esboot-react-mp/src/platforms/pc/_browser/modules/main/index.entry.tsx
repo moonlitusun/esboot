@@ -1,18 +1,16 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { store, useAppSelector } from '@pc/model/store';
 import { LAN_ENUM, DEFAULT_LAN } from '@/constants/config';
+
+import { useAppStore } from '@/model';
 
 import '@/styles/index.scss';
 
 import zhTW from '@pc-browser/lang/zh-TW';
 import zhCN from '@pc-browser/lang/zh-CN';
 import enUS from '@pc-browser/lang/en-US';
-
-import '@pc/styles/global.scss';
 
 import RouterApp from './router';
 
@@ -23,7 +21,7 @@ const messagesDict = {
 };
 
 const App = () => {
-  const lang = useAppSelector((state) => state.app.userConfig.language);
+  const lang = useAppStore((state) => state.lang);
 
   return (
     <IntlProvider locale={DEFAULT_LAN} messages={messagesDict[lang]}>
@@ -35,11 +33,9 @@ const App = () => {
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </Provider>,
+  <StrictMode>
+    <App />
+  </StrictMode>,
   document.getElementById('root'),
 );
 
