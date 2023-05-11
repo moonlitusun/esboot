@@ -1,6 +1,6 @@
 {
   "name": "@dz-web/esboot",
-  "version": "2.0.4",
+  "version": "2.0.7",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -34,6 +34,7 @@
     "@typescript-eslint/parser": "^5.36.2",
     "@umijs/ast": "^4.0.19",
     "@umijs/mfsu": "^4.0.19",
+    "@commitlint/config-conventional": "^17.1.0",
     "adm-zip": "^0.5.9",
     "antd-dayjs-webpack-plugin": "^1.0.6",
     "babel-loader": "^8.2.5",
@@ -96,7 +97,10 @@
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.0",
-    "webpackbar": "5.0.2"
+    "webpackbar": "5.0.2",
+    "@commitlint/cli": "^17.1.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
@@ -107,11 +111,9 @@
     "father": "^4.0.5"
   },
   "peerDependencies": {
-    "stylelint": "^14.11.0"
-  },
-  "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    }
+    "stylelint": "^14.11.0",
+    "@commitlint/cli": "^17.1.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
   }
 }
