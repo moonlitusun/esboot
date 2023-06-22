@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 export function joinExecPath(path: string) {
-  return join(process.cwd(), path);
+  return join(__dirname, '../../', path);
 }
 
 export function searchCommand(command: string) {

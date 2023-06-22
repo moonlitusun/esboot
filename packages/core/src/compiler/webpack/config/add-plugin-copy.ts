@@ -9,7 +9,6 @@ export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
   } = esbootConfig.extralConfig;
   const { config, userOpts: { copy } } = applyOpts;
 
-  // { from: './static/mobile-mpa', to: './static' },
   config.plugins.push(
     new CopyPlugin({
       patterns: [

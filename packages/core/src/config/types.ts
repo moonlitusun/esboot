@@ -20,4 +20,6 @@ export interface UserOpts {
   publicPath?: string;
   externals?: Pick<Configuration, 'externals'>;
   customWebpack?: (config: Configuration, applyOpts: ApplyOpts) => Configuration;
+  devtool?: string;
+  TSChecker?: boolean;
 }

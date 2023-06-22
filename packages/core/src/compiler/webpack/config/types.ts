@@ -16,4 +16,5 @@ export interface ApplyOpts {
   isDev: boolean;
   userOpts: any;
   mfsuInstance: any;
+  useMfsu: boolean;
 }

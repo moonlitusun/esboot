@@ -33,12 +33,6 @@ export interface IOpts {
   env: Environment;
 }
 
-// @ts-ignore
-const mfsuInstance = new MFSU({
-  implementor: webpack,
-  buildDepWithESBuild: true,
-});
-
 const getWebpackConfig = async (opts: IOpts) => {
   const { extralConfig, userOpts } = esbootConfig;
   const { rootPath } = extralConfig;
@@ -51,12 +45,27 @@ const getWebpackConfig = async (opts: IOpts) => {
     },
   };
 
+  // @ts-ignore
+  const mfsuInstance = new MFSU({
+    cwd: process.cwd(),
+    tmpBase: `${process.cwd()}/.mfsu`,
+    implementor: webpack,
+    buildDepWithESBuild: true,
+    onMFSUProgress: (r) => {
+      console.log(r, '<-- r');
+    },
+  });
+
+  console.log(`${process.cwd()}/.mfsu`, '<-- `${process.cwd()}/.mfsu`');
+
   const isDev = opts.env === Environment.dev;
+  const useMfsu = isDev && userOpts.mfsu;
 
   const applyOpts: ApplyOpts = {
     config,
     userOpts,
     isDev,
+    useMfsu,
     mfsuInstance,
   };
 
@@ -79,12 +88,12 @@ const getWebpackConfig = async (opts: IOpts) => {
   await addOptimization(applyOpts);
   await addDevServer(applyOpts);
 
-  const { externals = {}, publicPath, customWebpack } = userOpts;
+  const { externals = {}, devtool, customWebpack, TSChecker } = userOpts;
   const restPlugins = [
     // new webpackbar(),
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
-    // isDev && new ForkTsCheckerWebpackPlugin({}),
+    isDev && TSChecker && new ForkTsCheckerWebpackPlugin({}),
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);
@@ -97,7 +106,9 @@ const getWebpackConfig = async (opts: IOpts) => {
     externals,
   });
 
-  if (isDev) {
+  if (devtool) {
+    config.devtool = config.devtool;
+  } else if (isDev) {
     config.devtool = 'cheap-module-source-map';
   }
 
@@ -117,6 +128,10 @@ const getWebpackConfig = async (opts: IOpts) => {
         chunkFilename: 'css/[id].[contenthash:5].css',
       })
     );
+  }
+
+  if (useMfsu) {
+    await mfsuInstance.setWebpackConfig({ config });
   }
 
   return customWebpack ? customWebpack(config, applyOpts) : config;

@@ -4,8 +4,9 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
   const {
     config,
     isDev,
+    useMfsu,
     mfsuInstance,
-    userOpts: { mfsu, proxy, port, host },
+    userOpts: { proxy, port, host },
   } = applyOpts;
 
   if (!isDev) return;
@@ -17,7 +18,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
       disableDotRule: true,
     },
     setupMiddlewares(middlewares: any[]) {
-      if (mfsu) {
+      if (useMfsu) {
         middlewares.unshift(...mfsuInstance.getMiddlewares());
       }
       return middlewares;

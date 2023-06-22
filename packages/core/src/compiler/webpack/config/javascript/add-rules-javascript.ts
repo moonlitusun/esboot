@@ -9,8 +9,8 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
   const {
     config,
     isDev,
+    useMfsu,
     mfsuInstance,
-    userOpts: { mfsu },
   } = applyOpts;
 
   config.module.rules.push({
@@ -26,7 +26,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
           env,
           plugins: [
             ...plugins,
-            ...(isDev && mfsu ? mfsuInstance.getBabelPlugins() : []),
+            ...(useMfsu ? mfsuInstance.getBabelPlugins() : []),
             isDev && require.resolve('react-refresh/babel'),
           ].filter(Boolean),
         },

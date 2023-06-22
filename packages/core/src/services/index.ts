@@ -7,6 +7,7 @@ import { Environment } from '@@webpack/config/environment';
 import { registry } from './registry';
 import { runDev } from './dev';
 import { runBuild } from './build';
+import { runPreview } from './preview';
 
 const cwd = process.cwd();
 
@@ -43,6 +44,17 @@ export const run = () => {
       await registry({ root: cwd });
 
       runBuild();
+    });
+
+  program
+    .command('preview')
+    .description('Preview Projects')
+    .option('-p, --port <char>')
+    .option('-d, --directory <char>')
+    .action(async (options) => {
+      await registry({ root: cwd });
+
+      runPreview(options.port || 8900, options.directory || 'dist');
     });
 
   program.version(pkg.version);
