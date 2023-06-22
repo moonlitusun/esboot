@@ -15,7 +15,7 @@
     "stylelint": "stylelint **/*.scss",
     "lint-staged": "lint-staged",
     "commitlint": "commitlint --from HEAD~1 --to HEAD",
-    "prepare": "husky install",
+    "prepare2": "husky install",
     "docs:start": "esboot docs dev",
     "docs:build": "esboot docs build"
   },
