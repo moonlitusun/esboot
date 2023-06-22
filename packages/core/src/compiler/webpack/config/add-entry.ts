@@ -1,9 +1,9 @@
 import { getExportProps } from '@umijs/ast';
 import { readFileSync } from 'fs';
 import { basename, join } from 'path';
-import glob from 'glob';
+import { glob } from 'glob';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 import { ApplyOpts } from './types';
 
@@ -19,7 +19,7 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     platform,
     pageType,
     configRootPathOfPlatfrom,
-  } = appConfig;
+  } = esbootConfig.extralConfig;
 
   const {
     ESBOOT_CONTENT_PATH = '',
@@ -30,9 +30,11 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
 
   const { config } = applyOpts;
   const content_path = join(contentRootPath, ESBOOT_CONTENT_PATH);
-  const files = glob.sync(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {
+  const files = await glob(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {
     root: join(rootPath, content_path),
   });
+
+  console.log(files, '<-- files');
 
   files.forEach((file: string) => {
     const { title, template, name } =

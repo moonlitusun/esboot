@@ -3,7 +3,7 @@ import { generateScopedNameFactory } from '@dr.pogodin/babel-plugin-react-css-mo
 
 export const presets = [
   [
-    '@babel/env',
+    require('@babel/preset-env'),
     {
       modules: false,
       useBuiltIns: 'usage',
@@ -11,7 +11,7 @@ export const presets = [
     },
   ],
   [
-    '@babel/preset-react',
+    require('@babel/preset-react'),
     {
       runtime: 'automatic',
     },
@@ -19,10 +19,10 @@ export const presets = [
 ];
 
 export const plugins = [
-  ['@babel/plugin-syntax-dynamic-import'],
-  '@babel/plugin-proposal-class-properties',
+  [require('@babel/plugin-syntax-dynamic-import')],
+  require('@babel/plugin-proposal-class-properties'),
   [
-    '@dr.pogodin/babel-plugin-react-css-modules',
+    require('@dr.pogodin/babel-plugin-react-css-modules'),
     {
       filetypes: {
         '.scss': {

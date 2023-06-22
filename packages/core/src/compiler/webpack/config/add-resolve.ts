@@ -1,9 +1,9 @@
 import { join } from 'path';
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 export const addResolve = async (applyOpts: any) => {
   const { config } = applyOpts;
-  const { rootPath } = appConfig;
+  const { rootPath } = esbootConfig.extralConfig;
 
   const aliasDict: Record<string, string> = {
     '@': rootPath,

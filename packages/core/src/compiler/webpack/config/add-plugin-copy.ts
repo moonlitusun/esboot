@@ -1,15 +1,12 @@
 import CopyPlugin from 'copy-webpack-plugin';
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 import { ApplyOpts } from './types';
 
 export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
   const {
-    rootPath,
-    platform,
-    pageType,
     configRootPathOfPlatfrom,
-  } = appConfig;
+  } = esbootConfig.extralConfig;
   const { config, userOpts: { copy } } = applyOpts;
 
   // { from: './static/mobile-mpa', to: './static' },

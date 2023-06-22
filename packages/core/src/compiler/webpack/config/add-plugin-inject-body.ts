@@ -1,12 +1,12 @@
 import InjectBodyPlugin from 'inject-body-webpack-plugin';
 
 import ip from '@@/helpers/ip';
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 import { ApplyOpts } from './types';
 
 export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
-const { relativeStaticConfigPath, isBrowser, pkg } = appConfig;
+const { isBrowser } = esbootConfig.extralConfig;
   const { config, isDev } = applyOpts;
 
   config.plugins.push(

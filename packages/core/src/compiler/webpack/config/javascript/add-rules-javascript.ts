@@ -1,10 +1,10 @@
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 import { plugins, env, presets } from './babel/babelrc.config';
 
 import { ApplyOpts } from '../types';
 
 export async function addJavaScriptRules(applyOpts: ApplyOpts) {
-  const { rootPath } = appConfig;
+  const { rootPath } = esbootConfig.extralConfig;
 
   const {
     config,

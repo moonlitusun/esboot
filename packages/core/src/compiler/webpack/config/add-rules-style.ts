@@ -7,7 +7,7 @@ const {
   getLocalIdent,
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 import { ApplyOpts } from './types';
 
@@ -19,10 +19,9 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
   const {
     config,
     isDev,
-    mfsuInstance,
-    userOpts: { mfsu },
+    userOpts: { isRelativePublicPath },
   } = applyOpts;
-  const { rootPath, isMobile } = appConfig;
+  const { rootPath, isMobile } = esbootConfig.extralConfig;
 
   const globalScssPathList = [
     path.join(rootPath, './styles/'),
@@ -51,7 +50,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
         ? require.resolve('style-loader')
         : {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' },
+            options: isRelativePublicPath ? { publicPath: '../' } : {},
           },
       {
         loader: require.resolve('css-loader'),

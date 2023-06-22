@@ -11,14 +11,9 @@ export interface CustomConfiguration extends Configuration {
   },
 }
 
-export interface UserOpts {
-  mfsu?: boolean;
-  copy?: any;
-}
-
 export interface ApplyOpts {
   config: CustomConfiguration;
   isDev: boolean;
-  userOpts: UserOpts;
+  userOpts: any;
   mfsuInstance: any;
 }

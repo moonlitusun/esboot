@@ -1,5 +1,5 @@
-import { IConfig } from '../types/config';
+import { EsbootConfig } from '@@/config/types';
 
-export default function defineConfig(config: IConfig) {
+export default function defineConfig(config: EsbootConfig) {
   return config;
 }

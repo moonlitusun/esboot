@@ -1,10 +1,10 @@
 import webpack from 'webpack';
-import appConfig from '@@/helpers/app-config';
+import esbootConfig from '@@/config';
 
 import { ApplyOpts } from './types';
 
 export const addDefinePlugin = async (applyOpts: ApplyOpts) => {
-  const { pkg } = appConfig;
+  const { pkg } = esbootConfig.extralConfig;
 
   const { config } = applyOpts;
 

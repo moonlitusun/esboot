@@ -1,5 +1,4 @@
-import { resolve, join } from 'path';
-import dotenv from 'dotenv';
+import { resolve, join } from 'path'; 
 
 const pkg = require('../../package.json');
 
@@ -25,8 +24,6 @@ export default new (class AppConfig {
   pkg: Record<string, string> = {};
 
   init() {
-    dotenv.config();
-
     const {
       NODE_ENV,
       ESBOOT_PLATFORM = PLATFORMS.PC,
@@ -41,10 +38,6 @@ export default new (class AppConfig {
     );
 
     if (NODE_ENV === 'production') {
-      console.log(
-        process.env.BROWSERSLIST_ENV,
-        '<-- process.env.BROWSERSLIST_ENV'
-      );
       process.env.BROWSERSLIST_ENV = `${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}-production`;
     }
 

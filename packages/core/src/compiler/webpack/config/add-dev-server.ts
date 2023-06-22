@@ -5,12 +5,12 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
     config,
     isDev,
     mfsuInstance,
-    userOpts: { mfsu },
+    userOpts: { mfsu, proxy, port, host },
   } = applyOpts;
 
-  if (isDev) return;
+  if (!isDev) return;
 
-  config.devServer = {
+  const devServer = {
     compress: true,
     hot: true,
     historyApiFallback: {
@@ -22,7 +22,10 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
       }
       return middlewares;
     },
-    port: 8100,
-    host: '0.0.0.0',
+    port: port || 8100,
+    host: host || '0.0.0.0',
+    proxy,
   };
+
+  config.devServer = devServer;
 };
