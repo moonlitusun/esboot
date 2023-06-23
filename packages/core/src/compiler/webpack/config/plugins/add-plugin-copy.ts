@@ -1,7 +1,7 @@
 import CopyPlugin from 'copy-webpack-plugin';
 import esbootConfig from '@@/config';
 
-import { ApplyOpts } from './types';
+import { ApplyOpts } from '../types';
 
 export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
   const {

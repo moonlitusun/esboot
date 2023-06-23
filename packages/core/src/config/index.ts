@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
-import { resolve } from 'path';
 
 import { Environment } from '@@webpack/config/environment';
+import { USER_CONFIG_FILE } from '@@/constants';
 
 import { defaultUserOpts } from './default-user-opts';
 import appConfig from './app-config';
@@ -10,14 +10,12 @@ export default new (class ESbootConfig {
   userOpts: any = {};
   extralConfig: any = {};
 
-  init = () => {
-    appConfig.init();
-    this.extralConfig = appConfig;
+  initUserConfig = (reload = false) => {
+    if (reload) {
+      delete require.cache[require.resolve(USER_CONFIG_FILE)];
+    };
 
-    const customOpts = require(resolve(
-      process.cwd(),
-      './.esbootrc.ts'
-    )).default;
+    const customOpts = require(USER_CONFIG_FILE).default;
 
     const isDev = process.env.NODE_ENV === Environment.dev;
     const publicPath = isDev ? '/' : './';
@@ -26,5 +24,12 @@ export default new (class ESbootConfig {
     config.isRelativePublicPath = config.publicPath === './';
 
     this.userOpts = config;
-  }
+  };
+
+  init = () => {
+    appConfig.init();
+    this.extralConfig = appConfig;
+
+    this.initUserConfig();
+  };
 })();

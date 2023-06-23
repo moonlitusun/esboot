@@ -1,13 +1,18 @@
-export const addOutput = async (applyOpts: any) => {
-  const { config, isDev, userOpts: { outputPath, publicPath } } = applyOpts;
+import { resolve } from 'path';
+import { DEFAULT_OUTPUT_PATH } from '@@/constants';
 
-  const output: Record<string, any> = {
+export const addOutput = async (applyOpts: any) => {
+  const {
+    config,
+    isDev,
+    cwd,
+    userOpts: { outputPath, publicPath },
+  } = applyOpts;
+
+  config.output = {
     publicPath,
     clean: !isDev,
+    path: resolve(cwd, outputPath || DEFAULT_OUTPUT_PATH),
     filename: isDev ? 'js/[name].js' : 'js/[name].[chunkhash:5].js',
-  }
-
-  if (outputPath) output.path = outputPath;
-
-  config.output = output;
+  };
 };

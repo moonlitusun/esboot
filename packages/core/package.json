@@ -1,6 +1,6 @@
 {
   "name": "@dz-web/esboot",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -31,6 +31,7 @@
     "@commitlint/config-conventional": "^17.6.5",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.9.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@types/react-css-modules": "^4.6.4",
     "@types/webpack-env": "^1.18.1",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
@@ -43,6 +44,7 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "chalk": "^5.2.0",
+    "chokidar": "^3.5.3",
     "commander": "^11.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",

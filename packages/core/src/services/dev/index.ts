@@ -1,20 +1,42 @@
 import Webpack from 'webpack';
+import chokidar from 'chokidar';
 import WebpackDevServer from 'webpack-dev-server';
+import { debounce } from 'lodash';
 
 import { Environment } from '@@webpack/config/environment';
+import { USER_CONFIG_FILE } from '@@/constants';
 import getWebpackConfig from '@@webpack/config/config';
+import esbootConfig from '@@/config';
+
+export const WATCH_DEBOUNCE_STEP = 300;
 
 export async function runDev() {
-  const cfg = await getWebpackConfig({ env: Environment.dev });
-  const compiler = Webpack(cfg);
-  
-  const devServerOptions = { ...cfg.devServer, open: true };
-  const server = new WebpackDevServer(devServerOptions, compiler);
-  
-  const runServer = async () => {
+  let server: WebpackDevServer;
+
+  const start = async () => {
+    const cfg = await getWebpackConfig({ env: Environment.dev });
+    const compiler = Webpack(cfg);
+
+    server = new WebpackDevServer(cfg.devServer, compiler);
+
     console.log('Starting server...');
     await server.start();
   };
-  
-  runServer();
+
+  start();
+
+  const watcher = chokidar.watch(USER_CONFIG_FILE, {
+    ignoreInitial: true,
+    cwd: process.cwd(),
+  });
+
+  watcher.on(
+    'change',
+    debounce(async () => {
+      esbootConfig.initUserConfig(true);
+      await server.stop();
+
+      await start();
+    }, WATCH_DEBOUNCE_STEP)
+  );
 }

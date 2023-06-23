@@ -3,7 +3,7 @@ import InjectBodyPlugin from 'inject-body-webpack-plugin';
 import ip from '@@/helpers/ip';
 import esbootConfig from '@@/config';
 
-import { ApplyOpts } from './types';
+import { ApplyOpts } from '../types';
 
 export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
 const { isBrowser } = esbootConfig.extralConfig;

@@ -1,4 +1,5 @@
 import type { Configuration } from 'webpack';
+import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { ApplyOpts } from '../compiler/webpack/config/types';
 
@@ -22,4 +23,5 @@ export interface UserOpts {
   customWebpack?: (config: Configuration, applyOpts: ApplyOpts) => Configuration;
   devtool?: string;
   TSChecker?: boolean;
+  analyzer?: BundleAnalyzerPlugin.options;
 }

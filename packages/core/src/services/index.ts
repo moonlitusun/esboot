@@ -8,16 +8,13 @@ import { registry } from './registry';
 import { runDev } from './dev';
 import { runBuild } from './build';
 import { runPreview } from './preview';
+import { runLint } from './lint';
+import { runCommitLint } from './lint/commit';
 
 const cwd = process.cwd();
 
 const pkgPath = join(__dirname, '../../package.json');
 const pkg = require(pkgPath);
-
-const scriptsPath = {
-  dev: join(__dirname, './dev/index.js'),
-  build: join(__dirname, './build/index.js'),
-};
 
 export const run = () => {
   program
@@ -54,13 +51,30 @@ export const run = () => {
     .action(async (options) => {
       await registry({ root: cwd });
 
-      runPreview(options.port || 8900, options.directory || 'dist');
+      runPreview(options.port || 8900, options.directory);
     });
+
+  program
+    .command('lint')
+    .description('Lint files')
+    .allowUnknownOption(true)
+    .action(async (options) => {
+      runLint(process.argv.slice(3));
+    });
+
+  // program
+  //   .command('commitlint')
+  //   .description('Lint commit message')
+  //   .allowUnknownOption(true)
+  //   .action(async () => {
+  //     runCommitLint(process.argv.slice(3));
+  //   });
 
   program.version(pkg.version);
   program.parse(process.argv);
 };
 
+// dead code
 export function forkScript(scriptPath: string) {
   const child = fork(scriptPath, {
     cwd,

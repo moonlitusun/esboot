@@ -1,23 +1,21 @@
-# todo
+# v2 RoadMap
 
-- [x] 支持proxy
-- [x] 支持outputPath
-- [x] 支持publicPath
-- [x] 支持devtools
-- [x] 支持externals
-- [x] 支持webpack自定义
-- [x] 添加配置`.esboot.rc`
-- [ ] 支持mfsu
-- [ ] 支持ForkTsCheckerWebpackPlugin
+- [ ] 支持StaticConfigPath 加版本号
+- [ ] 支持bridge-mock命令
+- [ ] 支持extraBabelIncludes
 - [ ] 支持关闭js css压缩
-- [ ] 支持eslint
-- [ ] 支持stylelint
-- [ ] 支持tslint
+- [ ] 支持js多种压缩器
+- [ ] 支持css多种压缩器
 - [ ] 支持alias
-- [ ] 支持husky
 - [ ] 支持docs
 - [ ] 集成ssr
 - [ ] 兼容多平台
 - [ ] 添加启动器
 - [ ] 支持多平台和单平台
+- [ ] 增加单元测试
+- [ ] 增加UI测试
 - [ ] 支持vite、esbuild等
+- [ ] 支持https
+- [ ] 支持svgr
+- [ ] 支持generate命令
+- [ ] 支持antd 5

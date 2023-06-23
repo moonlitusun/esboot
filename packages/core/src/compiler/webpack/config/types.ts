@@ -15,6 +15,6 @@ export interface ApplyOpts {
   config: CustomConfiguration;
   isDev: boolean;
   userOpts: any;
-  mfsuInstance: any;
-  useMfsu: boolean;
+  cwd: string;
+  mfsu: any | undefined;
 }
