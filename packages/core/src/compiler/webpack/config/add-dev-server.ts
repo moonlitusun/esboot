@@ -6,18 +6,20 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
     config,
     isDev,
     mfsu,
-    userOpts: { proxy, port, host },
+    userOpts: { proxy, port, host, https, http2, open },
   } = applyOpts;
 
   if (!isDev) return;
 
   const devServer = {
     compress: true,
-    open: false,
+    open,
     hot: true,
     client: {
       progress: true,
     },
+    https,
+    http2,
     historyApiFallback: {
       disableDotRule: true,
     },

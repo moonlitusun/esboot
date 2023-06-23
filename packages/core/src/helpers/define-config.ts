@@ -1,5 +1,5 @@
-import { EsbootConfig } from '@@/config/types';
+import { UserOpts } from '@@/config/types';
 
-export default function defineConfig(config: EsbootConfig) {
+export default function defineConfig(config: UserOpts) {
   return config;
 }

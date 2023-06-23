@@ -8,20 +8,22 @@ export interface ICopy {
   to: string;
 }
 
-export interface EsbootConfig {
-  copy?: ICopy[] | string[];
-}
-
 export interface UserOpts {
   mfsu?: boolean;
-  copy?: any;
+  copy?: ICopy[] | string[];
   host?: string;
   port?: number;
   proxy?: any;
   publicPath?: string;
   externals?: Pick<Configuration, 'externals'>;
   customWebpack?: (config: Configuration, applyOpts: ApplyOpts) => Configuration;
-  devtool?: string;
   TSChecker?: boolean;
   analyzer?: BundleAnalyzerPlugin.options;
+  devtool?: string;
+  https?: any;
+  http2?: any;
+  open?: boolean;
+  extraBabelPlugins?: string[],
+  extraBabelPresets?: string[],
+  extraBabelIncludes?: Array<string | RegExp>;
 }
