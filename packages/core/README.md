@@ -1,21 +1,20 @@
 # v2 RoadMap
 
-- [ ] 支持关闭js css压缩
-- [ ] 支持js多种压缩器
-- [ ] 支持css多种压缩器
-- [ ] 支持StaticConfigPath 加版本号
-- [ ] 兼容多平台
-- [ ] 支持bridge-mock命令
 - [ ] 支持alias
-- [ ] 支持docs
+- [ ] 兼容多平台
+- [ ] 多语言方案
+
+- [ ] 创建完整demo
+- [ ] 添加错误捕捉
 - [ ] 添加启动器
+- [ ] pocket
+- [ ] 支持generate命令
+
+- [ ] splitChunks
 - [ ] 支持多平台和单平台
+- [ ] 支持svgr
 - [ ] 增加单元测试
 - [ ] 增加UI测试
-- [ ] 支持generate命令
-- [ ] 支持antd 5
-
-- [ ] 支持svgr
 - [ ] 集成ssr
 - [ ] 支持vite
 - [ ] 支持rspack

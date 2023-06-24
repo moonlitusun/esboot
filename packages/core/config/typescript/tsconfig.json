@@ -13,12 +13,7 @@
     "noResolve": false,
     "removeComments": true,
     "allowJs": false,
-    "lib": [
-      "ES5",
-      "ES2015",
-      "ES2018",
-      "DOM"
-    ],
-    "target": "ES5"
+    "lib": ["ES5", "ES2015", "ES2018", "DOM"],
+    "target": "ES5",
   },
 }

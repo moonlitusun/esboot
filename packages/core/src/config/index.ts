@@ -26,10 +26,13 @@ export default new (class ESbootConfig {
     this.userOpts = config;
   };
 
-  init = () => {
+  initExtralConfig = () => {
     appConfig.init();
     this.extralConfig = appConfig;
+  }
 
+  init = () => {
+    this.initExtralConfig();
     this.initUserConfig();
   };
 })();

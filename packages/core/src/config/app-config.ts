@@ -21,6 +21,7 @@ export default new (class AppConfig {
   configRootPath: string = '';
   configRootPathOfPlatfrom: string = '';
   configRootPathOfPageType: string = '';
+  configJSPath: string = '';
   pkg: Record<string, string> = {};
 
   init() {
@@ -34,14 +35,14 @@ export default new (class AppConfig {
     const configRootPathOfPlatfrom = join(configRootPath, ESBOOT_PLATFORM);
     const configRootPathOfPageType = join(
       configRootPathOfPlatfrom,
-      ESBOOT_PAGE_TYPE
+      `_${ESBOOT_PAGE_TYPE}`
     );
 
     if (NODE_ENV === 'production') {
       process.env.BROWSERSLIST_ENV = `${ESBOOT_PLATFORM}-${ESBOOT_PAGE_TYPE}-production`;
     }
 
-    this.pageType == ESBOOT_PAGE_TYPE;
+    this.pageType = ESBOOT_PAGE_TYPE as PAGE_TYPE;
     this.platform = ESBOOT_PLATFORM as PLATFORMS;
     this.isMobile = ESBOOT_PLATFORM === PLATFORMS.MOBILE;
     this.isBrowser = ESBOOT_PAGE_TYPE === PAGE_TYPE.browser;
@@ -49,6 +50,7 @@ export default new (class AppConfig {
     this.configRootPath = configRootPath;
     this.configRootPathOfPlatfrom = configRootPathOfPlatfrom;
     this.configRootPathOfPageType = configRootPathOfPageType;
+    this.configJSPath = `${this.configRootPathOfPageType}/config.js`;
     this.pkg = pkg;
   }
 })();

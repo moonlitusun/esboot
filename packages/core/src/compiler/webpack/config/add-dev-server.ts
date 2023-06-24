@@ -1,4 +1,3 @@
-import { DEFAULT_DEV_PORT } from '@@/constants';
 import { ApplyOpts } from './types';
 
 export const addDevServer = async (applyOpts: ApplyOpts) => {
@@ -27,7 +26,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
       middlewares.unshift(...(mfsu?.getMiddlewares() ?? []));
       return middlewares;
     },
-    port: port || DEFAULT_DEV_PORT,
+    port: port,
     host: host || '0.0.0.0',
     proxy,
   };

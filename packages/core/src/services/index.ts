@@ -4,12 +4,17 @@ import { program } from 'commander';
 
 import { Environment } from '@@webpack/config/environment';
 
+import esbootConfig from '@@/config';
+
 import { registry } from './registry';
 import { runDev } from './dev';
 import { runBuild } from './build';
 import { runPreview } from './preview';
 import { runLint } from './lint';
+import { runExec } from './exec';
 import { runCommitLint } from './lint/commit';
+import { runDocs } from './docs';
+import { runMockBridge } from './mock/bridge';
 
 const cwd = process.cwd();
 
@@ -58,7 +63,7 @@ export const run = () => {
     .command('lint')
     .description('Lint files')
     .allowUnknownOption(true)
-    .action(async (options) => {
+    .action(async () => {
       runLint(process.argv.slice(3));
     });
 
@@ -69,6 +74,33 @@ export const run = () => {
   //   .action(async () => {
   //     runCommitLint(process.argv.slice(3));
   //   });
+
+  program
+    .command('docs')
+    .description('docs')
+    .allowUnknownOption(true)
+    .action(async () => {
+      runDocs(process.argv.slice(3));
+    });
+
+  program
+    .command('exec')
+    .description('exec commands')
+    .allowUnknownOption(true)
+    .action(async () => {
+      runExec(process.argv.slice(3));
+    });
+
+  program
+    .command('mock:bridge')
+    .description('Start bridge mock')
+    .option('-f, --file <char>')
+    .option('-s, --sampleFile <char>')
+    .action(async (options) => {
+      await esbootConfig.initExtralConfig();
+
+      runMockBridge(options);
+    });
 
   program.version(pkg.version);
   program.parse(process.argv);

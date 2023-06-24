@@ -28,15 +28,13 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
 
   const contentRootPath = `./platforms/${platform}/_${pageType}`;
 
-  const { config } = applyOpts;
+  const { config, isDev, userOpts: { port } } = applyOpts;
   const content_path = join(contentRootPath, ESBOOT_CONTENT_PATH);
   const files = await glob(`/**/${ESBOOT_CONTENT_PATTERN}.entry.tsx`, {
     root: join(rootPath, content_path),
   });
 
-  console.log(files, '<-- files');
-
-  files.forEach((file: string) => {
+  files.forEach((file: string, index) => {
     const { title, template, name } =
       (getExportProps(readFileSync(file, 'utf-8')) as EntryFileExportProps) ||
       {};
@@ -44,6 +42,10 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     const chunkName = name || filename;
     const ensureTitle = title || filename || 'ESboot APP';
     const ensureTpl = join(configRootPathOfPlatfrom, `template/${template || 'index'}.html`);
+
+    if (isDev) {
+      console.log(`Page${index + 1}`, `http://localhost:${port}/${chunkName}.html`)
+    }
 
     config.entry[chunkName] = file;
 

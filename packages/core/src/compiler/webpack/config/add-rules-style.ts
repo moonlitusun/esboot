@@ -1,6 +1,7 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import postcssNormalize from 'postcss-normalize';
+import LightningCSS from 'lightningcss';
 
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
 const {
@@ -19,7 +20,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
   const {
     config,
     isDev,
-    userOpts: { isRelativePublicPath },
+    userOpts: { isRelativePublicPath, pxtorem: pxtoremCustom },
   } = applyOpts;
   const { rootPath, isMobile } = esbootConfig.extralConfig;
 
@@ -74,6 +75,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
                   replace: true,
                   mediaQuery: false,
                   minPixelValue: 0,
+                  ...pxtoremCustom,
                 }),
               require('postcss-flexbugs-fixes'),
               require('postcss-preset-env')({
@@ -87,6 +89,12 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
           },
         },
       },
+      // {
+      //   loader: require.resolve('lightningcss-loader'),
+      //   options: {
+      //     implementation: LightningCSS
+      //   },
+      // },
       {
         loader: require.resolve('sass-loader'),
         options: { sourceMap: isDev },

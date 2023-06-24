@@ -8,6 +8,19 @@ export interface ICopy {
   to: string;
 }
 
+export enum JsMinifier {
+  terser = 'terser',
+  // esbuild = 'esbuild',
+  swc = 'swc',
+  none = 'none',
+}
+
+export enum CSSMinifier {
+  cssnano = 'cssnano',
+  lightningcss = 'lightningcss',
+  none = 'none',
+}
+
 export interface UserOpts {
   mfsu?: boolean;
   copy?: ICopy[] | string[];
@@ -26,4 +39,9 @@ export interface UserOpts {
   extraBabelPlugins?: string[],
   extraBabelPresets?: string[],
   extraBabelIncludes?: Array<string | RegExp>;
+  pxtorem?: Record<string, any>;
+  jsMinifier?: JsMinifier;
+  jsMinifierOptions?: any;
+  cssMinifier?: CSSMinifier;
+  cssMinifierOptions?: any;
 }
