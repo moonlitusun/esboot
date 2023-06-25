@@ -18,7 +18,10 @@ export const addOptimization = async (applyOpts: ApplyOpts) => {
       cssMinifier,
       cssMinifierOptions,
     },
+    isDev,
   } = applyOpts;
+
+  if (isDev) return;
 
   const minimizer = [];
 
@@ -85,6 +88,7 @@ export const addOptimization = async (applyOpts: ApplyOpts) => {
     },
     emitOnErrors: true,
     usedExports: true,
+    sideEffects: false,
     minimize: true,
     minimizer,
   };

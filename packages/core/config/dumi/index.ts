@@ -1,6 +1,6 @@
-import { resolve } from 'path';
+const { resolve } = require('path');
 
-export default {
+module.exports = {
   themeConfig: {
     name: 'ESBoot',
     logo: './images/dz-logo.jpg',
@@ -9,14 +9,15 @@ export default {
     type: 'hash',
   },
   publicPath: '/',
-  mfsu: {
-    development: {
-      output: './.mfsu-dev',
-    },
-    // production : {
-    //   output : "./.mfsu-prod",
-    // }
-  },
+  // mfsu: {
+  //   development: {
+  //     output: './.mfsu-dev',
+  //   },
+  //   // production : {
+  //   //   output : "./.mfsu-prod",
+  //   // }
+  // },
+  mfsu: false,
   alias: {
     '@src': resolve(process.cwd(), './src'),
   },

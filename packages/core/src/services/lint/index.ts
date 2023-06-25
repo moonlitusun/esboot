@@ -6,7 +6,7 @@ import { resolve } from 'path';
 export function runLint(args: string[]) {
   spawn.sync(
     searchCommand('stylelint'),
-    [resolve(process.cwd(), '**/*.scss'), ...args],
+    ['**/*.scss', ...args],
     {
       stdio: 'inherit',
       shell: true,

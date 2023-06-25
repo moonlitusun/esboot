@@ -8,3 +8,4 @@ export const USER_CONFIG_FILE = resolve(
 export const DEFAULT_DEVTOOL = 'cheap-module-source-map';
 export const DEFAULT_OUTPUT_PATH = 'dist';
 export const DEFAULT_DEV_PORT = 8100;
+export const isWins = process.platform === 'win32';

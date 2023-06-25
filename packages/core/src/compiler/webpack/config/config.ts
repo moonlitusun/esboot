@@ -95,9 +95,9 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   const { externals = {}, devtool, customWebpack } = userOpts;
   const restPlugins = [
-    // new webpackbar(),
+    new webpackbar(),
     new FriendlyErrorsWebpackPlugin(),
-    isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
+    isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);

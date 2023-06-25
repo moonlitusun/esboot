@@ -15,8 +15,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@types/node": "^17.0.12",
-    "father": "^4.0.5",
+    "@types/node": "^17.0.45",
+    "father": "^4.2.3",
     "prettier": "latest",
     "turbo": "latest"
   },
