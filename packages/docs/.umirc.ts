@@ -6,9 +6,9 @@ export default {
   routePrefetch: {},
   manifest: {},
   plugins: ['@umijs/plugin-docs'],
-  conventionRoutes: {
-    exclude: [/\/components\//],
-  },
+  // conventionRoutes: {
+  //   exclude: [/\/components\//],
+  // },
   alias: {
     '@': './src'
   }
