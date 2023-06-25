@@ -1,5 +1,7 @@
 # v2 RoadMap
 
+- [ ] wins上面Bridge mock 端口无效
+- [ ] DeprecationWarning
 - [ ] 兼容多平台
 - [ ] 写文档
 - [ ] 支持alias

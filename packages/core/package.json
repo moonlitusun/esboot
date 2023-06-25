@@ -1,12 +1,12 @@
 {
   "name": "@dz-web/esboot",
-  "version": "2.0.26",
+  "version": "2.0.27",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "Roc",
   "main": "dist/index.js",
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "bin": {
     "esboot": "bin/index.js"
   },
