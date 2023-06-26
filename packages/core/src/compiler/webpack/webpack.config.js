@@ -136,22 +136,6 @@ const getPlugins = () => [
   ),
   new InjectBodyPlugin({
     content: `
-    <script>
-      // default theme
-      function getUrlParam(name) {
-        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return decodeURI(r[2]);
-        return null;
-      }
-
-      var theme = getUrlParam('theme');
-
-      if (theme) {
-        document.documentElement.className = theme;
-      }
-    </script>
-
     <script src="${ESBOOT_RELATIVE_STATIC_CONFIG_PATH}?v=${process.env.BUILD_VERSION || pkg.version}"></script>
     ${
       (!ESBOOT_IS_BROWSER && isDevMode) ?
