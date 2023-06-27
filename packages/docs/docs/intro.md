@@ -6,9 +6,9 @@ sidebar_position: 1
 
 ## 环境准备
 
-因为ESBoot v2用的API都比较新，所以先确保有Node v16版本以上。
+ESBoot v2用的API都比较新，所以先确保有Node v16版本以上。
 
-因为ESBoot集成了很多工程化工具，包括一些Rust和Go的包，非常大，所以包管理工具推荐使用pnpm，节省磁盘空间，退而求次之选用yarn。
+ESBoot集成了很多工程化工具，包括一些Rust和Go的包，非常大，所以包管理工具推荐使用`pnpm`，节省磁盘空间，退而求次之选用`yarn`。
 
 ## 创建项目
 
@@ -35,6 +35,8 @@ stylelint下载之后需要配置一下能支持scss规则.
 ### ESLint
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+安装完之后不需要额外的配置，直接找一个tsx文件，
 
 ### EditorConfig
 

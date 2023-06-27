@@ -22,6 +22,7 @@ export enum CSSMinifier {
 }
 
 export interface UserOpts {
+  analyze?: boolean;
   mfsu?: boolean;
   copy?: ICopy[] | string[];
   host?: string;

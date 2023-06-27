@@ -12,6 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
+    "dep": "yarn build && npx dz-ud /ld/esboot ./build/",
     "typecheck": "tsc"
   },
   "dependencies": {
