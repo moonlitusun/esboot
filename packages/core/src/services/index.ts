@@ -7,6 +7,7 @@ import { Environment } from '@@webpack/config/environment';
 import esbootConfig from '@@/config';
 
 import { registry } from './registry';
+import { processPrepare } from './prepare';
 import { runDev } from './dev';
 import { runBuild } from './build';
 import { runPreview } from './preview';
@@ -64,6 +65,8 @@ export const run = () => {
     .description('Lint files')
     .allowUnknownOption(true)
     .action(async () => {
+      processPrepare();
+
       runLint(process.argv.slice(3));
     });
 
@@ -80,6 +83,8 @@ export const run = () => {
     .description('docs')
     .allowUnknownOption(true)
     .action(async () => {
+      processPrepare();
+
       runDocs(process.argv.slice(3));
     });
 
@@ -88,6 +93,8 @@ export const run = () => {
     .description('exec commands')
     .allowUnknownOption(true)
     .action(async () => {
+      processPrepare();
+
       runExec(process.argv.slice(3));
     });
 
@@ -97,6 +104,7 @@ export const run = () => {
     .option('-f, --file <char>')
     .option('-s, --sampleFile <char>')
     .action(async (options) => {
+      processPrepare();
       await esbootConfig.initExtralConfig();
 
       runMockBridge(options);
