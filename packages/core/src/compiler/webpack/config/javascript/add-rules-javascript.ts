@@ -19,7 +19,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
       rootPath,
       ...extraBabelIncludes,
     ].filter(Boolean),
-    exclude: /(node_modules|bower_components)/,
+    // exclude: /(node_modules|bower_components)/,
     use: [
       {
         loader: require.resolve('babel-loader'),
