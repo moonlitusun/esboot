@@ -15,7 +15,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
     open,
     hot: true,
     client: {
-      progress: true,
+      progress: false,
     },
     https,
     http2,
