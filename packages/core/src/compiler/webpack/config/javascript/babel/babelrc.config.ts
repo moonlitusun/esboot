@@ -21,14 +21,14 @@ export const plugins = [
   [require('@babel/plugin-syntax-dynamic-import')],
   require('@babel/plugin-proposal-class-properties'),
   [
-    require('@dz-web/babel-plugin-react-css-modules'),
+    require('@dr.pogodin/babel-plugin-react-css-modules'),
     {
       filetypes: {
         '.scss': {
           syntax: 'postcss-scss',
         },
       },
-      generateScopedName: require('@dz-web/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
+      generateScopedName: require('@dr.pogodin/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
         '[name]__[local]__[contenthash:base64:5]'
       ),
       webpackHotModuleReloading: true,

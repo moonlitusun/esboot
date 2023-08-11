@@ -6,7 +6,7 @@ import LightningCSS from 'lightningcss';
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
 const {
   getLocalIdent,
-} = require('@dz-web/babel-plugin-react-css-modules/utils');
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
 import esbootConfig from '@@/config';
 

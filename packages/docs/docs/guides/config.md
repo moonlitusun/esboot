@@ -36,6 +36,8 @@ export default defineConfig({
 
 ## copy
 
+**大部分情况可以不用，参考[static](/docs/guides/static)**
+
 - 类型：`Array<string | { from: string; to: string; }>`
 - 默认值：`[]`
 
