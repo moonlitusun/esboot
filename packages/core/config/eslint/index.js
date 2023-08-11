@@ -54,6 +54,8 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    // 用了ts，不需要这个规则了
+    'react/require-default-props': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-filename-extension': [
       'error',

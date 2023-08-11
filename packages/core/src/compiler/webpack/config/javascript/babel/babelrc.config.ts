@@ -1,5 +1,4 @@
 import path from 'path';
-import { generateScopedNameFactory } from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 export const presets = [
   [
@@ -22,14 +21,14 @@ export const plugins = [
   [require('@babel/plugin-syntax-dynamic-import')],
   require('@babel/plugin-proposal-class-properties'),
   [
-    require('@dr.pogodin/babel-plugin-react-css-modules'),
+    require('@dz-web/babel-plugin-react-css-modules'),
     {
       filetypes: {
         '.scss': {
           syntax: 'postcss-scss',
         },
       },
-      generateScopedName: generateScopedNameFactory(
+      generateScopedName: require('@dz-web/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
         '[name]__[local]__[contenthash:base64:5]'
       ),
       webpackHotModuleReloading: true,
