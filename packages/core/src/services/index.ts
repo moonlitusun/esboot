@@ -105,6 +105,7 @@ export const run = () => {
     .option('-s, --sampleFile <char>')
     .action(async (options) => {
       processPrepare();
+      await registry({ root: cwd });
       await esbootConfig.initExtralConfig();
 
       runMockBridge(options);
