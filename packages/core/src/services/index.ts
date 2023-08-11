@@ -1,4 +1,5 @@
 import { join } from 'path';
+import fse from 'fs-extra';
 import { fork } from 'child_process';
 import { program } from 'commander';
 
@@ -17,6 +18,8 @@ import { runCommitLint } from './lint/commit';
 import { runDocs } from './docs';
 import { runMockBridge } from './mock/bridge';
 
+import { writeMultiPlatform } from '../scripts/write-multi-platform';
+
 const cwd = process.cwd();
 
 const pkgPath = join(__dirname, '../../package.json');
@@ -33,6 +36,7 @@ export const run = () => {
 
       await registry({ root: cwd });
 
+      writeMultiPlatform();
       runDev();
     });
 
@@ -46,6 +50,7 @@ export const run = () => {
 
       await registry({ root: cwd });
 
+      writeMultiPlatform();
       runBuild();
     });
 
