@@ -9,7 +9,8 @@
     "strict": true,
     "skipLibCheck": true,
     "target": "es2019",
-    "jsx": "react"
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
   "exclude": [
     "**/node_modules",
@@ -18,6 +19,7 @@
     "**/fixtures",
     "**/*.test.ts",
     "**/*.e2e.ts",
-    "**/templates"
+    "**/templates",
+    "ui"
   ]
 }

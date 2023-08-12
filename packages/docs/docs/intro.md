@@ -12,7 +12,51 @@ ESBoot集成了很多工程化工具，包括一些Rust和Go的包，非常大�
 
 ## 创建项目
 
-项目脚手架正在开发中...
+先找个地方建个空目录。
+
+```bash
+$ mkdir myapp && cd myapp
+...
+```
+
+通过官方工具创建项目(以下模式选一种即可，推荐`pnpm`)，
+
+```bash
+# pnpm
+pnpm dlx create-esboot@latest
+
+# bun
+bunx create-esboot
+
+# npm
+npx create-esboot@latest
+
+# yarn
+yarn create esboot
+```
+
+### 从模版创建项目
+
+```bash
+# 从 @dz-web/esboot-electron-template 创建一个 electron 模板
+
+pnpm create esboot --template electron
+```
+
+### 参数选项
+
+使用 `create-esboot` 创建项目时，可用的参数如下：
+
+| option | description |
+| ------ | ------ |
+| `--no-git` | 创建项目，但不初始化 Git |
+| `--no-install` | 创建项目，但不自动安装依赖 |
+
+## 启动项目
+
+```bash
+pnpm dev
+```
 
 ## 编辑器准备
 
