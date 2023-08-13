@@ -31,12 +31,11 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@dz-web/esboot": "^2.0.34",
+    "@dz-web/esboot": "^2.0.36",
     "@types/react": "18.2.14",
     "@types/react-dom": "^18.2.6",
     "eslint": "^8.43.0",
-    "stylelint": "^15.9.0",
-    "typescript": "^5.1.3"
+    "stylelint": "^15.9.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint",
