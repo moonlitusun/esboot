@@ -230,7 +230,7 @@ export default async ({
     const generator = new BaseGenerator({
       path: join(__dirname, '..', 'templates', appTemplate),
       target,
-      slient: true,
+      slient: false,
       data: useDefaultData
         ? defaultData
         : ({

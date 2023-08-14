@@ -37,7 +37,7 @@ export const unpackTemplate = async (opts: IUnpackTemplateOpts) => {
   const nameList: string[] = [];
 
   const isStartWithUmi = template.startsWith('@dz-web/esboot');
-  console.log(template, '<-- template');
+
   if (template.endsWith('-template')) {
     // @umijs/electron-template
     if (isStartWithUmi) {

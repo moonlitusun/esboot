@@ -49,3 +49,4 @@ bridge-mock.js
 .idea/
 .vscode/
 stats.json
+src/helpers/multi-platforms.ts
