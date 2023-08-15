@@ -7,6 +7,7 @@ module.exports = {
   customSyntax: require.resolve('postcss-scss'),
   ignoreFiles: ['node_modules'],
   rules: {
+    'import-notation': 'string',
     'at-rule-no-unknown': [
       true,
       {
@@ -26,11 +27,17 @@ module.exports = {
           'content',
           'return',
           'function',
+          'use',
         ],
       },
     ],
     'scss/dollar-variable-pattern': '^(([a-z]+)-*)+$',
-    'selector-max-id': 0,
+    'selector-max-id': [
+      0,
+      {
+        ignoreContextFunctionalPseudoClasses: [':not', '/^:(h|H)as$/'],
+      },
+    ],
     'max-nesting-depth': 3,
     'at-rule-empty-line-before': [
       'always',
