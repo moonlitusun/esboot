@@ -178,3 +178,7 @@ $ esboot mock:bridge
 /Users/My/esboot-react-mp/config/mobile/bridge/bridge-mock.js 加载成功
 正在监听 *:3002, admin控制台访问地址： http://localhost:3002?port=3002
 ```
+
+## g-alias
+
+用于改了[alias](/docs/guides/config#alias)之后从新生成`typescript`和`eslint`的配置。

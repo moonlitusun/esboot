@@ -20,4 +20,13 @@ export const defaultUserOpts = {
   jsMinifierOptions: {},
   cssMinifier: CSSMinifier.cssnano,
   cssMinifierOptions: {},
+  alias: {
+    '@': 'src',
+    '@mobile': 'src/platforms/mobile',
+    '@mobile-native': 'src/platforms/mobile/_native',
+    '@mobile-browser': 'src/platforms/mobile/_browser',
+    '@pc': 'src/platforms/pc',
+    '@pc-native': 'src/platforms/pc/_native',
+    '@pc-browser': 'src/platforms/pc/_browser',
+  },
 };

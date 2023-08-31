@@ -1,5 +1,5 @@
 import esbootConfig from '@@/config';
-import { plugins, env, presets } from './babel/babelrc.config';
+import { getPlugins, env, presets } from './babel/babelrc.config';
 
 import { ApplyOpts } from '../types';
 
@@ -10,7 +10,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
     config,
     isDev,
     mfsu,
-    userOpts: { extraBabelPlugins, extraBabelPresets, extraBabelIncludes }
+    userOpts: { extraBabelPlugins, extraBabelPresets, extraBabelIncludes, alias }
   } = applyOpts;
 
   config.module.rules.push({
@@ -32,7 +32,7 @@ export async function addJavaScriptRules(applyOpts: ApplyOpts) {
           env,
           plugins: [
             ...extraBabelPlugins,
-            ...plugins,
+            ...getPlugins(alias),
             ...(mfsu?.getBabelPlugins() ?? []),
             isDev && require.resolve('react-refresh/babel'),
           ].filter(Boolean),

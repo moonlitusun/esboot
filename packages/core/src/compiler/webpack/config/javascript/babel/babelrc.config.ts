@@ -1,4 +1,5 @@
 import path from 'path';
+import type { UserOpts } from '@@/config/types';
 
 export const presets = [
   [
@@ -17,47 +18,44 @@ export const presets = [
   ],
 ];
 
-export const plugins = [
-  [require('@babel/plugin-syntax-dynamic-import')],
-  require('@babel/plugin-proposal-class-properties'),
-  [
-    require('@dr.pogodin/babel-plugin-react-css-modules'),
-    {
-      filetypes: {
-        '.scss': {
-          syntax: 'postcss-scss',
+export const getPlugins = (alias: UserOpts['alias']) => {
+  const customAlias: UserOpts['alias'] = {};
+
+  for (let k in alias) {
+    const value = path.resolve(process.cwd(), `./${alias[k]}/`);
+
+    customAlias[k] = value;
+  }
+
+  return [
+    [require('@babel/plugin-syntax-dynamic-import')],
+    require('@babel/plugin-proposal-class-properties'),
+    [
+      require('@dr.pogodin/babel-plugin-react-css-modules'),
+      {
+        filetypes: {
+          '.scss': {
+            syntax: 'postcss-scss',
+          },
         },
+        generateScopedName:
+          require('@dr.pogodin/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
+            '[name]__[local]__[contenthash:base64:5]'
+          ),
+        webpackHotModuleReloading: true,
+        autoResolveMultipleImports: true,
+        handleMissingStyleName: 'throw',
       },
-      generateScopedName: require('@dr.pogodin/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
-        '[name]__[local]__[contenthash:base64:5]'
-      ),
-      webpackHotModuleReloading: true,
-      autoResolveMultipleImports: true,
-      handleMissingStyleName: 'throw',
-    },
-  ],
-  [
-    require.resolve('babel-plugin-module-resolver'),
-    {
-      alias: {
-        '@': path.resolve(process.cwd(), './src/'),
-        '@mobile': path.resolve(process.cwd(), './src/platforms/mobile/'),
-        '@mobile-native': path.resolve(
-          process.cwd(),
-          './src/platforms/mobile/_native/'
-        ),
-        '@mobile-browser': path.resolve(
-          process.cwd(),
-          './src/platforms/mobile/_browser/'
-        ),
-        '@pc': path.resolve(process.cwd(), './src/platforms/pc/'),
-        '@pc-native': path.resolve(process.cwd(), './src/platforms/pc/_native/'),
-        '@pc-browser': path.resolve(process.cwd(), './src/platforms/pc/_browser/'),
+    ],
+    [
+      require.resolve('babel-plugin-module-resolver'),
+      {
+        alias: customAlias,
+        extensions: ['.ts', '.tsx'],
       },
-      extensions: ['.ts', '.tsx'],
-    },
-  ],
-];
+    ],
+  ];
+};
 
 export const env = {
   production: {

@@ -14,7 +14,8 @@ const config = {
   url: 'https://moonlit.vip',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/esboot/',
+  // baseUrl: '/esboot/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

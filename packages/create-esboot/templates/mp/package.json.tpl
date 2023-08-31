@@ -31,7 +31,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@dz-web/esboot": "^2.0.37",
+    "@dz-web/esboot": "^2.1.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "^18.2.6",
     "eslint": "^8.43.0",

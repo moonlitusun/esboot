@@ -17,6 +17,7 @@ import { runExec } from './exec';
 import { runCommitLint } from './lint/commit';
 import { runDocs } from './docs';
 import { runMockBridge } from './mock/bridge';
+import { generateAliasFiles } from './generate/alias';
 
 import { writeMultiPlatform } from '../scripts/write-multi-platform';
 
@@ -101,6 +102,17 @@ export const run = () => {
       processPrepare();
 
       runExec(process.argv.slice(3));
+    });
+
+  program
+    .command('g-alias')
+    .description('Generate alias')
+    .allowUnknownOption(true)
+    .action(async () => {
+      processPrepare();
+      await esbootConfig.initUserConfig();
+
+      generateAliasFiles();
     });
 
   program
