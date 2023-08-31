@@ -8,7 +8,7 @@
     "dev": "esboot dev",
     "build": "esboot build",
     "esboot": "esboot",
-    "prepare": "esboot exec husky install"
+    "postinstall": "esboot exec husky install && esboot g-alias"
   },
   "author": "{{{ author }}}",
   "license": "ISC",
@@ -31,7 +31,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@dz-web/esboot": "^2.1.0",
+    "@dz-web/esboot": "^2.1.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "^18.2.6",
     "eslint": "^8.43.0",

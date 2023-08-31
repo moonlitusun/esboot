@@ -31,7 +31,7 @@ export const getPlugins = (alias: UserOpts['alias']) => {
     [require('@babel/plugin-syntax-dynamic-import')],
     require('@babel/plugin-proposal-class-properties'),
     [
-      require('@dr.pogodin/babel-plugin-react-css-modules'),
+      require('@dz-web/babel-plugin-react-css-modules'),
       {
         filetypes: {
           '.scss': {
@@ -39,7 +39,7 @@ export const getPlugins = (alias: UserOpts['alias']) => {
           },
         },
         generateScopedName:
-          require('@dr.pogodin/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
+          require('@dz-web/babel-plugin-react-css-modules/utils').generateScopedNameFactory(
             '[name]__[local]__[contenthash:base64:5]'
           ),
         webpackHotModuleReloading: true,

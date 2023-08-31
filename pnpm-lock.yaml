@@ -126,7 +126,7 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.6.6
         version: 17.7.0
-      '@dr.pogodin/babel-plugin-react-css-modules':
+      '@dz-web/babel-plugin-react-css-modules':
         specifier: ^6.10.0
         version: 6.10.0(css-loader@6.8.1)(postcss@8.4.27)(webpack@5.88.2)
       '@dz-web/bridge-mock':
@@ -3679,7 +3679,7 @@ packages:
       - webpack-cli
     dev: false
 
-  /@dr.pogodin/babel-plugin-react-css-modules@6.10.0(css-loader@6.8.1)(postcss@8.4.27)(webpack@5.88.2):
+  /@dz-web/babel-plugin-react-css-modules@6.10.0(css-loader@6.8.1)(postcss@8.4.27)(webpack@5.88.2):
     resolution: {integrity: sha512-ooLo9D/CXgCOhpMUYkXMqZd6GHPfWBhlNTfx/vLvO704QPivfz2VjmjWS0zscdTVRQyKFXV56A5HHooqQRE6uw==}
     engines: {node: '>=16'}
     peerDependencies:
