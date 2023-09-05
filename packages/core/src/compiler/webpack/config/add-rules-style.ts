@@ -2,6 +2,7 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import postcssNormalize from 'postcss-normalize';
 import LightningCSS from 'lightningcss';
+import { isUndefined } from 'lodash';
 
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
 const {
@@ -20,9 +21,13 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
   const {
     config,
     isDev,
-    userOpts: { isRelativePublicPath, pxtorem: pxtoremCustom },
+    userOpts: { isRelativePublicPath, pxtorem: pxtoremAllOptions },
   } = applyOpts;
+  const { enable: enablePxToRem, ...pxtoremCustom } = pxtoremAllOptions;
   const { rootPath, isMobile } = esbootConfig.extralConfig;
+  const enablePxToRemByCompatibility = isUndefined(enablePxToRem)
+    ? isMobile
+    : enablePxToRem;
 
   const globalScssPathList = [
     path.join(rootPath, './styles/'),
@@ -63,7 +68,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
           sourceMap: isDev,
           postcssOptions: {
             plugins: [
-              isMobile &&
+              enablePxToRemByCompatibility &&
                 pxtorem({
                   rootValue: 100,
                   unitPrecision: 5,

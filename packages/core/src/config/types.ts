@@ -21,6 +21,20 @@ export enum CSSMinifier {
   none = 'none',
 }
 
+export interface Px2rem {
+  enable?: boolean;
+  rootValue?: number | Record<string, number>,
+  unitPrecision?: number,
+  propWhiteList?: string[],
+  propBlackList?: string[],
+  exclude?: any,
+  selectorBlackList?: string[],
+  ignoreIdentifier?: boolean | string,
+  replace?: boolean,
+  mediaQuery?: boolean,
+  minPixelValue?: number,
+}
+
 export interface UserOpts {
   analyze?: boolean;
   mfsu?: boolean;
@@ -40,7 +54,7 @@ export interface UserOpts {
   extraBabelPlugins?: string[],
   extraBabelPresets?: string[],
   extraBabelIncludes?: Array<string | RegExp>;
-  pxtorem?: Record<string, any>;
+  pxtorem?: Px2rem;
   jsMinifier?: JsMinifier;
   jsMinifierOptions?: any;
   cssMinifier?: CSSMinifier;

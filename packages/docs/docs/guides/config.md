@@ -195,8 +195,10 @@ proxy: {
 
 - 默认值：
 
-```ts
+```js
 {
+  // 如果是mobile 默认为true
+  enable: false,
   rootValue: 100,
   unitPrecision: 5,
   propWhiteList: [],
