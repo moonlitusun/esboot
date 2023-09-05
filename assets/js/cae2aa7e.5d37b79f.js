@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[7754],{9512:e=>{e.exports=JSON.parse('{"title":"ChangeLogs","slug":"/category/changelogs","permalink":"/esboot/docs/category/changelogs","navigation":{"previous":{"title":"env","permalink":"/esboot/docs/guides/env"},"next":{"title":"v2","permalink":"/esboot/docs/changelog/v2"}}}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[1703],{4974:e=>{e.exports=JSON.parse('{"title":"Guides","slug":"/category/guides","permalink":"/esboot/docs/category/guides","navigation":{"previous":{"title":"\u5feb\u901f\u5f00\u59cb","permalink":"/esboot/docs/intro"},"next":{"title":"\u76ee\u5f55\u7ed3\u6784","permalink":"/esboot/docs/guides/menu"}}}')}}]);
