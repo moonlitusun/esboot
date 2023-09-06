@@ -12,8 +12,12 @@ const getVersion = () => {
 };
 
 export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
-  const { isBrowser, isMobile } = esbootConfig.extralConfig;
-  const { config, isDev, userOpts: { publicPath } } = applyOpts;
+  const { isBrowser } = esbootConfig.extralConfig;
+  const {
+    config,
+    isDev,
+    userOpts: { publicPath },
+  } = applyOpts;
 
   const isInjectBridgeMock = !isBrowser && isDev;
 
@@ -22,13 +26,16 @@ export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
     new InjectBodyPlugin({
       position: 'start',
       content: `
-      <script src="${publicPath}config.js?v=${process.env.BUILD_VERSION || getVersion()}">
+      <script src="${publicPath}config.js?v=${
+        // jenkins version
+        process.env.BUILD_VERSION || getVersion()
+      }">
       <\/script>
 
       ${
         isInjectBridgeMock
           ? `<script>
-        window.brigeMockHost = "http://${ip}";
+        window.brigeMockHost = "http://${process.env.BRIDGE_MOCK_HOST || ip}";
         window.brigeMockPort = ${process.env.BRIDGE_MOCK_PORT || 3000};
         <\/script>`
           : ''

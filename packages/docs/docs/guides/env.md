@@ -59,6 +59,12 @@ ESBOOT_CONTENT_PATTERN=trade
 ESBOOT_CONTENT_PATTERN=+(trade|trade-setting)
 ```
 
+### BRIDGE_MOCK_HOST
+
+`可选host，如localhost`
+
+bridge-mock的监听host。
+
 ### BRIDGE_MOCK_PORT
 
 `可选端口号，如3021`
