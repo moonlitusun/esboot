@@ -1,7 +1,7 @@
-import { useContext } from 'react';
 import { IntlProvider } from 'react-intl';
+import { useAppStore } from '@pc-native/model/app';
 import { Language } from '@/constants/config';
-import { getDisplayName, userConfigContext } from './native';
+import { getDisplayName } from './native';
 
 interface GenericObject {
   [prop: string]: string;
@@ -13,7 +13,7 @@ export interface I18nOption {
 
 export default function wrapI18n(App: React.ReactNode, options: I18nOption): React.ReactNode {
   const InternalApp: React.FC = () => {
-    const { language } = useContext<any>(userConfigContext);
+    const language = useAppStore((state) => state.language);
 
     return (
       <IntlProvider messages={options.messageDict[language]} locale={language}>

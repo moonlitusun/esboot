@@ -1,6 +1,6 @@
 import { IntlProvider } from 'react-intl';
 import { Language } from '@/constants/config';
-import { useAppStore } from '@mobile/model/app';
+import { useAppStore } from '@mobile-native/model/app';
 import { getDisplayName } from './native';
 
 export interface I18nOption {
