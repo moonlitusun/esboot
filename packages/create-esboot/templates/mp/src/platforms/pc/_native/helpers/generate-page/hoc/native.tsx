@@ -31,7 +31,8 @@ export default function wrapNative(App): React.ReactNode {
     const setUserInfo = useAppStore((state) => state.setUserInfo);
 
     function _updateUserConfig(rawConfig: UserConfig): void {
-      const { theme: prevTheme, raise: prevRaise } = userConfig;
+      const prevTheme = userConfig.theme || window?.esboot_urlParams?.theme;
+      const prevRaise = userConfig.raise || window?.esboot_urlParams?.raise;
       const { raise, theme, language, font = defaultFontCfg } = rawConfig;
       const { additionalSize, weight } = font;
 
