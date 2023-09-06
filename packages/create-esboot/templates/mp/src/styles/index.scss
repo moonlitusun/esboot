@@ -1,8 +1,9 @@
 @import './normalize';
 
+/* stylelint-disable-next-line selector-max-id */
 html,
 body,
-div:has(#root) {
+#root {
   width: 100%;
   height: 100%;
 }
