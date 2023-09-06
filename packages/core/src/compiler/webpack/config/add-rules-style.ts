@@ -70,7 +70,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
             plugins: [
               enablePxToRemByCompatibility &&
                 pxtorem({
-                  rootValue: 100,
+                  rootValue: 200,
                   unitPrecision: 5,
                   propWhiteList: [],
                   propBlackList: [],
