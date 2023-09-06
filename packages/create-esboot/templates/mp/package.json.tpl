@@ -13,7 +13,7 @@
   "author": "{{{ author }}}",
   "license": "ISC",
   "dependencies": {
-    "@dz-web/bridge": "^2.0.7",
+    "@dz-web/bridge": "^2.0.8",
     "@dz-web/o-orange": "^3.7.11",
     "@dz-web/request": "^0.1.10",
     "@loadable/component": "^5.15.3",

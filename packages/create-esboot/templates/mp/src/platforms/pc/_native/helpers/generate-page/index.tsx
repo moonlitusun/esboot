@@ -31,7 +31,7 @@ export default function generatePage(wrapApp: React.ReactNode, options: IOptions
   if (i18n) wrapApp = wrapI18n(wrapApp, i18n);
 
   if (native) {
-    bridge.initPlatforms(BridgePlatforms.pc);
+    bridge.initPlatforms(BridgePlatforms.mock);
 
     wrapApp = wrapNative(wrapApp);
   }

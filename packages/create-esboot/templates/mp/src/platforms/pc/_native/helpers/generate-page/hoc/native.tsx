@@ -66,16 +66,15 @@ export default function wrapNative(App): React.ReactNode {
 
     useEffect(() => {
       getUserConfig()
-        .then((res) => {
-          updateUserConfig(res);
-        })
+        .then((res) => _updateUserConfig(res))
         .catch((err) => console.log(`获取用户配置失败: ${err}`));
 
       getUserInfo()
-        .then((res) => _updateUserConfig(res))
+        .then((res) => _updateUserInfo(res))
         .catch((err) => console.log('err:', err));
 
       updateUserInfo((res) => _updateUserInfo(res));
+      updateUserConfig((res) => _updateUserConfig(res));
     }, []);
 
     return App;
