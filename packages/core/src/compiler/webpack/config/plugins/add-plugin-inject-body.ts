@@ -15,7 +15,7 @@ export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
   const { isBrowser, isMobile } = esbootConfig.extralConfig;
   const { config, isDev, userOpts: { publicPath } } = applyOpts;
 
-  const isInjectBridgeMock = !isBrowser && isMobile && isDev;
+  const isInjectBridgeMock = !isBrowser && isDev;
 
   config.plugins.push(
     // @ts-ignore
