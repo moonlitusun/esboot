@@ -1,16 +1,17 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
 import '@/styles/index.scss';
 
-import RouterApp from './router';
+import router from './router';
 
 ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <StrictMode>
-    <Router>
-      <RouterApp />
-    </Router>
+    <RouterProvider
+      router={router}
+      fallbackElement={<div>*</div>}
+    />
   </StrictMode>,
 );
 

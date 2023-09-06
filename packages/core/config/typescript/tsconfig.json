@@ -35,9 +35,6 @@
       ],
       "@pc-browser/*": [
         "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/pc/_browser/*"
-      ],
-      "@@/*": [
-        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/*"
       ]
     }
   },

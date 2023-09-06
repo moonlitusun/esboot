@@ -43,10 +43,6 @@ module.exports = {
           [
             "@pc-browser",
             "src/platforms/pc/_browser/"
-          ],
-          [
-            "@@",
-            "src/"
           ]
         ],
         "extensions": [
