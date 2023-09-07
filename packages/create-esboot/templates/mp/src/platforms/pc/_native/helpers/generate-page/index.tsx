@@ -1,11 +1,13 @@
 import { bridge, BridgePlatforms } from '@dz-web/bridge';
 import { mounteReact } from '@/helpers/react';
+import { useBridgeMock } from '@/constants/config';
 
 import wrapNative from './hoc/native';
 import wrapI18n, { I18nOption } from './hoc/i18n';
 import wrapAntd from './hoc/antd';
 
 import '@/styles/index.scss';
+import '@pc/styles/index.scss';
 
 interface IOptions {
   store?: any;
@@ -30,8 +32,10 @@ export default function generatePage(wrapApp: React.ReactNode, options: IOptions
 
   if (i18n) wrapApp = wrapI18n(wrapApp, i18n);
 
+  console.log(process.env.NODE_ENV);
+
   if (native) {
-    bridge.initPlatforms(BridgePlatforms.mock);
+    bridge.initPlatforms(useBridgeMock ? BridgePlatforms.mock : BridgePlatforms.pc);
 
     wrapApp = wrapNative(wrapApp);
   }

@@ -1,17 +1,18 @@
 import { initReqInfo } from '@dz-web/request';
-import codeStorage from '@/helpers/code-storage';
-// import logger from '@mobile/helpers/logger';
-// import { userStatusChange, UserStatus } from '@/platforms/mobile/helpers/native/msg';
 import staticConfig from '@/helpers/static-config';
+import { Language } from '../../constants/config';
+// import logger from '@mobile/helpers/logger';
 
 const reqInfo = initReqInfo({
   defaultBaseUrl: staticConfig.getCommonServer(),
   defaultTimeout: 1000 * 6 * 3,
-  reqInfo: () => codeStorage,
+  reqInfo: () => ({
+    token: '',
+    language: Language.EN_US,
+  }),
   // logger,
   responseInterceptors: (response: any) => {
     const { code, message } = response.data;
-    // token 过期跳转到登录页
     if (code === 990151) {
       if (process.env.NODE_ENV === 'production') {
         // userStatusChange({

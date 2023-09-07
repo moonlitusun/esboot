@@ -1,5 +1,6 @@
 import { bridge, BridgePlatforms } from '@dz-web/bridge';
 import { mounteReact } from '@/helpers/react';
+import { useBridgeMock } from '@/constants/config';
 
 import wrapNative from './hoc/native';
 import wrapI18n, { I18nOption } from './hoc/i18n';
@@ -28,7 +29,7 @@ export default function generatePage(App: React.ReactNode, options: GeneratePage
 
   if (i18n) wrapApp = wrapI18n(wrapApp, i18n);
   if (native) {
-    bridge.initPlatforms(BridgePlatforms.mock);
+    bridge.initPlatforms(useBridgeMock ? BridgePlatforms.mock : BridgePlatforms.webview);
     wrapApp = wrapNative(wrapApp);
   }
 

@@ -1,11 +1,20 @@
 /**
+ * bridge mock
+ */
+let defaultUseBridgeMock = true;
+// let defaultUseBridgeMock = false;
+
+if (process.env.NODE_ENV === 'production') defaultUseBridgeMock = false;
+export const useBridgeMock = defaultUseBridgeMock;
+
+/**
  * 多语言
  *
  */
 export enum Language {
   ZH_CN = 'zh-CN',
   ZH_TW = 'zh-TW',
-  EN_US = 'en-US'
+  EN_US = 'en-US',
 }
 
 export const DEFAULT_LAN = Language.ZH_CN;
@@ -21,7 +30,7 @@ export interface QuoteColorDirection {
 
 export enum QuoteColorType {
   green = 'green',
-  red = 'red'
+  red = 'red',
 }
 
 export const QUOTE_COLOR_DICT: Record<Partial<QuoteColorType>, QuoteColorDirection> = {
