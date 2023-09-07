@@ -50,11 +50,40 @@ export default defineConfig({
 import { FONT_SIZE } from '@/constants/config';
 ```
 
-*注意：*
+:::tip
 
 配置的key，如`@`，不要写成`@/`，value如`src`，不要写成`src/`，因为解析的时候会自动加上。
 
 因为`alias`在项目中其实需要配置4个地方(`eslint`/`typescript`/`webpack`/`babel`)，4个地方的写法都有些不同，所以`esboot`内部会去兼容格式问题。其中`webpack`和`babel`的改了`alias`会立即生效。`typescript`的会在执行`esboot g-alias`后生效。但是`eslint`只会在开项目的时候读一次配置，所以改了`alias`之后最好的操作就是先执行`esboot g-alias`，然后`reload window`(`vscode`中触发快捷键`ctrl + shift + p`，然后输入`reload window`)一下。这样`alias`才会完全生效。
+:::
+
+## define
+
+- 类型：`Record<string, string>`
+- 默认值： 如下
+
+```js
+{
+  'process.env.VERSION': JSON.stringify(pkg.version),
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+}
+```
+
+基于[define-plugin](https://webpack.js.org/plugins/define-plugin/) 插件设置代码中的可用变量。
+
+:::caution
+
+- 属性值会经过一次 `JSON.stringify` 转换。
+- key 值的替换是通过语法形式来匹配的，比如配置了 `{'a.b.c': 'abcValue'}` 是无法替换代码中的 `a.b?.c` 的
+
+:::
+
+当你在 ts 的项目中使用这些变量时，你需要在 `globals.d.ts` 文件中声明变量类型，以支持 ts 类型提示，比如：
+
+```js
+// define
+declare const define: string;
+```
 
 ## mfsu
 

@@ -6,12 +6,18 @@ import { ApplyOpts } from '../types';
 export const addDefinePlugin = async (applyOpts: ApplyOpts) => {
   const { pkg } = esbootConfig.extralConfig;
 
-  const { config } = applyOpts;
+  const { config, userOpts: { define = {} } } = applyOpts;
+
+  const customDefine: Record<string, string> = {};
+  for (const key in define) {
+    customDefine[key] = JSON.stringify(define[key]);
+  }
 
   config.plugins.push(
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify(pkg.version),
-      ENV: JSON.stringify(process.env.NODE_ENV),
+      'process.env.VERSION': JSON.stringify(pkg.version),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      ...customDefine,
     })
   );
 };

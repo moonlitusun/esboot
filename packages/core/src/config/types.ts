@@ -60,4 +60,5 @@ export interface UserOpts {
   cssMinifier?: CSSMinifier;
   cssMinifierOptions?: any;
   alias?: Record<string, string>;
+  define?: Record<string, string>;
 }

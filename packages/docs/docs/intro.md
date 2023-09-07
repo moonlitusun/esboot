@@ -21,7 +21,29 @@ $ mkdir myapp && cd myapp
 
 通过官方工具创建项目(以下模式选一种即可，推荐`pnpm`)，
 
-```bash
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="pnpm" label="pnpm" default>
+
+    pnpm dlx create-esboot@latest
+  </TabItem>
+  <TabItem value="bun" label="bun">
+
+    bunx create-esboot
+  </TabItem>
+  <TabItem value="npm" label="npm">
+
+    npx create-esboot@latest
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+
+    yarn create esboot
+  </TabItem>
+</Tabs>
+
+<!-- ```bash
 # pnpm
 pnpm dlx create-esboot@latest
 
@@ -33,7 +55,7 @@ npx create-esboot@latest
 
 # yarn
 yarn create esboot
-```
+``` -->
 
 ### 从模版创建项目
 
