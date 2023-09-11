@@ -14,23 +14,11 @@ module.exports = {
         map: [
           ['@', 'src/'],
           ['@mobile', 'src/platforms/mobile/'],
-          [
-            '@mobile-native',
-            'src/platforms/mobile/_native/',
-          ],
-          [
-            '@mobile-browser',
-            'src/platforms/mobile/_browser/',
-          ],
+          ['@mobile-native', 'src/platforms/mobile/_native/'],
+          ['@mobile-browser', 'src/platforms/mobile/_browser/'],
           ['@pc', 'src/platforms/pc/'],
-          [
-            '@pc-native',
-            'src/platforms/pc/_native/',
-          ],
-          [
-            '@pc-browser',
-            'src/platforms/pc/_browser/',
-          ],
+          ['@pc-native', 'src/platforms/pc/_native/'],
+          ['@pc-browser', 'src/platforms/pc/_browser/'],
         ],
         extensions: ['.ts', '.tsx', '.js', 'jsx'],
       },
@@ -62,9 +50,13 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'react/function-component-definition': [
-      1,
+      2,
       {
-        namedComponents: 'arrow-function',
+        namedComponents: [
+          'arrow-function',
+          'function-declaration',
+          'function-expression',
+        ],
       },
     ],
     'import/extensions': [
@@ -94,7 +86,7 @@ module.exports = {
     'jsx-a11y/no-redundant-roles': 0,
     'react/react-in-jsx-scope': 0,
     'react/prop-types': 0,
-    "react/no-unknown-property": ['error', { ignore: ['styleName'] }],
+    'react/no-unknown-property': ['error', { ignore: ['styleName'] }],
     'prefer-destructuring': 'warn',
     'max-len': ['error', 120],
     'object-curly-newline': 0,
