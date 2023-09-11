@@ -92,6 +92,7 @@ module.exports = {
     'object-curly-newline': 0,
     'react-hooks/exhaustive-deps': 0,
     '@typescript-eslint/no-explicit-any': ['off'],
+    'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
   },
   env: {
     browser: true,
