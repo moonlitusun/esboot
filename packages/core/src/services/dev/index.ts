@@ -1,4 +1,5 @@
 import Webpack from 'webpack';
+import kleur from 'kleur';
 import chokidar from 'chokidar';
 import WebpackDevServer from 'webpack-dev-server';
 import { debounce } from 'lodash';
@@ -16,10 +17,12 @@ export async function runDev() {
   const start = async () => {
     const cfg = await getWebpackConfig({ env: Environment.dev });
     const compiler = Webpack(cfg);
+    const { version } = esbootConfig.extralConfig.pkg;
 
     server = new WebpackDevServer(cfg.devServer, compiler);
 
-    console.log('Starting server...');
+    console.log(`🚀 ${kleur.bold().bgGreen().black('  ESBoot  ')} v${version} \n`);
+
     await server.start();
   };
 

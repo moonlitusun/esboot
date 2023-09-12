@@ -1,6 +1,8 @@
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { ApplyOpts } from '../types';
+
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 export const addBundleAnalyzerPlugin = async (applyOpts: ApplyOpts) => {
   const {

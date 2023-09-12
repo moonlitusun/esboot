@@ -43,9 +43,9 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     const ensureTitle = title || filename || 'ESboot APP';
     const ensureTpl = join(configRootPathOfPlatfrom, `template/${template || 'index'}.html`);
 
-    if (isDev) {
-      console.log(`Page${index + 1}`, `http://localhost:${port}/${chunkName}.html`)
-    }
+    // if (isDev) {
+    //   console.log(`Page${index + 1}`, `http://localhost:${port}/${chunkName}.html`)
+    // }
 
     config.entry[chunkName] = file;
 

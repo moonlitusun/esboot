@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "nodeNext",
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": false,
+    "noResolve": false,
+    "removeComments": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/*"
+      ],
+      "@mobile/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/mobile/*"
+      ],
+      "@mobile-native/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/mobile/_native/*"
+      ],
+      "@mobile-browser/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/mobile/_browser/*"
+      ],
+      "@pc/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/pc/*"
+      ],
+      "@pc-native/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/pc/_native/*"
+      ],
+      "@pc-browser/*": [
+        "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/platforms/pc/_browser/*"
+      ]
+    }
+  },
+  "exclude": [
+    "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/**/node_modules",
+    "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/**/*.spec.ts"
+  ],
+  "include": [
+    "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/.esbootrc.ts",
+    "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/src/**/*",
+    "/Users/rocsun/Code/dz-library/esboot/esboot-react-mp/globals.d.ts"
+  ]
+}

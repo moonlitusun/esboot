@@ -1,5 +1,4 @@
 import type { Configuration } from 'webpack';
-import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { ApplyOpts } from '../compiler/webpack/config/types';
 
@@ -40,13 +39,13 @@ export interface UserOpts {
   mfsu?: boolean;
   copy?: ICopy[] | string[];
   host?: string;
-  port?: number;
+  port?: number | 'auto';
   proxy?: any;
   publicPath?: string;
   externals?: Pick<Configuration, 'externals'>;
   customWebpack?: (config: Configuration, applyOpts: ApplyOpts) => Configuration;
   TSChecker?: boolean;
-  analyzer?: BundleAnalyzerPlugin.options;
+  analyzer?: any;
   devtool?: string;
   https?: any;
   http2?: any;

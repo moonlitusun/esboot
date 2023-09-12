@@ -10,4 +10,4 @@ const targetPath = path.join(srcPath, './helpers/multi-platforms.ts');
 
 fs.copy(scriptPath, targetPath)
     .then(() => console.log('CreateMultiPlatform success!'))
-    .catch((err: never) => console.error(`CreateMultiPlatform error: ${err}!`));
+    .catch((err: any) => console.error(`CreateMultiPlatform error: ${err}!`));

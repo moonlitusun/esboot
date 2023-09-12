@@ -72,8 +72,6 @@ const getWebpackConfig = async (opts: IOpts) => {
     mfsu,
   };
 
-  config.mode = isDev ? Environment.dev : Environment.prod;
-
   await addEntry(applyOpts);
   await addOutput(applyOpts);
   await addResolve(applyOpts);
@@ -95,7 +93,7 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   const { externals = {}, devtool, customWebpack } = userOpts;
   const restPlugins = [
-    new webpackbar(),
+    // new webpackbar(),
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
@@ -103,7 +101,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   config.plugins.push(...restPlugins);
 
   Object.assign(config, {
-    // context: rootPath,
+    mode: isDev ? Environment.dev : Environment.prod,
     performance: {
       hints: isDev ? false : 'warning',
     },
@@ -116,6 +114,7 @@ const getWebpackConfig = async (opts: IOpts) => {
     config.devtool = DEFAULT_DEVTOOL;
   }
 
+  // prod
   if (!isDev) {
     Object.assign(config, {
       cache: {
@@ -132,6 +131,14 @@ const getWebpackConfig = async (opts: IOpts) => {
         chunkFilename: 'css/[id].[contenthash:5].css',
       })
     );
+  } else {
+    // dev
+    Object.assign(config, {
+      stats: 'errors-only',
+      infrastructureLogging: {
+        level: 'error'
+      }
+    });
   }
 
   if (mfsu) {
