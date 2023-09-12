@@ -32,8 +32,6 @@ export default function generatePage(wrapApp: React.ReactNode, options: IOptions
 
   if (i18n) wrapApp = wrapI18n(wrapApp, i18n);
 
-  console.log(process.env.NODE_ENV);
-
   if (native) {
     bridge.initPlatforms(useBridgeMock ? BridgePlatforms.mock : BridgePlatforms.pc);
 

@@ -93,7 +93,7 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   const { externals = {}, devtool, customWebpack } = userOpts;
   const restPlugins = [
-    // new webpackbar(),
+    new webpackbar(),
     new FriendlyErrorsWebpackPlugin(),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
@@ -136,8 +136,8 @@ const getWebpackConfig = async (opts: IOpts) => {
     Object.assign(config, {
       stats: 'errors-only',
       infrastructureLogging: {
-        level: 'error'
-      }
+        level: 'error',
+      },
     });
   }
 

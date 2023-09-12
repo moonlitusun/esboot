@@ -21,9 +21,15 @@ export async function runDev() {
 
     server = new WebpackDevServer(cfg.devServer, compiler);
 
-    console.log(`🚀 ${kleur.bold().bgGreen().black('  ESBoot  ')} v${version} \n`);
+    console.log(
+      `🚀 ${kleur.bold().bgGreen().black('  ESBoot  ')} v${version} \n`
+    );
 
-    await server.start();
+    try {
+      await server.start();
+    } catch (err) {
+      console.log(err, '<-- err');
+    }
   };
 
   start();

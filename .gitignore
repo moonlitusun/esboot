@@ -42,5 +42,5 @@ dist/
 .dumi
 
 #
-config/typescript/tsconfig.json
-config/eslint/index.js
+**/config/typescript/tsconfig.json
+**/config/eslint/index.js
