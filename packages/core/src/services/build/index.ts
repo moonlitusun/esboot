@@ -8,5 +8,6 @@ export async function runBuild() {
 
   compiler.run((err) => {
     if (err) throw err;
+    process.exit(1);
   });
 }
