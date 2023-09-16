@@ -1,8 +1,10 @@
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import type { PluginOptions } from 'copy-webpack-plugin';
 import type { Configuration } from 'webpack';
 
 import { ApplyOpts } from '../compiler/webpack/config/types';
 
-export interface ICopy {
+export interface Copy {
   from: string;
   to: string;
 }
@@ -22,36 +24,37 @@ export enum CSSMinifier {
 
 export interface Px2rem {
   enable?: boolean;
-  rootValue?: number | Record<string, number>,
-  unitPrecision?: number,
-  propWhiteList?: string[],
-  propBlackList?: string[],
-  exclude?: any,
-  selectorBlackList?: string[],
-  ignoreIdentifier?: boolean | string,
-  replace?: boolean,
-  mediaQuery?: boolean,
-  minPixelValue?: number,
+  rootValue?: number | Record<string, number>;
+  unitPrecision?: number;
+  propWhiteList?: string[];
+  propBlackList?: string[];
+  exclude?: any;
+  selectorBlackList?: string[];
+  ignoreIdentifier?: boolean | string;
+  replace?: boolean;
+  mediaQuery?: boolean;
+  minPixelValue?: number;
 }
 
-export interface UserOpts {
+export interface UserOpts
+  extends Pick<
+      DevServerConfiguration,
+      'https' | 'http2' | 'open' | 'host' | 'proxy' | 'port'
+    >,
+    Pick<Configuration, 'externals' | 'devtool'> {
   analyze?: boolean;
   mfsu?: boolean;
-  copy?: ICopy[] | string[];
-  host?: string;
-  port?: number | 'auto';
-  proxy?: any;
+  copy?: Pick<PluginOptions, 'patterns'>;
+  outputPath?: string;
   publicPath?: string;
-  externals?: Pick<Configuration, 'externals'>;
-  customWebpack?: (config: Configuration, applyOpts: ApplyOpts) => Configuration;
+  customWebpack?: (
+    config: Configuration,
+    applyOpts: ApplyOpts
+  ) => Configuration;
   TSChecker?: boolean;
   analyzer?: any;
-  devtool?: string;
-  https?: any;
-  http2?: any;
-  open?: boolean;
-  extraBabelPlugins?: string[],
-  extraBabelPresets?: string[],
+  extraBabelPlugins?: string[];
+  extraBabelPresets?: string[];
   extraBabelIncludes?: Array<string | RegExp>;
   pxtorem?: Px2rem;
   jsMinifier?: JsMinifier;

@@ -18,7 +18,7 @@ export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
 
   const copyList = [
     {
-      from: configJSPath,
+      from: configJSPath as string,
       to: './config.js',
     },
     {
@@ -33,7 +33,7 @@ export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
       from: `${configRootPath}/static`,
       to: './static',
     },
-  ];
+  ] as const;
 
   config.plugins.push(
     new CopyPlugin({

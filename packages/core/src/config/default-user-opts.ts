@@ -1,4 +1,5 @@
 import { DEFAULT_DEV_PORT } from '@@/constants';
+import type { UserOpts } from './types';
 import { JsMinifier, CSSMinifier } from './types';
 
 export const defaultUserOpts = {
@@ -29,4 +30,4 @@ export const defaultUserOpts = {
     '@pc-native': 'src/platforms/pc/_native',
     '@pc-browser': 'src/platforms/pc/_browser',
   },
-};
+} satisfies UserOpts;
