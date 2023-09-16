@@ -1,13 +1,24 @@
-import Webpack from 'webpack';
+import webpack from 'webpack';
 import { Environment } from '@@webpack/config/environment';
 import getWebpackConfig from '@@webpack/config/config';
 
 export async function runBuild() {
   const cfg = await getWebpackConfig({ env: Environment.prod });
-  const compiler = Webpack(cfg);
+  const compiler = webpack(cfg);
 
-  compiler.run((err) => {
-    if (err) throw err;
-    process.exit(1);
-  });
+  const watching = compiler.watch(
+    {
+      aggregateTimeout: 300,
+      poll: undefined,
+    },
+    (err, stats) => {
+      watching.close((closeErr) => {
+        // console.log('Watching Ended.');
+      });
+
+      if (err || stats?.hasErrors()) {
+        process.exit(1);
+      }
+    }
+  );
 }
