@@ -5,7 +5,6 @@ import { JsMinifier, CSSMinifier } from './types';
 export const defaultUserOpts = {
   mfsu: true,
   analyze: false,
-  copy: [],
   proxy: {},
   https: false,
   http2: false,

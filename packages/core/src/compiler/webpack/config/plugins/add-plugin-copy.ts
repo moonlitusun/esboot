@@ -13,7 +13,7 @@ export const addCopyPlugin = async (applyOpts: ApplyOpts) => {
   } = esbootConfig.extralConfig;
   const {
     config,
-    userOpts: { copy },
+    userOpts: { copy = [] },
   } = applyOpts;
 
   const copyList = [

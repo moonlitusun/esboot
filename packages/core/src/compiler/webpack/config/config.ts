@@ -27,6 +27,9 @@ import { addCopyPlugin } from '@@webpack/config/plugins/add-plugin-copy';
 import { addForkTsCheckerWebpackPlugin } from '@@webpack/config/plugins/add-plugin-fork-ts-checker';
 import { addBundleAnalyzerPlugin } from '@@webpack/config/plugins/add-plugin-bundle-analyzer';
 
+// fun
+import { addCache } from '@@webpack/config/add-cache';
+
 import esbootConfig from '@@/config';
 
 import { DEFAULT_DEVTOOL } from '@@/constants';
@@ -56,7 +59,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   if (isDev && userOpts.mfsu) {
     mfsu = new MFSU({
       cwd: process.cwd(),
-      tmpBase: `${process.cwd()}/node_modules/.cache/.mfsu`,
+      tmpBase: `${process.cwd()}/node_modules/.cache/.mfsu1`,
       implementor: webpack,
       depBuildConfig: {},
       buildDepWithESBuild: true,
@@ -91,6 +94,9 @@ const getWebpackConfig = async (opts: IOpts) => {
   await addOptimization(applyOpts);
   await addDevServer(applyOpts);
 
+  // fun
+  await addCache(applyOpts);
+
   const { externals = {}, devtool, customWebpack } = userOpts;
   const restPlugins = [
     new webpackbar(),
@@ -116,15 +122,6 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   // prod
   if (!isDev) {
-    Object.assign(config, {
-      cache: {
-        type: 'filesystem',
-        buildDependencies: {
-          config: [__filename],
-        },
-      },
-    });
-
     config.plugins.push(
       new MiniCssExtractPlugin({
         filename: 'css/[name].[contenthash:5].css',
@@ -145,6 +142,7 @@ const getWebpackConfig = async (opts: IOpts) => {
     await mfsu.setWebpackConfig({ config } as any);
   }
 
+  console.log(config, '<-- config');
   return customWebpack ? customWebpack(config, applyOpts) : config;
 };
 

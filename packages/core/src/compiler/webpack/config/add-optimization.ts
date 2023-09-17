@@ -75,8 +75,6 @@ export const addOptimization = async (applyOpts: ApplyOpts) => {
   }
 
   config.optimization = {
-    runtimeChunk: 'single',
-    moduleIds: 'deterministic',
     splitChunks: {
       chunks: 'all',
       name: 'vendor',

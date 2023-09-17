@@ -36,12 +36,7 @@ export interface Px2rem {
   minPixelValue?: number;
 }
 
-export interface UserOpts
-  extends Pick<
-      DevServerConfiguration,
-      'https' | 'http2' | 'open' | 'host' | 'proxy' | 'port'
-    >,
-    Pick<Configuration, 'externals' | 'devtool'> {
+export type UserOpts = {
   analyze?: boolean;
   mfsu?: boolean;
   copy?: Pick<PluginOptions, 'patterns'>;
@@ -63,4 +58,8 @@ export interface UserOpts
   cssMinifierOptions?: any;
   alias?: Record<string, string>;
   define?: Record<string, string>;
-}
+} & Pick<
+  DevServerConfiguration,
+  'https' | 'http2' | 'open' | 'host' | 'proxy' | 'port'
+> &
+  Pick<Configuration, 'externals' | 'devtool'>;
