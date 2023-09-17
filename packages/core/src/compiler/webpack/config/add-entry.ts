@@ -51,6 +51,7 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
 
     config.entry[chunkName] = file;
 
+    console.log(ensureTpl, '<-- ensureTpl');
     config.plugins.push(
       new HtmlWebpackPlugin({
         inject: true,
