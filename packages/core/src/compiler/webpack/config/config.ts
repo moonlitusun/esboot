@@ -32,11 +32,9 @@ import { addCache } from '@@webpack/config/add-cache';
 
 import esbootConfig from '@@/config';
 
-import { DEFAULT_DEVTOOL } from '@@/constants';
+import { DEFAULT_DEVTOOL, mfsuCacheDir } from '@@/constants';
 
 import { ApplyOpts, CustomConfiguration } from './types';
-
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 export interface IOpts {
   env: Environment;
@@ -59,7 +57,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   if (isDev && userOpts.mfsu) {
     mfsu = new MFSU({
       cwd: process.cwd(),
-      tmpBase: `${process.cwd()}/node_modules/.cache/.mfsu1`,
+      tmpBase: mfsuCacheDir,
       implementor: webpack,
       depBuildConfig: {},
       buildDepWithESBuild: true,
@@ -99,8 +97,13 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   const { externals = {}, devtool, customWebpack } = userOpts;
   const restPlugins = [
-    new webpackbar(),
-    new FriendlyErrorsWebpackPlugin(),
+    new webpackbar({
+      name: 'ESBoot',
+      color: 'magenta',
+      fancy: true,
+      basic: false,
+    }),
+    // 开启mfsu会重复输出两次compile，重复了。
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
 
@@ -142,7 +145,6 @@ const getWebpackConfig = async (opts: IOpts) => {
     await mfsu.setWebpackConfig({ config } as any);
   }
 
-  console.log(config, '<-- config');
   return customWebpack ? customWebpack(config, applyOpts) : config;
 };
 

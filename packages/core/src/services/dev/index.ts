@@ -1,9 +1,9 @@
 import Webpack from 'webpack';
-import kleur from 'kleur';
 import chokidar from 'chokidar';
 import WebpackDevServer from 'webpack-dev-server';
 import { debounce } from 'lodash';
 
+import { logBrand, error } from '@@/helpers/logger';
 import { Environment } from '@@webpack/config/environment';
 import { USER_CONFIG_FILE } from '@@/constants';
 import getWebpackConfig from '@@webpack/config/config';
@@ -17,18 +17,14 @@ export async function runDev() {
   const start = async () => {
     const cfg = await getWebpackConfig({ env: Environment.dev });
     const compiler = Webpack(cfg);
-    const { version } = esbootConfig.extralConfig.pkg;
 
+    logBrand();
     server = new WebpackDevServer(cfg.devServer, compiler);
-
-    console.log(
-      `🚀 ${kleur.bold().bgGreen().black('  ESBoot  ')} v${version} \n`
-    );
 
     try {
       await server.start();
     } catch (err) {
-      console.log(err, '<-- err');
+      error(err);
     }
   };
 

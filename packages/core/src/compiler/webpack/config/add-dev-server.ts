@@ -1,5 +1,6 @@
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 import kleur from 'kleur';
+import { ready } from '@@/helpers/logger';
 import { ApplyOpts } from './types';
 
 export const addDevServer = async (applyOpts: ApplyOpts) => {
@@ -39,7 +40,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
 
       const { port } = (devServerInstance.server?.address()) as any;
 
-      console.log(`🔥 ${kleur.blue('ready')} started server on [::]:${port}, url: ${kleur.green(`http://localhost:${port}`)}`);
+      ready(`started server on [::]:${port}, url: ${kleur.underline().green(`http://localhost:${port}`)} \n`);
     },
   };
 

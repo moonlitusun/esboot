@@ -12,4 +12,4 @@ export const isWins = process.platform === 'win32';
 
 const cacheDir = resolve(process.cwd(), 'node_modules/.cache/esboot');
 export const webpackCacheDir = join(cacheDir, 'webpack-cache');
-export const mfsuCacheDir = join(cacheDir, './.mfsu');
+export const mfsuCacheDir = join(cacheDir, './mfsu');

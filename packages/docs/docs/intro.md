@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## 环境准备
 
-ESBoot v2用的API都比较新，所以先确保有Node v16版本以上。
+`Node >= v16`
 
 ESBoot集成了很多工程化工具，包括一些Rust和Go的包，非常大，所以包管理工具推荐使用`pnpm`，节省磁盘空间，退而求次之选用`yarn`。
 

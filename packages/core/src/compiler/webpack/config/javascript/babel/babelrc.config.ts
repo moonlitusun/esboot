@@ -29,7 +29,6 @@ export const getPlugins = (alias: UserOpts['alias']) => {
 
   return [
     [require('@babel/plugin-syntax-dynamic-import')],
-    require('@babel/plugin-proposal-class-properties'),
     [
       require('@dz-web/babel-plugin-react-css-modules'),
       {

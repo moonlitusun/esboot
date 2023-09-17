@@ -15,7 +15,6 @@ export const addCache = async (applyOpts: any) => {
     cache: {
       type: 'filesystem',
       cacheDirectory: webpackCacheDir,
-      profile: true,
       buildDependencies: {
         config: [USER_CONFIG_FILE],
       },

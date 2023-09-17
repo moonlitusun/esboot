@@ -60,7 +60,6 @@ export const addOptimization = async (applyOpts: ApplyOpts) => {
   switch (cssMinifier) {
     case CSSMinifier.cssnano:
       minimizer.push(new CssMinimizerPlugin(cssMinifierOptions));
-
       break;
     case CSSMinifier.lightningcss:
       minimizer.push(
