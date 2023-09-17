@@ -1,6 +1,5 @@
 import webpack, { Configuration } from 'webpack';
 import webpackbar from 'webpackbar';
-import { resolve } from 'path';
 import { MFSU } from '@umijs/mfsu';
 import { noop } from 'lodash';
 
@@ -96,19 +95,15 @@ const getWebpackConfig = async (opts: IOpts) => {
   await addCache(applyOpts);
 
   const { externals = {}, devtool, customWebpack } = userOpts;
-  const restPlugins = [
+  const restPlugins: any[] = [
     new webpackbar({
       name: 'ESBoot',
       color: 'magenta',
-      fancy: true,
-      basic: false,
     }),
-    // 开启mfsu会重复输出两次compile，重复了。
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);
-
   Object.assign(config, {
     mode: isDev ? Environment.dev : Environment.prod,
     performance: {
