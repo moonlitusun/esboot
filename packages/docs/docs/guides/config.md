@@ -64,7 +64,7 @@ import { FONT_SIZE } from '@/constants/config';
 
 ```js
 {
-  'process.env.VERSION': JSON.stringify(pkg.version),
+  'process.env.VERSION': JSON.stringify(version),
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 }
 ```

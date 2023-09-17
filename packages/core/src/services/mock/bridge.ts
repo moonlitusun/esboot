@@ -5,7 +5,7 @@ import { runExec } from '../exec';
 
 export function runMockBridge(options: Record<string, string>) {
   const { file, sampleFile } = options;
-  const { platform } = esbootConfig.extralConfig;
+  const { platform } = esbootConfig.runtimeCfg;
   const folderPath = `./config/${platform}`;
 
   const filePath = file || join(folderPath, 'bridge/bridge-mock.js');

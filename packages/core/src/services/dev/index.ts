@@ -3,6 +3,8 @@ import chokidar from 'chokidar';
 import WebpackDevServer from 'webpack-dev-server';
 import { debounce } from 'lodash';
 
+import { afterHooks } from '@@/helpers/hooks';
+
 import { logBrand, error } from '@@/helpers/logger';
 import { Environment } from '@@webpack/config/environment';
 import { USER_CONFIG_FILE } from '@@/constants';
@@ -26,6 +28,8 @@ export async function runDev() {
     } catch (err) {
       error(err);
     }
+
+    afterHooks();
   };
 
   start();

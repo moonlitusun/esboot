@@ -1,38 +1,44 @@
-import { merge } from 'lodash';
+import { merge, noop } from 'lodash';
 
 import { Environment } from '@@webpack/config/environment';
 import { USER_CONFIG_FILE } from '@@/constants';
 
 import { defaultUserOpts } from './default-user-opts';
-import appConfig from './app-config';
+import runtimeConfig from './runtime-config';
 
 export default new (class ESbootConfig {
   userOpts: any = {};
-  extralConfig: any = {};
+  runtimeCfg: any = {
+    entry: [],
+  };
 
   initUserConfig = (reload = false) => {
     if (reload) {
       delete require.cache[require.resolve(USER_CONFIG_FILE)];
-    };
+    }
 
-    const customOpts = require(USER_CONFIG_FILE).default;
+    const { default: customOpts, afterHooks } = require(USER_CONFIG_FILE);
 
     const isDev = process.env.NODE_ENV === Environment.dev;
     const publicPath = isDev ? '/' : './';
 
-    const config = merge(defaultUserOpts, { publicPath }, customOpts);
+    const config = merge(
+      defaultUserOpts,
+      { publicPath, afterHooks },
+      customOpts
+    );
     config.isRelativePublicPath = config.publicPath === './';
 
     this.userOpts = config;
   };
 
-  initExtralConfig = () => {
-    appConfig.init();
-    this.extralConfig = appConfig;
-  }
+  initRuntimeCfg = () => {
+    runtimeConfig.init();
+    this.runtimeCfg = runtimeConfig;
+  };
 
   init = () => {
-    this.initExtralConfig();
+    this.initRuntimeCfg();
     this.initUserConfig();
   };
 })();

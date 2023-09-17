@@ -4,7 +4,7 @@ import esbootConfig from '@@/config';
 import { ApplyOpts } from '../types';
 
 export const addDefinePlugin = async (applyOpts: ApplyOpts) => {
-  const { pkg } = esbootConfig.extralConfig;
+  const { version } = esbootConfig.runtimeCfg;
 
   const { config, userOpts: { define = {} } } = applyOpts;
 
@@ -15,7 +15,7 @@ export const addDefinePlugin = async (applyOpts: ApplyOpts) => {
 
   config.plugins.push(
     new webpack.DefinePlugin({
-      'process.env.VERSION': JSON.stringify(pkg.version),
+      'process.env.VERSION': JSON.stringify(version),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       ...customDefine,
     })

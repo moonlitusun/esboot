@@ -15,7 +15,7 @@ interface EntryFileExportProps {
 
 export const addEntry = async (applyOpts: ApplyOpts) => {
   const { rootPath, platform, pageType, configRootPathOfPlatfrom } =
-    esbootConfig.extralConfig;
+    esbootConfig.runtimeCfg;
 
   const { ESBOOT_CONTENT_PATH = '', ESBOOT_CONTENT_PATTERN = '*' } =
     process.env;
@@ -32,6 +32,8 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     root: join(rootPath, content_path),
   });
 
+  esbootConfig.runtimeCfg.entry = [];
+
   files.forEach((file: string, index) => {
     const { title, template, name } =
       (getExportProps(readFileSync(file, 'utf-8')) as EntryFileExportProps) ||
@@ -45,13 +47,15 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
       `template/${template || 'index'}.html`
     );
 
-    // if (isDev) {
-    //   console.log(`Page${index + 1}`, `http://localhost:${port}/${chunkName}.html`)
-    // }
+    esbootConfig.runtimeCfg.entry.push({
+      tpl: ensureTpl,
+      chunkName,
+      filename,
+      title: ensureTitle,
+    });
 
     config.entry[chunkName] = file;
 
-    console.log(ensureTpl, '<-- ensureTpl');
     config.plugins.push(
       new HtmlWebpackPlugin({
         inject: true,

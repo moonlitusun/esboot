@@ -12,7 +12,7 @@ const getVersion = () => {
 };
 
 export const addInjectBodyPlugin = async (applyOpts: ApplyOpts) => {
-  const { isBrowser } = esbootConfig.extralConfig;
+  const { isBrowser } = esbootConfig.runtimeCfg;
   const {
     config,
     isDev,

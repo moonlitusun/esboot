@@ -1,6 +1,9 @@
 import webpack from 'webpack';
 import kleur from 'kleur';
+
 import { ready, logBrand } from '@@/helpers/logger';
+import { afterHooks } from '@@/helpers/hooks';
+
 import { Environment } from '@@webpack/config/environment';
 import getWebpackConfig from '@@webpack/config/config';
 
@@ -26,9 +29,7 @@ export async function runBuild() {
       errors.forEach((err, index) => {
         const { message, moduleName = '', loc = '' } = err;
         console.log(
-          `${kleur
-            .bgRed()
-            .bold(` ERROR ${index + 1} `)} in ${kleur.white(
+          `${kleur.bgRed().bold(` ERROR ${index + 1} `)} in ${kleur.white(
             moduleName
           )} ${kleur.green(loc)} \n`
         );
@@ -40,6 +41,7 @@ export async function runBuild() {
     // if (stats?.hasWarnings()) {
     // }
 
+    afterHooks();
     if (watch) compiler.close(() => {});
   };
 

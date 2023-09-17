@@ -1,4 +1,5 @@
-import { resolve, join } from 'path'; 
+import { resolve, join } from 'path';
+import { pick } from 'lodash';
 
 const pkg = require('../../package.json');
 
@@ -12,7 +13,7 @@ enum PAGE_TYPE {
   browser = 'browser',
 }
 
-export default new (class AppConfig {
+export default new (class RuntimeConfig {
   pageType: PAGE_TYPE = PAGE_TYPE.browser;
   platform: PLATFORMS = PLATFORMS.PC;
   isMobile: boolean = false;
@@ -22,7 +23,6 @@ export default new (class AppConfig {
   configRootPathOfPlatfrom: string = '';
   configRootPathOfPageType: string = '';
   configJSPath: string = '';
-  pkg: Record<string, string> = {};
 
   init() {
     const {
@@ -51,6 +51,6 @@ export default new (class AppConfig {
     this.configRootPathOfPlatfrom = configRootPathOfPlatfrom;
     this.configRootPathOfPageType = configRootPathOfPageType;
     this.configJSPath = `${this.configRootPathOfPageType}/config.js`;
-    this.pkg = pkg;
+    Object.assign(this, pick(pkg, ['version']));
   }
 })();

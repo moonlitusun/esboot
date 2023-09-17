@@ -24,7 +24,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
     userOpts: { isRelativePublicPath, pxtorem: pxtoremAllOptions },
   } = applyOpts;
   const { enable: enablePxToRem, ...pxtoremCustom } = pxtoremAllOptions;
-  const { rootPath, isMobile } = esbootConfig.extralConfig;
+  const { rootPath, isMobile } = esbootConfig.runtimeCfg;
   const enablePxToRemByCompatibility = isUndefined(enablePxToRem)
     ? isMobile
     : enablePxToRem;

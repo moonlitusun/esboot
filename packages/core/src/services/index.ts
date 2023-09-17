@@ -123,7 +123,7 @@ export const run = () => {
     .action(async (options) => {
       processPrepare();
       await registry({ root: cwd });
-      await esbootConfig.initExtralConfig();
+      await esbootConfig.initRuntimeCfg();
 
       runMockBridge(options);
     });
