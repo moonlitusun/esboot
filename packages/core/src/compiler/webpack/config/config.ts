@@ -104,12 +104,17 @@ const getWebpackConfig = async (opts: IOpts) => {
       color: 'magenta',
       fancy: true,
       basic: true,
-      reporter: {
-        afterAllDone() {
-          if (!execHooks) afterHooks();
-          execHooks = true;
+      profile: true,
+      reporters: [
+        'fancy',
+        'profile',
+        {
+          afterAllDone() {
+            if (!execHooks) afterHooks();
+            execHooks = true;
+          },
         },
-      } as any,
+      ] as any[],
     }),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
