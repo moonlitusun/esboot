@@ -97,24 +97,24 @@ const getWebpackConfig = async (opts: IOpts) => {
   // fun
   await addCache(applyOpts);
 
-  const { externals = {}, devtool, customWebpack } = userOpts;
+  const { externals = {}, devtool, customWebpack, analyze } = userOpts;
   const restPlugins: any[] = [
     new webpackbar({
       name: 'ESBoot',
       color: 'magenta',
       fancy: true,
       basic: true,
-      profile: true,
+      profile: analyze,
       reporters: [
         'fancy',
-        'profile',
+        analyze && 'profile',
         {
           afterAllDone() {
             if (!execHooks) afterHooks();
             execHooks = true;
           },
         },
-      ] as any[],
+      ].filter(Boolean) as any[],
     }),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);
