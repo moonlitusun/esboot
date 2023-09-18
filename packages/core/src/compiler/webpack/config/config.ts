@@ -32,12 +32,15 @@ import { addCache } from '@@webpack/config/add-cache';
 import esbootConfig from '@@/config';
 
 import { DEFAULT_DEVTOOL, mfsuCacheDir } from '@@/constants';
+import { afterHooks } from '@@/helpers/hooks';
 
 import { ApplyOpts, CustomConfiguration } from './types';
 
 export interface IOpts {
   env: Environment;
 }
+
+let execHooks = false;
 
 const getWebpackConfig = async (opts: IOpts) => {
   const { userOpts } = esbootConfig;
@@ -99,6 +102,14 @@ const getWebpackConfig = async (opts: IOpts) => {
     new webpackbar({
       name: 'ESBoot',
       color: 'magenta',
+      fancy: true,
+      basic: true,
+      reporter: {
+        afterAllDone() {
+          if (!execHooks) afterHooks();
+          execHooks = true;
+        },
+      } as any,
     }),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean);

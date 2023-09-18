@@ -33,7 +33,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
     port,
     host: host || '0.0.0.0',
     proxy,
-    onListening: function (devServerInstance) {
+    onListening(devServerInstance) {
       if (!devServerInstance) {
         throw new Error('webpack-dev-server is not defined');
       }
@@ -42,6 +42,11 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
 
       ready(`started server on [::]:${port}, url: ${kleur.underline().green(`http://localhost:${port}`)} \n`);
     },
+    onAfterSetupMiddleware(devServerInstance) {
+      if (!devServerInstance) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+    }
   };
 
   config.devServer = devServer;

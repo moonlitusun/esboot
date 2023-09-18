@@ -2,7 +2,6 @@ import webpack from 'webpack';
 import kleur from 'kleur';
 
 import { ready, logBrand } from '@@/helpers/logger';
-import { afterHooks } from '@@/helpers/hooks';
 
 import { Environment } from '@@webpack/config/environment';
 import getWebpackConfig from '@@webpack/config/config';
@@ -41,7 +40,6 @@ export async function runBuild() {
     // if (stats?.hasWarnings()) {
     // }
 
-    afterHooks();
     if (watch) compiler.close(() => {});
   };
 
