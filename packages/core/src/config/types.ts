@@ -4,11 +4,6 @@ import type { Configuration } from 'webpack';
 
 import { ApplyOpts } from '../compiler/webpack/config/types';
 
-export interface Copy {
-  from: string;
-  to: string;
-}
-
 export enum JsMinifier {
   terser = 'terser',
   // esbuild = 'esbuild',

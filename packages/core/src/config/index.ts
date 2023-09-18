@@ -1,4 +1,4 @@
-import { merge, noop } from 'lodash';
+import { merge, isFunction } from 'lodash';
 
 import { Environment } from '@@webpack/config/environment';
 import { USER_CONFIG_FILE } from '@@/constants';
@@ -17,7 +17,8 @@ export default new (class ESbootConfig {
       delete require.cache[require.resolve(USER_CONFIG_FILE)];
     }
 
-    const { default: customOpts, afterHooks } = require(USER_CONFIG_FILE);
+    const { default: getCustomOpts, afterHooks } = require(USER_CONFIG_FILE);
+    const customOpts = isFunction(getCustomOpts) ? getCustomOpts(this.runtimeCfg) : getCustomOpts;
 
     const isDev = process.env.NODE_ENV === Environment.dev;
     const publicPath = isDev ? '/' : './';
