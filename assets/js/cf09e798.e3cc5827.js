@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[8762],{3630:e=>{e.exports=JSON.parse('{"title":"react-mp","slug":"/category/react-mp","permalink":"/docs/category/react-mp","navigation":{"next":{"title":"\u6587\u4ef6\u76ee\u5f55","permalink":"/docs/template/react-mp/\u6587\u4ef6\u76ee\u5f55"}}}')}}]);
