@@ -14,8 +14,8 @@ const config = {
   url: 'https://esboot.js.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  // baseUrl: '/esboot/',
-  baseUrl: process.env.BASE_URL || '/',
+  baseUrl: '/',
+  // baseUrl: process.env.BASE_URL || '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
