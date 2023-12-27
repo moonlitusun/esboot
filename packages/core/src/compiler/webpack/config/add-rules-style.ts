@@ -1,7 +1,7 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import postcssNormalize from 'postcss-normalize';
-import LightningCSS from 'lightningcss';
+// import LightningCSS from 'lightningcss';
 import { isUndefined } from 'lodash';
 
 const pxtorem = require('@alitajs/postcss-plugin-px2rem');
@@ -17,12 +17,35 @@ interface ParseScssModuleOpts {
   modules?: boolean;
 }
 
+// export const getCssHashRule = () =>
+//   process.env.NODE_ENV === 'production'
+//     ? '[local]__[contenthash:base64:5]'
+//     : '[name]__[local]__[contenthash:base64:5]';
+// : '[package]___[path][name]___[local]___[hash:base64:6]';
+
+export const getCssHashRule = () => '[local]__[contenthash:base64:8]';
+const getStyleLoader = (): Record<string, any> => ({
+  loader: require.resolve('style-loader'),
+  options: {
+    esModule: true,
+  },
+});
+const getMiniCssExtractPluginOptions = (): Record<string, any> => ({
+  emit: true,
+  esModule: true,
+});
+const getCssLoaderOptions = (): Record<string, any> => ({
+  esModule: true,
+  import: true,
+});
+
 export async function addCSSRules(applyOpts: ApplyOpts) {
   const {
     config,
     isDev,
-    userOpts: { isRelativePublicPath, pxtorem: pxtoremAllOptions },
+    userOpts: { isRelativePublicPath, pxtorem: pxtoremAllOptions, sourceMap },
   } = applyOpts;
+  const isSourceMap = isUndefined(sourceMap) ? isDev : sourceMap;
   const { enable: enablePxToRem, ...pxtoremCustom } = pxtoremAllOptions;
   const { rootPath, isMobile } = esbootConfig.compileTimeConfig;
   const enablePxToRemByCompatibility = isUndefined(enablePxToRem)
@@ -35,37 +58,45 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
     path.join(rootPath, './platforms/pc/styles/'),
   ];
 
+  const cssLoaderOptions = {
+    sourceMap: isSourceMap,
+    ...getCssLoaderOptions(),
+  };
+
   const parseScssModule = (options: ParseScssModuleOpts) => {
     const { modules = false } = options;
-    const cssLoaderOptions = {
-      sourceMap: isDev,
-    };
+
+    const cssLoaderOptionsCopy = { ...cssLoaderOptions, importLoaders: 2 };
+
     if (modules) {
-      Object.assign(cssLoaderOptions, {
-        importLoaders: 2,
+      Object.assign(cssLoaderOptionsCopy, {
         modules: {
           namedExport: true,
           localIdentContext: rootPath,
           getLocalIdent,
-          localIdentName: '[name]__[local]__[contenthash:base64:5]',
+          localIdentName: getCssHashRule(),
         },
       });
     }
+
+    const miniCssExtractPluginOptions = getMiniCssExtractPluginOptions();
+    if (isRelativePublicPath) miniCssExtractPluginOptions.publicPath = '../';
+
     return [
       isDev
-        ? require.resolve('style-loader')
+        ? getStyleLoader()
         : {
             loader: MiniCssExtractPlugin.loader,
-            options: isRelativePublicPath ? { publicPath: '../' } : {},
+            options: miniCssExtractPluginOptions,
           },
       {
         loader: require.resolve('css-loader'),
-        options: cssLoaderOptions,
+        options: cssLoaderOptionsCopy,
       },
       {
         loader: require.resolve('postcss-loader'),
         options: {
-          sourceMap: isDev,
+          sourceMap: isSourceMap,
           postcssOptions: {
             plugins: [
               enablePxToRemByCompatibility &&
@@ -102,7 +133,7 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
       // },
       {
         loader: require.resolve('sass-loader'),
-        options: { sourceMap: isDev },
+        options: { sourceMap: isSourceMap },
       },
     ];
   };
@@ -114,13 +145,15 @@ export async function addCSSRules(applyOpts: ApplyOpts) {
       test: /\.css$/,
       use: [
         isDev
-          ? require.resolve('style-loader')
+          ? getStyleLoader()
           : {
               loader: MiniCssExtractPlugin.loader,
-              // options: isRelativePublicPath ? { publicPath: '../' } : {},
+              options: getMiniCssExtractPluginOptions(),
             },
-        ,
-        require.resolve('css-loader'),
+        {
+          loader: require.resolve('css-loader'),
+          options: cssLoaderOptions,
+        },
       ],
     },
     {
