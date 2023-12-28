@@ -1,11 +1,16 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "moonlitusun/esboot"
+    }
+  ],
   "commit": false,
-  "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "fixed": [["@dz-web/esboot-utils", "@dz-web/esboot"]],
+  "ignore": ["@dz-web/esboot-storybook-framework", "@dz-web/esboot-plugin-storybook", "tsconfig", "docs"]
 }
