@@ -14,7 +14,9 @@ sidebar_position: 0
 
 ### 添加插件
 
+:::warning
 `需要esboot@2.11.4及以上`
+:::
 
 ```ts
 // .esbootrc.ts
@@ -58,4 +60,28 @@ type CustomTailwindcssPluginOpts = (defaultConfig: Config) => Config;
 <p className="text-3xl font-bold underline">
   hello world
 </p>
+```
+
+## IntelliSense In VSCode
+
+推荐下载[vscode-tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+推荐以下配置：
+
+```js
+{
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascriptreact",
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact",
+    "html": "HTML"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  // 插件默认会读tailwindCSS.config.js，推荐先指向.esbootrc.ts
+  "tailwindCSS.experimental.configFile": ".esbootrc.ts"
+}
 ```
