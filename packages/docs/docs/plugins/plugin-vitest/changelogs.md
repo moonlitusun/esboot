@@ -6,6 +6,12 @@ sidebar_position: 1
 
 `2023-12-06`
 
+### v1.1.0
+
+`2024-03-25`
+
+- feat: add `@testing-library/react-hooks`，支持hooks testing。
+
 ### v1.0.0
 
 - feat: upgrade vitest to latest(v1.0.1) 🚀
