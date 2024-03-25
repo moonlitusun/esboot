@@ -34,7 +34,9 @@ export default defineConfig({
       '**/*.test.{ts,tsx}',
       '**/*.{ts,tsx}',
     ],
+    setupFiles: [join(__dirname, './setup.ts')],
     environment: 'jsdom',
+    // globals: true,
     alias: {
       ...alias,
       ...customTSConfigAlias,

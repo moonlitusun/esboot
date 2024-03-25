@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/esboot/intro">
-            ESBoot Tutorial - 5min ⏱️
+            ESBoot Tutorial
           </Link>
         </div>
       </div>

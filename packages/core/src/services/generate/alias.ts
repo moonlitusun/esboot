@@ -89,6 +89,10 @@ export function generateAliasFiles() {
     return join(process.cwd(), v);
   });
 
+  invokeEachPlugin((plugin) => {
+    merge(tsconfigJson, plugin.afterCommandOfGenerateAlias?.()?.tsConfig ?? {});
+  });
+
   const tsOutoutPath = join(cacheDir, 'typescript/tsconfig.json');
   fs.writeJSONSync(tsOutoutPath, tsconfigJson, {
     spaces: 2,

@@ -36,6 +36,19 @@ stylelint下载之后需要配置一下能支持scss规则.
 
 安装完之后不需要额外的配置，直接找一个tsx文件测试一下即可。
 
+### TypeScript
+
+推荐配置(适配ESBoot的lint配置)：
+
+```json
+{
+  // tsx中插入className这样的属性的时候会是 className=""
+  "typescript.preferences.quoteStyle": "double",
+  // 尾部插入分号
+  "typescript.format.semicolons": "insert",
+}
+```
+
 ### EditorConfig for VS Code
 
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)

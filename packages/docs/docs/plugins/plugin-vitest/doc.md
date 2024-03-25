@@ -34,6 +34,7 @@ pnpm run esboot vitest --open
 
 - [vitest](http://localhost:3000/docs/plugins/plugin-list/vitest)
 - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
+- [@testing-library/react-hooks](https://react-hooks-testing-library.com/)
 - [@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/)
 
 ## 使用示例

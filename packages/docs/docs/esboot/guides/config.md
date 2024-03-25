@@ -218,6 +218,32 @@ proxy: {
 
 与[devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps)一致。
 
+:::warning
+https需要使用SSL/TLS协议来加密数据传输，会增加一些额外的计算和网络开销，所以会稍微降低传输速度和响应时间。所以开发环境非必要情况可以不选用https。
+:::
+
+:::tip
+如果开启了静态资源走https，就无法使用http接口了。如果必须使用http接口，可以选择使用[proxy](#proxy)，比如：
+
+```ts
+// 原先的接口地址
+const url = 'http://example.api.com';
+
+// .esboot.rc
+{
+  proxy: {
+    "/api": {
+      target: url,
+      changeOrigin: true,
+      pathRewrite: { "^/api": "" },
+    },
+  }
+}
+```
+
+此时接口调用就可以直接使用`https://host:port/api`。
+:::
+
 ## http2
 
 - 默认值：`false`
