@@ -26,6 +26,6 @@
     }
   },
   "files": ["node_modules/.cache/esboot/typescript/esboot.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts"],
   "include": [".esbootrc.ts", "src/**/*", "globals.d.ts", "node_modules/.cache/esboot/typescript/esboot.d.ts"]
 }

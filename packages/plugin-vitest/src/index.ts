@@ -34,6 +34,11 @@ export default (): Plugin => {
     },
     afterCommandOfGenerateAlias: () => ({
       alias,
+      tsConfig: {
+        "compilerOptions": {
+          "types": [getAbsolutePath('@testing-library/jest-dom')],
+        },
+      }
     }),
   };
 };
