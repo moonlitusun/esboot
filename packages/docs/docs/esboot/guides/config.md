@@ -113,6 +113,33 @@ declare const define: string;
 
 是否开启[mfsu](https://module-federation.github.io/)
 
+## mfsuOptions
+
+- 类型: `(cfg: MFSUOpts) => MFSUOpts`
+- 默认值: `noop`
+
+```ts
+export interface MFSUOpts {
+  excludeNodeNatives?: boolean;
+  exportAllMembers?: Record<string, string[]>;
+  getCacheDependency?: Function;
+  onMFSUProgress?: Function;
+  mfName?: string;
+  tmpBase?: string;
+  unMatchLibs?: Array<string | RegExp>; // 哪些仓库不需要经过mfsu
+  runtimePublicPath?: boolean | string;
+  buildDepWithESBuild?: boolean;
+  depBuildConfig?: any;
+  strategy?: 'eager' | 'normal';
+  include?: string[];
+  srcCodeCache?: any;
+  shared?: any;
+  remoteName?: string;
+  remoteAliases?: string[];
+  startBuildWorker?: (dep: any[]) => Worker;
+}
+```
+
 ## copy
 
 **大部分情况可以不用，参考[static](/docs/esboot/guides/static)**

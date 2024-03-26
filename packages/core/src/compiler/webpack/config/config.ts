@@ -1,7 +1,7 @@
 import webpack, { Configuration } from 'webpack';
 import webpackbar from 'webpackbar';
 import { MFSU } from '@umijs/mfsu';
-import { noop, isUndefined } from 'lodash';
+import { noop, isFunction } from 'lodash';
 import Config from 'webpack-5-chain';
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -59,14 +59,20 @@ const getWebpackConfig = async (opts: IOpts) => {
 
   let mfsu: MFSU | undefined;
   if (isDev && userOpts.mfsu) {
+    let defaultMfsuOpts = {};
+
+    if (isFunction(userOpts.mfsuOptions)) {
+      defaultMfsuOpts = userOpts.mfsuOptions(defaultMfsuOpts);
+    }
+
     mfsu = new MFSU({
+      depBuildConfig: {},
+      buildDepWithESBuild: true,
+      startBuildWorker: noop as any,
+      ...defaultMfsuOpts,
       cwd: process.cwd(),
       tmpBase: mfsuCacheDir,
       implementor: webpack,
-      depBuildConfig: {},
-      unMatchLibs: [/rsuite/],
-      buildDepWithESBuild: true,
-      startBuildWorker: noop as any,
     });
   }
 

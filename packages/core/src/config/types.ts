@@ -47,9 +47,31 @@ export type CustomWebpack = (
   applyOpts: ApplyOpts
 ) => Configuration;
 
+export interface MFSUOpts {
+  cwd?: string;
+  excludeNodeNatives?: boolean;
+  exportAllMembers?: Record<string, string[]>;
+  getCacheDependency?: Function;
+  onMFSUProgress?: Function;
+  mfName?: string;
+  tmpBase?: string;
+  unMatchLibs?: Array<string | RegExp>;
+  runtimePublicPath?: boolean | string;
+  buildDepWithESBuild?: boolean;
+  depBuildConfig?: any;
+  strategy?: 'eager' | 'normal';
+  include?: string[];
+  srcCodeCache?: any;
+  shared?: any;
+  remoteName?: string;
+  remoteAliases?: string[];
+  startBuildWorker?: (dep: any[]) => Worker;
+}
+
 export type UserOpts = {
   analyze?: boolean;
   mfsu?: boolean;
+  mfsuOptions?: (cfg: MFSUOpts) => MFSUOpts;
   copy?: Pick<PluginOptions, 'patterns'>;
   outputPath?: string;
   publicPath?: string;
