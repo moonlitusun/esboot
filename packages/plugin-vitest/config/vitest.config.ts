@@ -29,6 +29,7 @@ export default defineConfig({
   plugins: [react()],
   define: addDefine(),
   test: {
+    include: ['src/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     forceRerunTriggers: [
       ...configDefaults.forceRerunTriggers,
       '**/*.test.{ts,tsx}',
