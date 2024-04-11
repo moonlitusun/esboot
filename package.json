@@ -21,6 +21,7 @@
     "@changesets/cli": "^2.27.1",
     "@types/node": "^17.0.45",
     "father": "^4.2.3",
+    "lerna": "^8.1.2",
     "prettier": "latest",
     "turbo": "latest"
   },

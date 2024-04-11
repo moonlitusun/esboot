@@ -8,6 +8,7 @@ import { invokeEachPlugin } from '@@/helpers/plugins';
 
 const eslintConfig = require('../../../config/eslint/index-sample');
 const tsconfigJson = require('../../../config/typescript/tsconfig-sample.json');
+const prettierConfigJson = require('../../../config/prettier/index-sample.json');
 
 export function generateAliasFiles() {
   const { alias, svgr } = esbootConfig.userOpts;
@@ -98,6 +99,18 @@ export function generateAliasFiles() {
     spaces: 2,
   });
   info(`Created File: ${tsOutoutPath}.`);
+
+  // prettier
+  invokeEachPlugin((plugin) => {
+    merge(prettierConfigJson, plugin.afterCommandOfGenerateAlias?.()?.prettierConfig ?? {});
+  });
+
+  const prettierOutputPath = join(cacheDir, 'prettier/index.json');
+  fs.ensureFileSync(prettierOutputPath);
+  fs.writeJSONSync(prettierOutputPath, prettierConfigJson, {
+    spaces: 2,
+  });
+  info(`Created File: ${prettierOutputPath}.`);
 
   console.log('Done!');
 }
