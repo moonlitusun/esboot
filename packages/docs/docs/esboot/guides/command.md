@@ -172,9 +172,9 @@ event - Build ~demos/docs/esboot/esboot-hello-demo-0/index.html
 $ pnpm run postinstall
 
 # esboot exec husky install
-info  - Created File: /Users/rocsun/Code/dz-library/esboot/esboot-react-sp/node_modules/.cache/esboot/eslint/index.js.
-info  - Created File: /Users/rocsun/Code/dz-library/esboot/esboot-react-sp/node_modules/.cache/esboot/typescript/esboot.d.ts.
-info  - Created File: /Users/rocsun/Code/dz-library/esboot/esboot-react-sp/node_modules/.cache/esboot/typescript/tsconfig.json.
+info  - Created File: ~/esboot/esboot-react-sp/node_modules/.cache/esboot/eslint/index.js.
+info  - Created File: ~/esboot/esboot-react-sp/node_modules/.cache/esboot/typescript/esboot.d.ts.
+info  - Created File: ~/esboot/esboot-react-sp/node_modules/.cache/esboot/typescript/tsconfig.json.
 Done!
 
 # esboot g-alias

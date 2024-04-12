@@ -55,6 +55,9 @@ export default (
     },
     afterCommandOfGenerateAlias: () => ({
       alias,
+      prettierConfig: {
+        plugins: [`${getAbsolutePath('prettier-plugin-tailwindcss')}/dist/index.mjs`],
+      },
     }),
   };
 };

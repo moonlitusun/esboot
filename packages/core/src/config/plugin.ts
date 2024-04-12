@@ -5,6 +5,7 @@ import type { CustomWebpack } from './types';
 interface AfterCommandOfGenerateAliasReturn {
   alias?: Record<string, string>;
   tsConfig?: Record<string, any>;
+  prettierConfig?: Record<string, any>;
 }
 
 export interface Plugin {
