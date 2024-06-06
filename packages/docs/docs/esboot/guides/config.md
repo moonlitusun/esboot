@@ -463,3 +463,50 @@ export enum CSSMinifier {
 
 - [cssnano](https://cssnano.co/docs/esboot/config-file/)
 - [lightningcss](https://lightningcss.dev/)
+
+## useLangJsonPicker
+
+`2.14.2`
+
+- 类型： `boolean`
+- 默认值：`true`
+
+是否开启pick语言json文件字段。
+
+如果开启，配合[langJsonPicker](/docs/esboot/guides/dev#langJsonPicker)字段使用，减少多语言文件体积。
+
+参考下面示例：
+
+*en-US.json*
+
+```json
+{
+  "global": {
+    "project": "test project"
+  },
+  "test1": {
+    "nest1": {
+      "key1": "zh-cn-key1"
+    },
+    "nest2": {
+      "key2": "zh-cn-key2"
+    }
+  }
+}
+```
+
+*index.entry.tsx*
+
+```tsx
+import enUS from '@/lang/en-US.json';
+
+// 此时enUS的内容就会去掉`test1.nest1`的内容。
+export default {
+  langJsonPicker: ['global', 'test1.nest2'],
+  title: 'index',
+};
+```
+
+:::warning
+为了统一多语言文件，只会对`src/lang/*.json`文件生效。
+:::

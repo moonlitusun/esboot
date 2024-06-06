@@ -45,3 +45,12 @@ export default {
 模版html地址，默认地址是`config/{platforms}/template/index.html`。
 
 配置不是一个完整的地址(目录是固定死的)，只需要配置页面名称，比如`my-tpl`，此时的地址就会是`config/{platforms}/template/my-tpl.html`。
+
+#### langJsonPicker
+
+参考[useLangJsonPicker](/docs/esboot/guides/config#useLangJsonPicker)。
+
+页面标题，默认为`文件名称 | ESboot APP`。
+
+- 类型： `string[]`，支持嵌套语法`xx.xx.xx`。
+- 默认值：`空`即导入全部

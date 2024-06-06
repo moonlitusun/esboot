@@ -77,6 +77,7 @@ export type UserOpts = {
   publicPath?: string;
   customWebpack?: CustomWebpack;
   TSChecker?: boolean;
+  useLangJsonPicker?: boolean;
   analyzer?: any;
   extraBabelPlugins?: string[];
   extraBabelPresets?: string[];

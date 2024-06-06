@@ -11,6 +11,7 @@ export const defaultUserOpts = {
   TSChecker: false,
   outputPath: 'dist',
   open: false,
+  useLangJsonPicker: true,
   port: DEFAULT_DEV_PORT,
   extraBabelPlugins: [],
   extraBabelPresets: [],

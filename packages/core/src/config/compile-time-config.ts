@@ -1,6 +1,6 @@
 import { resolve, join } from 'path';
 import address from 'address';
-import { pick, merge } from 'lodash';
+import { pick } from 'lodash';
 
 import type { ObjectPattern } from 'copy-webpack-plugin';
 
@@ -36,7 +36,7 @@ export interface CompileTimeConfig {
   configJSPath: string;
   ipv4: string;
   version: string;
-  entry: Record<string, string>[];
+  _entry: Record<string, Record<string, any>>;
   staticPathList: ObjectPattern[];
 }
 
@@ -57,7 +57,7 @@ export default new (class CCompileTimeConfig {
     configJSPath: '',
     ipv4: 'localhost',
     version: '',
-    entry: [],
+    _entry: {},
     staticPathList: [],
   };
 
@@ -82,7 +82,7 @@ export default new (class CCompileTimeConfig {
       platform: ESBOOT_PLATFORM as PLATFORMS,
       isMobile: ESBOOT_PLATFORM === PLATFORMS.MOBILE,
       isBrowser: ESBOOT_PAGE_TYPE === PAGE_TYPE.browser,
-      entry: [],
+      _entry: {},
       ...pick(pkg, ['version']),
     } satisfies Partial<CompileTimeConfig>;
 
