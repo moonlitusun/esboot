@@ -473,7 +473,7 @@ export enum CSSMinifier {
 
 是否开启pick语言json文件字段。
 
-如果开启，配合[langJsonPicker](/docs/esboot/guides/dev#langJsonPicker)字段使用，减少多语言文件体积。
+如果开启，配合[langJsonPicker](/docs/esboot/guides/dev#langjsonpicker)字段使用，减少多语言文件体积。
 
 参考下面示例：
 

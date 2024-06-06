@@ -48,7 +48,7 @@ export default {
 
 #### langJsonPicker
 
-参考[useLangJsonPicker](/docs/esboot/guides/config#useLangJsonPicker)。
+参考[useLangJsonPicker](/docs/esboot/guides/config#uselangjsonpicker)。
 
 页面标题，默认为`文件名称 | ESboot APP`。
 
