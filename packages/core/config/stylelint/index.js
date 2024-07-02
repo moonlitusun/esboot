@@ -104,5 +104,11 @@ module.exports = {
     'shorthand-property-no-redundant-values': true,
     'string-no-newline': true,
     'unit-no-unknown': true,
+    'no-eol-whitespace': true,
+    'block-no-empty': true,
+    'no-empty-first-line': true,
+    'no-empty-source': true,
+    'no-missing-end-of-source-newline': true,
+    'max-empty-lines': 1,
   },
 };
