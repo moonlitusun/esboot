@@ -8,6 +8,7 @@ module.exports = {
   ignoreFiles: ['node_modules'],
   rules: {
     'import-notation': 'string',
+    'block-opening-brace-space-before': 'always',
     'at-rule-no-unknown': [
       true,
       {
@@ -102,6 +103,6 @@ module.exports = {
     'selector-type-no-unknown': true,
     'shorthand-property-no-redundant-values': true,
     'string-no-newline': true,
-    'unit-no-unknown': true
+    'unit-no-unknown': true,
   },
 };
