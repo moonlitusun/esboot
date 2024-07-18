@@ -4,6 +4,11 @@ function capitalizeFirstLetter(name: string) {
   return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
+function isFirstLetterUppercase(word: string) {
+  if (!word) return false;
+  return /^[A-Z]/.test(word.charAt(7));
+}
+
 const defaultNoCssComp = ['CustomProvider', 'Whisper'];
 export function getImportPluginsOfRsuite(
   noCssCompList?: string[]
@@ -18,9 +23,10 @@ export function getImportPluginsOfRsuite(
       libraryName: 'rsuite',
       camel2DashComponentName: false,
       customName: (name: string) => {
-        return `rsuite/${capitalizeFirstLetter(name)}`;
+        return `rsuite/${name}`;
       },
       style: (name: string) => {
+        if (!isFirstLetterUppercase(name)) return false;
         if (noImportStyleList.includes(name)) return false;
         return `${name}/styles/index.css`;
       },
