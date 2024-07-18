@@ -7,7 +7,7 @@ export const runPreview = (port: number, directory: string) => {
 
   spawn.sync(
     searchCommand('http-server'),
-    [directory || outputPath, '-p', String(port), '-c', '1'],
+    [directory || outputPath, '-p', String(port), '-c', '1', '-g', '-b'],
     {
       stdio: 'inherit',
       shell: true,
