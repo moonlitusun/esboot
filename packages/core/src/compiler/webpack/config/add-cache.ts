@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { merge } from 'lodash';
 import { USER_CONFIG_FILE, webpackCacheDir } from '@@/constants';
 
@@ -15,7 +16,7 @@ export const addCache = async (applyOpts: any) => {
       type: 'filesystem',
       cacheDirectory: webpackCacheDir,
       buildDependencies: {
-        config: [USER_CONFIG_FILE],
+        config: [USER_CONFIG_FILE, resolve(process.cwd(), './pnpm-lock.yaml')],
       },
     },
   });
