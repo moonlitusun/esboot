@@ -22,8 +22,9 @@ module.exports = {
       recommended: false,
     },
     messages: {
-      noImportOtherPlatforms: 'Disallow importing other platforms',
-      noImportLowLevelPlatforms: 'Disallow importing low-level modules',
+      noImportOtherPlatforms: 'Disallow importing other platforms，{{desc}}',
+      noImportLowLevelPlatforms:
+        'Disallow importing low-level modules, {{desc}}',
     },
     schema: [],
   },
@@ -54,8 +55,8 @@ module.exports = {
         const currInfo = extractPlatformAndType(currentFilename);
         const importInfo = extractPlatformAndType(resolvedPath);
 
-        // console.log(importPath, importInfo, '<-- import info');
-        // console.log(resolvedPath, currInfo, '<-- curr ino');
+        console.log(resolvedPath, importInfo, '<-- import info');
+        console.log(currentFilename, currInfo, '<-- curr ino');
         // When import file is not platfrom's file
         if (!importInfo) return;
 
@@ -64,38 +65,41 @@ module.exports = {
         const { platform: importPlatform, pageType: importPageType } =
           importInfo || {};
 
-        const reportNoImportOtherPlatforms = () => {
-          context.report({
-            node,
-            messageId: 'noImportOtherPlatforms',
-          });
-        };
+        if (!currPlatform && !importPlatform) return;
+        console.log(currInfo, importInfo, '<--=== ');
 
-        const reportLowestModule = () => {
+        if (!currPlatform && importPlatform) {
           context.report({
             node,
             messageId: 'noImportLowLevelPlatforms',
+            data: {
+              desc: `You cannot import files from the ${importPlatform} platform here.`,
+            },
           });
-        };
+          return;
+        }
 
-        if (!currPlatform && !importPlatform) return;
-        // console.log(currInfo, importInfo, '<--=== ');
-
-        // Import files from within the platform outside of the platform
-        if (!currPlatform && importPlatform) {
-          reportLowestModule();
+        // Not same platform
+        if (importPlatform && currPlatform !== importPlatform) {
+          context.report({
+            node,
+            messageId: 'noImportOtherPlatforms',
+            data: {
+              desc: `You cannot import files from the ${importPlatform} platform here.`,
+            },
+          });
           return;
         }
 
         // Import pageType content from within the platform
         if (currPlatform && !currPageType && importPageType) {
-          reportLowestModule();
-          return;
-        }
-
-        // Not same platform
-        if (currPlatform !== importPlatform) {
-          reportNoImportOtherPlatforms();
+          context.report({
+            node,
+            messageId: 'noImportLowLevelPlatforms',
+            data: {
+              desc: `You cannot import files from the ${importPageType} pageType here.`,
+            },
+          });
           return;
         }
 
@@ -104,7 +108,13 @@ module.exports = {
 
           // Not same pageType
           if (importPageType !== currPageType) {
-            reportNoImportOtherPlatforms();
+            context.report({
+              node,
+              messageId: 'noImportOtherPlatforms',
+              data: {
+                desc: `You cannot import files from the ${importPageType} pageType here.`,
+              },
+            });
             return;
           }
         }
