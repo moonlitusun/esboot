@@ -2,8 +2,7 @@ const path = require('path');
 const { resolve } = require('./resolver-alias');
 
 function extractPlatformAndType(filePath) {
-  console.log(filePath, '<-- filePath');
-  const regex = /src\/platforms\/([^\/]+)\/(?:_([^\/]+)\/)?/;
+  const regex = /src\/platforms\/(mobile|pc)\/(?:_(browser|native)\/)?/;
   const match = filePath.match(regex);
   if (match) {
     return {
@@ -23,8 +22,7 @@ module.exports = {
       recommended: false,
     },
     messages: {
-      noImportOtherPlatforms:
-        'Importing from other platforms directory is not allowed.',
+      noImportOtherPlatforms: 'Disallow importing other platforms',
       noImportLowLevelPlatforms: 'Disallow importing low-level modules',
     },
     schema: [],
@@ -56,7 +54,9 @@ module.exports = {
         const currInfo = extractPlatformAndType(currentFilename);
         const importInfo = extractPlatformAndType(resolvedPath);
 
-        // 引入文件不在platform中
+        // console.log(importPath, importInfo, '<-- import info');
+        // console.log(resolvedPath, currInfo, '<-- curr ino');
+        // When import file is not platfrom's file
         if (!importInfo) return;
 
         const { platform: currPlatform, pageType: currPageType } =
@@ -64,7 +64,7 @@ module.exports = {
         const { platform: importPlatform, pageType: importPageType } =
           importInfo || {};
 
-        const report = () => {
+        const reportNoImportOtherPlatforms = () => {
           context.report({
             node,
             messageId: 'noImportOtherPlatforms',
@@ -79,30 +79,32 @@ module.exports = {
         };
 
         if (!currPlatform && !importPlatform) return;
-        console.log(currInfo, importInfo, '<--=== ');
+        // console.log(currInfo, importInfo, '<--=== ');
 
-        // 平台之外引入平台内文件
+        // Import files from within the platform outside of the platform
         if (!currPlatform && importPlatform) {
           reportLowestModule();
           return;
         }
 
-        // platform之中引入pageType的内容
+        // Import pageType content from within the platform
         if (currPlatform && !currPageType && importPageType) {
           reportLowestModule();
           return;
         }
 
+        // Not same platform
         if (currPlatform !== importPlatform) {
-          report();
+          reportNoImportOtherPlatforms();
           return;
         }
 
         if (currPlatform && importPlatform) {
           if (!importPageType && currPageType) return;
 
+          // Not same pageType
           if (importPageType !== currPageType) {
-            report();
+            reportNoImportOtherPlatforms();
             return;
           }
         }
