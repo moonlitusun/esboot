@@ -4,7 +4,8 @@ module.exports = {
     'airbnb/hooks',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:@dz-web/esboot/recommended'
   ],
   settings: {
     'import/resolver': {
@@ -127,7 +128,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'import'],
+  plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'import', '@dz-web/esboot'],
   globals: {
     DEBUG: true,
   },
