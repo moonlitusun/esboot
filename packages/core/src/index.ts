@@ -8,3 +8,4 @@ export { default as defineConfig } from './helpers/define-config';
 
 // compiler
 export { addDefine } from '@@/compiler/utils/add-define';
+export { getImportPluginsOfRsuite } from '@@/compiler/utils/babel-import-plugin';

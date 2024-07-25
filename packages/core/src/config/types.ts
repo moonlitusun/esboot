@@ -68,6 +68,8 @@ export interface MFSUOpts {
   startBuildWorker?: (dep: any[]) => Worker;
 }
 
+export type BabelPlugin = [string, Record<string, any>];
+
 export type UserOpts = {
   analyze?: boolean;
   mfsu?: boolean;
@@ -77,8 +79,9 @@ export type UserOpts = {
   publicPath?: string;
   customWebpack?: CustomWebpack;
   TSChecker?: boolean;
+  useLangJsonPicker?: boolean;
   analyzer?: any;
-  extraBabelPlugins?: string[];
+  extraBabelPlugins?: BabelPlugin[];
   extraBabelPresets?: string[];
   extraBabelIncludes?: Array<string | RegExp>;
   pxtorem?: Px2rem;

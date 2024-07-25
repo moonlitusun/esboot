@@ -11,6 +11,7 @@ interface EntryFileExportProps {
   title?: string;
   template?: string;
   name?: string;
+  langJsonPicker?: string[];
 }
 
 export const addEntry = async (applyOpts: ApplyOpts) => {
@@ -29,10 +30,8 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     root: join(contentRootPath, ESBOOT_CONTENT_PATH),
   });
 
-  esbootConfig.compileTimeConfig.entry = [];
-
   files.forEach((file: string, index) => {
-    const { title, template, name } =
+    const { title, template, name, langJsonPicker } =
       (getExportProps(readFileSync(file, 'utf-8')) as EntryFileExportProps) ||
       {};
 
@@ -42,14 +41,14 @@ export const addEntry = async (applyOpts: ApplyOpts) => {
     const tplRelativePath = `template/${template || 'index'}.html`;
     const ensureTpl = join(configRootPathOfPlatfrom, tplRelativePath);
 
-    esbootConfig.compileTimeConfig.entry.push({
+    esbootConfig.compileTimeConfig._entry[file] = {
+      langJsonPicker,
       tpl: tplRelativePath,
-      entry: file,
-      // chunkName,
+      chunkName,
       filename,
       title: ensureTitle,
       url: `http://${ipv4}:${port}/${chunkName}.html`,
-    });
+    };
 
     config.entry[chunkName] = file;
 

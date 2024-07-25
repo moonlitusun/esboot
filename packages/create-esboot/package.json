@@ -1,7 +1,7 @@
 {
   "name": "create-esboot",
-  "version": "2.5.1",
-  "description": "create-umi",
+  "version": "2.5.3",
+  "description": "create-esboot",
   "repository": {
     "type": "git",
     "url": ""

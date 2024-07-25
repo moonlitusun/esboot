@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import webpack, { Configuration } from 'webpack';
 import webpackbar from 'webpackbar';
 import { MFSU } from '@umijs/mfsu';
@@ -111,6 +112,7 @@ const getWebpackConfig = async (opts: IOpts) => {
     externals = {},
     customWebpack,
     analyze,
+    useLangJsonPicker = true,
   } = userOpts;
 
   // RestPlugins
@@ -141,6 +143,20 @@ const getWebpackConfig = async (opts: IOpts) => {
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);
+  if (useLangJsonPicker) {
+    config.module.rules.push({
+      test: /\.json$/,
+      type: 'javascript/auto',
+      use: [
+        {
+          loader: resolve(
+            __dirname,
+            '../loaders/lang-json-picker/lang-json-picker.js'
+          ),
+        },
+      ],
+    });
+  }
 
   // Other Config
   if (isDev) {
