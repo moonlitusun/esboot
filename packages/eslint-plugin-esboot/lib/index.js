@@ -1,12 +1,13 @@
 module.exports = {
   rules: {
-    'no-import-other-platform': require('./no-import-other-platform'),
+    'no-cross-platform-imports': require('./rules/no-cross-platform-imports'),
+    'no-cross-platform-lib-imports': require('./rules/no-cross-platform-lib-imports'),
   },
   configs: {
     recommended: {
       plugins: ['@dz-web/esboot'],
       rules: {
-        '@dz-web/esboot/no-import-other-platform': 'error',
+        '@dz-web/esboot/no-cross-platform-imports': 'error',
       },
     },
   },

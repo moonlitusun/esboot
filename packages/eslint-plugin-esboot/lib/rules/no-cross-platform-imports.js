@@ -1,43 +1,32 @@
 const path = require('path');
-const { resolve } = require('./resolver-alias');
-
-function extractPlatformAndType(filePath) {
-  const regex = /src\/platforms\/(mobile|pc)\/(?:_(browser|native)\/)?/;
-  const match = filePath.match(regex);
-  if (match) {
-    return {
-      platform: match[1],
-      pageType: match[2],
-    };
-  }
-  return null;
-}
+const { resolve } = require('../helpers/resolver-alias');
+const {
+  extractPlatformAndType,
+} = require('../helpers/extract-platform-and-type');
 
 module.exports = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'disallow imports from other platforms',
+      description: 'Disallow imports from other platforms',
       category: 'Best Practices',
       recommended: false,
+      url: 'http://esboot.dzfe.net/docs/esboot/eslint/rules#no-cross-platform-imports',
     },
     messages: {
-      noImportOtherPlatforms: 'Disallow importing other platforms，{{desc}}',
+      noImportOtherPlatforms: 'Disallow importing other platforms, {{desc}}',
       noImportLowLevelPlatforms:
         'Disallow importing low-level modules, {{desc}}',
     },
     schema: [],
   },
   create(context) {
-    const currentFilename = context.getFilename();
+    const currentFilename = context.filename;
     const settings = context.settings['import/resolver'].alias;
-    const aliasMap = new Map(settings.map);
+    const currInfo = extractPlatformAndType(currentFilename);
 
     function resolveImportPath(importPath) {
-      const resolvedPath = resolve(importPath, currentFilename, {
-        map: Array.from(aliasMap.entries()),
-        extensions: settings.extensions,
-      });
+      const resolvedPath = resolve(importPath, currentFilename, settings);
 
       if (resolvedPath.found) {
         return resolvedPath.path;
@@ -51,12 +40,10 @@ module.exports = {
         const importPath = node.source.value;
 
         const resolvedPath = resolveImportPath(importPath);
-
-        const currInfo = extractPlatformAndType(currentFilename);
         const importInfo = extractPlatformAndType(resolvedPath);
 
-        console.log(resolvedPath, importInfo, '<-- import info');
-        console.log(currentFilename, currInfo, '<-- curr ino');
+        // console.log(resolvedPath, importInfo, '<-- import info');
+        // console.log(currentFilename, currInfo, '<-- curr ino');
         // When import file is not platfrom's file
         if (!importInfo) return;
 
@@ -66,7 +53,7 @@ module.exports = {
           importInfo || {};
 
         if (!currPlatform && !importPlatform) return;
-        console.log(currInfo, importInfo, '<--=== ');
+        // console.log(currInfo, importInfo, '<--=== ');
 
         if (!currPlatform && importPlatform) {
           context.report({
