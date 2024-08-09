@@ -47,7 +47,14 @@ export async function addAssetRules(applyOpts: ApplyOpts) {
                 icon: true,
                 typescript: true,
                 ext: 'tsx',
-                svgoConfig: {},
+                svgoConfig: {
+                  plugins: [
+                    {
+                      name: 'prefixIds',
+                      active: false
+                    }
+                  ]
+                },
               },
               svgrOptions
             ),
