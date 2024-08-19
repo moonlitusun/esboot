@@ -134,7 +134,7 @@ const getWebpackConfig = async (opts: IOpts) => {
         },
       ].filter(Boolean) as any[],
     }),
-    isDev && new ReactRefreshWebpackPlugin(),
+    isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
     !isDev &&
       new MiniCssExtractPlugin({
         filename: 'css/[name].[contenthash:5].css',
