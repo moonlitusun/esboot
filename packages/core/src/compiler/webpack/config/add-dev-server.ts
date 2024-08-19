@@ -21,6 +21,7 @@ export const addDevServer = async (applyOpts: ApplyOpts) => {
     client: {
       progress: false,
       logging: 'error',
+      overlay: false,
     },
     https,
     http2,
