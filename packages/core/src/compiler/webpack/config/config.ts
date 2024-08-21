@@ -105,7 +105,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   await addDevServer(applyOpts);
 
   // Fun
-  await addCache(applyOpts);
+  // await addCache(applyOpts);
   await addDevtool(applyOpts);
 
   const {
