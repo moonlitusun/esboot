@@ -56,7 +56,13 @@ export default (
     afterCommandOfGenerateAlias: () => ({
       alias,
       prettierConfig: {
-        plugins: [`${getAbsolutePath('prettier-plugin-tailwindcss')}/dist/index.mjs`],
+        endingPosition: 'absolute-with-indent',
+        customFunctions: ['clsx', 'cn', 'cva'],
+        plugins: [
+          `${getAbsolutePath('prettier-plugin-tailwindcss')}/dist/index.mjs`,
+          `${getAbsolutePath('prettier-plugin-classnames')}/dist/index.js`,
+          `${getAbsolutePath('prettier-plugin-merge')}/dist/index.js`,
+        ],
       },
     }),
   };
