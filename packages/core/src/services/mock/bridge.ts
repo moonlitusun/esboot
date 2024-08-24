@@ -1,9 +1,10 @@
 import { join } from 'path';
 import esbootConfig from '@@/config';
 
-import { runExec } from '../exec';
+const importExeca = import('execa');
 
-export function runMockBridge(options: Record<string, string>) {
+export async function runMockBridge(options: Record<string, string>) {
+  const { $ } = await importExeca;
   const { file, sampleFile } = options;
   const { platform } = esbootConfig.compileTimeConfig;
   const folderPath = `./config/${platform}`;
@@ -12,5 +13,9 @@ export function runMockBridge(options: Record<string, string>) {
   const samplePath =
     sampleFile || join(folderPath, 'bridge/bridge-mock-sample.js');
 
-  runExec(['bridge-mock', '-f', filePath, '-s', samplePath]);
+  $({
+    stdio: 'inherit',
+    shell: false,
+    cwd: process.cwd(),
+  })`${require.resolve('@dz-web/bridge-mock/bin')} -f ${filePath} -s ${samplePath}`;
 }

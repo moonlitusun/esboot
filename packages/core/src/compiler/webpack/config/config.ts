@@ -101,11 +101,11 @@ const getWebpackConfig = async (opts: IOpts) => {
   await addForkTsCheckerWebpackPlugin(applyOpts);
   await addBundleAnalyzerPlugin(applyOpts);
 
-  await addOptimization(applyOpts);
+  await addOptimization(applyOpts); // build还没加
   await addDevServer(applyOpts);
 
   // Fun
-  await addCache(applyOpts);
+  // await addCache(applyOpts);
   await addDevtool(applyOpts);
 
   const {
@@ -134,7 +134,7 @@ const getWebpackConfig = async (opts: IOpts) => {
         },
       ].filter(Boolean) as any[],
     }),
-    isDev && new ReactRefreshWebpackPlugin(),
+    isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
     !isDev &&
       new MiniCssExtractPlugin({
         filename: 'css/[name].[contenthash:5].css',
@@ -143,7 +143,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   ].filter(Boolean);
 
   config.plugins.push(...restPlugins);
-  if (useLangJsonPicker) {
+  if (useLangJsonPicker) { // 差
     config.module.rules.push({
       test: /\.json$/,
       type: 'javascript/auto',
@@ -206,7 +206,7 @@ const getWebpackConfig = async (opts: IOpts) => {
   // depConfig2.merge(config);
 
   // console.log(depConfig2.toConfig(), '<-- depConfig2');
-  if (mfsu) await mfsu.setWebpackConfig({ config, depConfig } as any);
+  if (mfsu) await mfsu.setWebpackConfig({ config, depConfig } as any); // 没有
 
   invokeEachPlugin((plugin) => plugin?.customWebpack?.(config, applyOpts));
   return customWebpack ? customWebpack(config, applyOpts) : config;

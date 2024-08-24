@@ -9,12 +9,15 @@ function isFirstLetterUppercase(word: string) {
   return /^[A-Z]/.test(word.charAt(7));
 }
 
+const concatName = (name: string) => `rsuite/${name}`;
 const defaultNoCssComp = ['CustomProvider', 'Whisper'];
+const notCompButHavingCss = [concatName('useToaster')];
+
 export function getImportPluginsOfRsuite(
   noCssCompList?: string[]
 ): BabelPlugin {
   const noImportStyleList = [...defaultNoCssComp, ...(noCssCompList || [])].map(
-    (name) => `rsuite/${name}`
+    (name) => concatName(name)
   );
 
   return [
@@ -23,10 +26,14 @@ export function getImportPluginsOfRsuite(
       libraryName: 'rsuite',
       camel2DashComponentName: false,
       customName: (name: string) => {
-        return `rsuite/${name}`;
+        return concatName(name);
       },
       style: (name: string) => {
-        if (!isFirstLetterUppercase(name)) return false;
+        if (
+          !isFirstLetterUppercase(name) &&
+          !notCompButHavingCss.includes(name)
+        )
+          return false;
         if (noImportStyleList.includes(name)) return false;
         return `${name}/styles/index.css`;
       },

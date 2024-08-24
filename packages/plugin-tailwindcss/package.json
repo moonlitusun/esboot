@@ -23,6 +23,8 @@
     "father": "^4.3.7"
   },
   "dependencies": {
+    "prettier-plugin-classnames": "^0.7.2",
+    "prettier-plugin-merge": "^0.7.1",
     "prettier-plugin-tailwindcss": "^0.5.13",
     "tailwindcss": "^3.4.1"
   },
