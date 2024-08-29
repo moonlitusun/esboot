@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[9755],{5257:e=>{e.exports=JSON.parse('{"title":"plugin-vitest","slug":"/category/plugin-vitest","permalink":"/docs/category/plugin-vitest","navigation":{"previous":{"title":"\u63d2\u4ef6\u5f00\u53d1","permalink":"/docs/plugins/dev"},"next":{"title":"doc","permalink":"/docs/plugins/plugin-vitest/doc"}}}')}}]);
