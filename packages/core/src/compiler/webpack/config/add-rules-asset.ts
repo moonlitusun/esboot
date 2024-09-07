@@ -52,7 +52,8 @@ export async function addAssetRules(applyOpts: ApplyOpts) {
                     {
                       name: 'prefixIds',
                       active: false
-                    }
+                    },
+                    'removeUselessDefs',
                   ]
                 },
               },
