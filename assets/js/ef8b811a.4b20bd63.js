@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[8947],{6600:e=>{e.exports=JSON.parse('{"authors":[{"name":"Roc","title":"Maintainer","imageURL":"https://avatars.githubusercontent.com/u/22940470?s=400&u=0bf5b6b7f50d2e9cbd556cdc5696abc8493b8cd4&v=4","key":"Roc","page":null,"count":1}]}')}}]);
