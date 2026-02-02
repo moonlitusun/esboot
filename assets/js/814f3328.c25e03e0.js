@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"ESBoot 4","permalink":"/blog/esboot-4","unlisted":false,"date":"2025-12-15T00:00:00.000Z"},{"title":"ESBoot 3","permalink":"/blog/esboot-3","unlisted":false,"date":"2024-09-18T00:00:00.000Z"}]}')}}]);
